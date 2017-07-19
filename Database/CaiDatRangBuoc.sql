@@ -61,3 +61,50 @@ END
 GO
 
 --2.Điểm của một bộ đề thi tối đa là 10 
+
+--3.Một câu hỏi phải có tối thiểu 1 đáp án đúng
+CREATE TRIGGER tg_MotCauHoiPhaiCoToiThieuMotDapAnDung ON CAUTRALOI
+AFTER UPDATE, DELETE
+AS
+BEGIN
+	DECLARE @SoLuongCauTraLoiDung INTEGER
+	
+	SELECT @SoLuongCauTraLoiDung = COUNT(*) FROM CAUTRALOI C,deleted I WHERE C.MACH = I.MACH AND C.LADAPANDUNG = 1 
+	IF ( @SoLuongCauTraLoiDung < 1 ) 
+	BEGIN
+		RAISERROR ('Một câu hỏi phải có tối thiểu 1 đáp án đúng', 16, 1);  
+		ROLLBACK TRANSACTION;  
+	END
+END
+GO
+
+--4.Khi chỉnh sửa câu hỏi, nếu chỉnh sửa số câu trả lời thì thuộc tính "Số lượng câu trả lời" phải cập nhật lại.
+
+CREATE TRIGGER tg_CapNhatTuDongSoLuongCauTraLoiCuaCauHoi ON CAUHOI
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+	DECLARE @SoLuongCauTraLoi INT
+	IF NOT EXISTS( SELECT * FROM deleted)
+	BEGIN
+		--trường hợp insert
+		SELECT @SoLuongCauTraLoi = COUNT(C.MACH) FROM CAUTRALOI C,inserted I WHERE C.MACH = I.MACH 
+		UPDATE CAUHOI SET SOCAUTRALOI = @SoLuongCauTraLoi WHERE MACH IN ( SELECT MACH FROM inserted )
+	END
+	ELSE
+	BEGIN
+		IF NOT EXISTS ( SELECT * FROM inserted )
+		BEGIN
+			--trường hợp Update
+			SELECT @SoLuongCauTraLoi = COUNT(C.MACH) FROM CAUTRALOI C,inserted I WHERE C.MACH = I.MACH 
+			UPDATE CAUHOI SET SOCAUTRALOI = @SoLuongCauTraLoi WHERE MACH IN ( SELECT MACH FROM deleted )
+		END
+		ELSE
+		BEGIN
+			--trường hợp update
+			SELECT @SoLuongCauTraLoi = COUNT(C.MACH) FROM CAUTRALOI C,deleted I WHERE C.MACH = I.MACH 
+			UPDATE CAUHOI SET SOCAUTRALOI = @SoLuongCauTraLoi WHERE MACH IN ( SELECT MACH FROM inserted )
+		END
+	END
+END
+GO
