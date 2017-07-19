@@ -80,7 +80,7 @@ GO
 
 --4.Khi chỉnh sửa câu hỏi, nếu chỉnh sửa số câu trả lời thì thuộc tính "Số lượng câu trả lời" phải cập nhật lại.
 
-CREATE TRIGGER tg_CapNhatTuDongSoLuongCauTraLoiCuaCauHoi ON CAUHOI
+ALTER TRIGGER tg_CapNhatTuDongSoLuongCauTraLoiCuaCauHoi ON CAUTRALOI
 AFTER INSERT, UPDATE, DELETE
 AS
 BEGIN
@@ -95,15 +95,17 @@ BEGIN
 	BEGIN
 		IF NOT EXISTS ( SELECT * FROM inserted )
 		BEGIN
-			--trường hợp Update
-			SELECT @SoLuongCauTraLoi = COUNT(C.MACH) FROM CAUTRALOI C,inserted I WHERE C.MACH = I.MACH 
+			--trường hợp DELETE
+			SELECT @SoLuongCauTraLoi = COUNT(C.MACH) FROM CAUTRALOI C,deleted I WHERE C.MACH = I.MACH 
 			UPDATE CAUHOI SET SOCAUTRALOI = @SoLuongCauTraLoi WHERE MACH IN ( SELECT MACH FROM deleted )
 		END
 		ELSE
 		BEGIN
-			--trường hợp update
-			SELECT @SoLuongCauTraLoi = COUNT(C.MACH) FROM CAUTRALOI C,deleted I WHERE C.MACH = I.MACH 
+			--trường hợp UPDATE
+			SELECT @SoLuongCauTraLoi = COUNT(C.MACH) FROM CAUTRALOI C,inserted I WHERE C.MACH = I.MACH 
 			UPDATE CAUHOI SET SOCAUTRALOI = @SoLuongCauTraLoi WHERE MACH IN ( SELECT MACH FROM inserted )
+			SELECT @SoLuongCauTraLoi = COUNT(C.MACH) FROM CAUTRALOI C,deleted I WHERE C.MACH = I.MACH 
+			UPDATE CAUHOI SET SOCAUTRALOI = @SoLuongCauTraLoi WHERE MACH IN ( SELECT MACH FROM deleted )
 		END
 	END
 END
