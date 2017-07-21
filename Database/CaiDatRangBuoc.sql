@@ -110,3 +110,22 @@ BEGIN
 	END
 END
 GO
+
+--5.Bộ đề thi chỉ chứa câu hỏi của một môn học duy nhất
+
+CREATE TRIGGER tg_BoDeThiChiChuaCauHoiCuaMotMonHocDuyNhat ON TAOBODETHI
+AFTER INSERT, UPDATE
+AS
+BEGIN
+	DECLARE @SoLuongMonHocCuaBoDeThi INT
+	SELECT @SoLuongMonHocCuaBoDeThi = COUNT(*) FROM ( 
+		SELECT c.MAMH FROM TAOBODETHI t, CauHoi c,inserted i WHERE i.MABDT = t.MABDT AND t.MACH = c.MACH
+		GROUP BY c.MAMH	
+	) as a
+	IF ( @SoLuongMonHocCuaBoDeThi >1 )
+	BEGIN
+		RAISERROR ('Bộ đề thi chỉ chứa câu hỏi của một môn học duy nhất', 16, 1);  
+		ROLLBACK TRANSACTION; 
+	END
+END
+GO

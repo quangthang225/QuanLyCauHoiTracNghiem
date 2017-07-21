@@ -88,6 +88,8 @@ BEGIN
 CREATE TABLE [dbo].[BODETHI](
 	[MABDT] [bigint] IDENTITY(1,1) NOT NULL,
 	[TENBDT] [nvarchar](255) NULL,
+	[HOCKY] [int] NULL,
+	[NAMHOC] [int] NULL,
 	[MAGVTAO] [bigint] NOT NULL,
 	CONSTRAINT [PK_BODETHI] PRIMARY KEY CLUSTERED 
 (
@@ -127,7 +129,7 @@ BEGIN
 CREATE TABLE [dbo].[CAUHOI](
 	[MACH] [bigint] IDENTITY(1,1) NOT NULL,
 	[NOIDUNG] [nvarchar](MAX) NULL,
-	[THANGDIEM] [int] NULL,
+	[THANGDIEM] [float] NULL,
 	[SOCAUTRALOI] [int] NULL,
 	[MUCDO] [int] NULL,
 	[MAMH] [bigint] NOT NULL,
@@ -148,7 +150,7 @@ BEGIN
 CREATE TABLE [dbo].[TAOBODETHI](
 	[MABDT] [bigint] NOT NULL,
 	[MACH] [bigint] NOT NULL,
-	[DIEM] [int] NULL,
+	[DIEM] [float] NULL,
 	PRIMARY KEY ([MABDT],[MACH])
 )
 
