@@ -1,0 +1,49 @@
+CREATE PROC sp_TaoTaiKhoan
+@HoTen nvarchar(255),
+@TenDangNhap varchar(30),
+@MatKhau varchar(30),
+@TrangThai bit,
+@ToanQuyenGV bit,
+@MaLoai bigint,
+@MaBM bigint,
+@MaGVQL bigint
+AS 
+BEGIN
+IF NOT EXISTS(SELECT * FROM LOAINGUOIDUNG WHERE [MALOAI] = @MaLoai)
+	BEGIN
+		PRINT N'MA LOAI NGUOI DUNG KHONG TON TAI'
+		RETURN 1
+	END
+ELSE IF NOT EXISTS(SELECT * FROM BOMON WHERE [MABM] = @MaBM)
+	BEGIN
+		PRINT N'MA BO MON KHONG TON TAI'
+		RETURN 2
+	END
+ELSE IF NOT EXISTS(SELECT * FROM NGUOIDUNG WHERE [MAND] = @MaGVQL)
+	BEGIN
+		PRINT N'MA GIAO VIEN QUAN LY KHONG TON TAI'
+		RETURN 3
+	END
+ELSE
+	BEGIN
+		INSERT INTO [NGUOIDUNG] 
+		([HOTEN],
+		[TENDANGNHAP],
+		[MATKHAU],
+		[TRANGTHAI],
+		[TOANQUYENGV],
+		[MALOAI],
+		[MABM],
+		[MAGVQL])
+		VALUES (@HoTen,
+		@TenDangNhap,
+		@MatKhau,
+		@TrangThai,
+		@ToanQuyenGV,
+		@MaLoai,
+		@MaBM,
+		@MaGVQL)
+		RETURN 0
+	END
+END
+GO
