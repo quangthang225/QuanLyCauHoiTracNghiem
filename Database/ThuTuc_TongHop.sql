@@ -506,23 +506,162 @@ END
 GO
 
 
-------- 15.  ------------------
+------- 15.Thêm Câu Hỏi  ------------------
+CREATE PROC spa_ThemCauHoi
+	@Macauhoi nvarchar(100),
+	@Monhoc nvarchar(100),
+	@Noidung nvarchar(Max),
+	@Socautraloi int,
+	@LoaiMonHoc int,
+	@Thangdiemdukien int,
+	@Danhsachcautraloi nvarchar(Max),
+	@bit BIT OUTPUT
+	AS 
+BEGIN
+BEGIN TRAN
+BEGIN TRY
+INSERT INTO CauHoi 
+([MaCauHoi],
+[Monhoc],
+[Noidung],
+[Socautraloi],
+[LoaiMonHoc],
+[Thangdiemdukien],
+[Danhsachcautraloi])
+VALUES (@Macauhoi ,
+@Monhoc ,
+@Noidung ,
+@Socautraloi ,
+@LoaiMonHoc ,
+@Thangdiemdukien,
+@Danhsachcautraloi)
+set @bit = 1
+END TRY
+BEGIN CATCH
+	ROLLBACK TRAN
+	set @bit = 0
+END CATCH
+COMMIT TRAN
+END
+GO
+------- 16.Câp Nhật Câu Hỏi  ------------------
+CREATE PROC sp_CapNhatCauHoi
+	@Macauhoi nvarchar(100),
+	@Monhoc nvarchar(100),
+	@Noidung nvarchar(Max),
+	@Socautraloi int,
+	@LoaiMonHoc int,
+	@Thangdiemdukien int,
+	@bit BIT OUTPUT
+	AS 
+BEGIN
+BEGIN TRAN
+BEGIN TRY
+UPDATE CAUHOI  
+SET Monhoc = @Monhoc,
+Noidung = @Noidung,
+Socautraloi = @Socautraloi,
+LoaiMonHoc = @LoaiMonHoc,
+Thangdiemdukien = @Thangdiemdukien
+WHERE MaCauHoi = @Macauhoi 
+set @bit = 1
 
+END TRY
+		BEGIN CATCH
+			ROLLBACK TRAN
+			SET @bit = 0
+		END CATCH
+			COMMIT TRAN
+END
+GO
 
-------- 16.  ------------------
+------- 17.Xoá Câu Hỏi  ------------------
+CREATE PROC sp_XoaCauHoi
+@Macauhoi int,
+@bit BIT OUTPUT
+	AS 
+BEGIN
+BEGIN TRAN
+BEGIN TRY
+DELETE CauHoi
+WHERE MaCauHoi = @Macauhoi 
+set @bit = 1
+END TRY
+BEGIN CATCH
+	ROLLBACK TRAN
+	set @bit = 0
+END CATCH
+COMMIT TRAN
+END
+GO
 
+------- 18.Tìm kiếm câu hỏi  ------------------
+CREATE PROCEDURE sp_TimKiemCauHoi
+	@Macauhoi nvarchar(100),
+	@Monhoc nvarchar(100),
+	@LoaiMonHoc int,
+	@MucDo nvarchar(100) ,
+	@bit BIT OUTPUT
+AS
+BEGIN
+	BEGIN TRAN
+		BEGIN TRY
+			SELECT *
+			FROM CAUHOI
+			WHERE (MaCauHoi = @Macauhoi OR @Macauhoi = 0 ) 
+					OR ( Monhoc like N'%' + @Monhoc + '%' OR @Monhoc = '' )
+					OR ( LoaiMonHoc = @LoaiMonHoc OR @LoaiMonHoc = 0 )
+					OR ( Mucdo like N'%' + @MucDo + '%' OR @MucDo = '' )
+			SET @bit = 1
+		END TRY
+		BEGIN CATCH
+			ROLLBACK TRAN
+			SET @bit = 0
+		END CATCH
+	COMMIT TRAN
+END
+GO
 
-------- 17.  ------------------
+------- 19.Xuất danh sách câu hỏi   ------------------
+CREATE PROCEDURE sp_XuatDanhSachCauHoi @Offset int, @fetch_next int
+AS
+BEGIN
+	BEGIN TRAN
+		BEGIN TRY
+SELECT * 
+FROM CAUHOI
+ORDER BY MaCauHoi
+OFFSET @Offset ROWS FETCH NEXT @fetch_next ROWS ONLY
+		END TRY
+		BEGIN CATCH
+			ROLLBACK TRAN
+		END CATCH
+	COMMIT TRAN
+END
+GO
 
+------- 20.Phân loại câu hỏi  ------------------
+CREATE PROC spa_PhanLoaiCauHoi
+	@Macauhoi nvarchar(100),
+	@MucDo nvarchar(100),
+	@bit BIT OUTPUT
+	AS 
+BEGIN
+BEGIN TRAN
+BEGIN TRY
+UPDATE CAUHOI  
+SET MucDo = @MucDo
+WHERE MaCauHoi = @Macauhoi 
+set @bit = 1
 
-------- 18.  ------------------
-
-
-------- 19.  ------------------
-
-
-------- 20.  ------------------
-
+END TRY
+		BEGIN CATCH
+			ROLLBACK TRAN
+			SET @bit = 0
+		END CATCH
+			COMMIT TRAN
+END
+GO
 
 ------- 21.  ------------------
 
