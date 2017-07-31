@@ -5,7 +5,6 @@ CREATE PROC spa_ThemCauHoi
 	@Socautraloi int,
 	@LoaiMonHoc int,
 	@Thangdiemdukien int,
-	@Danhsachcautraloi nvarchar(Max),
 	@bit BIT OUTPUT
 	AS 
 BEGIN
@@ -17,15 +16,13 @@ INSERT INTO CauHoi
 [Noidung],
 [Socautraloi],
 [LoaiMonHoc],
-[Thangdiemdukien],
-[Danhsachcautraloi])
+[Thangdiemdukien])
 VALUES (@Macauhoi ,
 @Monhoc ,
 @Noidung ,
 @Socautraloi ,
 @LoaiMonHoc ,
-@Thangdiemdukien,
-@Danhsachcautraloi)
+@Thangdiemdukien)
 set @bit = 1
 END TRY
 BEGIN CATCH

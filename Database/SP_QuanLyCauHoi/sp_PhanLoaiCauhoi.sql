@@ -1,4 +1,4 @@
-CREATE PROC spa_CapNhatCauHoi
+CREATE PROC spa_PhanLoaiCauHoi
 	@Macauhoi nvarchar(100),
 	@MucDo nvarchar(100),
 	@bit BIT OUTPUT
