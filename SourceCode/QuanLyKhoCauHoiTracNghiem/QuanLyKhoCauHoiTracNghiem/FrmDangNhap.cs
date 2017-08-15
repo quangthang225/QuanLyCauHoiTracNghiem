@@ -29,6 +29,15 @@ namespace QuanLyKhoCauHoiTracNghiem
                 FrmMain f = new FrmMain(tenDangNhap);
                 f.Show();
             }
+            else
+            {
+                MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng");
+            }
+        }
+
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

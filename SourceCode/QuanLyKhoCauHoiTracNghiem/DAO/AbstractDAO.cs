@@ -8,7 +8,7 @@ namespace DAO
 {
     public class AbstractDAO
     {
-        string connectionString = "Data Source=DICTUANLTRAN;Initial Catalog=QuanLyCauHoiTracNghiem;Integrated Security=True";
+        string connectionString = "Data Source=(local);Initial Catalog=QuanLyCauHoiTracNghiem;Integrated Security=True";
 
         public SqlConnection ConnectDB()
         {
