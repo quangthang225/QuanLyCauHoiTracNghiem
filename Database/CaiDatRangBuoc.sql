@@ -80,7 +80,7 @@ GO
 
 --4.Khi chỉnh sửa câu hỏi, nếu chỉnh sửa số câu trả lời thì thuộc tính "Số lượng câu trả lời" phải cập nhật lại.
 
-ALTER TRIGGER tg_CapNhatTuDongSoLuongCauTraLoiCuaCauHoi ON CAUTRALOI
+CREATE TRIGGER tg_CapNhatTuDongSoLuongCauTraLoiCuaCauHoi ON CAUTRALOI
 AFTER INSERT, UPDATE, DELETE
 AS
 BEGIN
