@@ -82,8 +82,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMatKhau.Location = new System.Drawing.Point(107, 63);
             this.txtMatKhau.Name = "txtMatKhau";
+            this.txtMatKhau.PasswordChar = '*';
             this.txtMatKhau.Size = new System.Drawing.Size(158, 20);
             this.txtMatKhau.TabIndex = 3;
+            this.txtMatKhau.UseSystemPasswordChar = true;
             // 
             // label2
             // 
@@ -114,6 +116,7 @@
             // 
             // FrmDangNhap
             // 
+            this.AcceptButton = this.btnDangNhap;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(295, 154);
