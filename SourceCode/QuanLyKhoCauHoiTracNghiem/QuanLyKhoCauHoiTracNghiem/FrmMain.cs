@@ -11,9 +11,10 @@ namespace QuanLyKhoCauHoiTracNghiem
 {
     public partial class FrmMain : Form
     {
-        public FrmMain()
+        public FrmMain(string tenDangNhap)
         {
             InitializeComponent();
+            mnuXinChao.Text = "Xin chào: " + tenDangNhap;
         }
     }
 }
