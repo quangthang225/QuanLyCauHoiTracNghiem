@@ -9,7 +9,6 @@ namespace DTO
     public class DETHIDTO
     {
         private long _MABDT;
-        [DisplayName("Mã đề thi")]
         public long MABDT
         {
             get { return _MABDT; }
@@ -17,7 +16,6 @@ namespace DTO
         }
 
         private string _TENBDT;
-        [DisplayName("Tên")]
         public string TENBDT
         {
             get { return _TENBDT; }
@@ -25,7 +23,6 @@ namespace DTO
         }
 
         private int _HOCKY;
-        [DisplayName("Học kỳ")]
         public int HOCKY
         {
             get { return _HOCKY; }
@@ -47,17 +44,33 @@ namespace DTO
             set { _MAGVTAO = value; }
         }
 
+        private long _MAMH;
+        public long MAMH
+        {
+            get { return _MAMH; }
+            set { _MAMH = value; }
+        }
+
+        private string _TENMH;
+        public string TENMH
+        {
+            get { return _TENMH; }
+            set { _TENMH = value; }
+        }
+
         public DETHIDTO()
         {
-
         }
-        public DETHIDTO(long madt,string tenbdt, int hocky, int namhoc,long maNguoiDung)
+
+        public DETHIDTO(long madt,string tenbdt, int hocky, int namhoc,long maNguoiDung, long maMonHoc, string tenMonHoc)
         {
             this._MABDT = madt;
             this._TENBDT = tenbdt;
             this._HOCKY = hocky;
             this._NAMHOC = namhoc;
             this._MAGVTAO = maNguoiDung;
+            this._MAMH = maMonHoc;
+            this._TENMH = tenMonHoc;
         }
     }
 }

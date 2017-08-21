@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DETHIBUS.cs" />
+    <Compile Include="MONHOCBUS.cs" />
     <Compile Include="NGUOIDUNGBUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

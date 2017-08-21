@@ -38,11 +38,16 @@
             this.txtTenDeThi = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvDeThi = new System.Windows.Forms.DataGridView();
+            this.btnThemCauHoi = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cboMonHoc = new System.Windows.Forms.ComboBox();
             this.MABDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TENBDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HOCKY = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NAMHOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MAGVTAO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtHocKy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNamHoc)).BeginInit();
@@ -51,6 +56,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cboMonHoc);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.btnThemCauHoi);
             this.groupBox1.Controls.Add(this.btnCapNhat);
             this.groupBox1.Controls.Add(this.btnTao);
             this.groupBox1.Controls.Add(this.label3);
@@ -69,7 +77,7 @@
             // 
             // btnCapNhat
             // 
-            this.btnCapNhat.Location = new System.Drawing.Point(327, 391);
+            this.btnCapNhat.Location = new System.Drawing.Point(262, 395);
             this.btnCapNhat.Name = "btnCapNhat";
             this.btnCapNhat.Size = new System.Drawing.Size(75, 23);
             this.btnCapNhat.TabIndex = 8;
@@ -79,7 +87,7 @@
             // 
             // btnTao
             // 
-            this.btnTao.Location = new System.Drawing.Point(229, 391);
+            this.btnTao.Location = new System.Drawing.Point(164, 395);
             this.btnTao.Name = "btnTao";
             this.btnTao.Size = new System.Drawing.Size(75, 23);
             this.btnTao.TabIndex = 7;
@@ -179,7 +187,9 @@
             this.TENBDT,
             this.HOCKY,
             this.NAMHOC,
-            this.MAGVTAO});
+            this.MAGVTAO,
+            this.Column1,
+            this.Column2});
             this.dgvDeThi.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvDeThi.Location = new System.Drawing.Point(3, 16);
             this.dgvDeThi.MultiSelect = false;
@@ -189,6 +199,33 @@
             this.dgvDeThi.Size = new System.Drawing.Size(589, 299);
             this.dgvDeThi.TabIndex = 0;
             this.dgvDeThi.SelectionChanged += new System.EventHandler(this.dgvDeThi_SelectionChanged);
+            // 
+            // btnThemCauHoi
+            // 
+            this.btnThemCauHoi.Location = new System.Drawing.Point(361, 395);
+            this.btnThemCauHoi.Name = "btnThemCauHoi";
+            this.btnThemCauHoi.Size = new System.Drawing.Size(89, 23);
+            this.btnThemCauHoi.TabIndex = 9;
+            this.btnThemCauHoi.Text = "Quản lý câu hỏi";
+            this.btnThemCauHoi.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(277, 356);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Môn học";
+            // 
+            // cboMonHoc
+            // 
+            this.cboMonHoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMonHoc.FormattingEnabled = true;
+            this.cboMonHoc.Location = new System.Drawing.Point(333, 354);
+            this.cboMonHoc.Name = "cboMonHoc";
+            this.cboMonHoc.Size = new System.Drawing.Size(121, 21);
+            this.cboMonHoc.TabIndex = 11;
             // 
             // MABDT
             // 
@@ -229,6 +266,20 @@
             this.MAGVTAO.Name = "MAGVTAO";
             this.MAGVTAO.ReadOnly = true;
             // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "TENMH";
+            this.Column1.HeaderText = "Môn học";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "MAMH";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Visible = false;
+            // 
             // FrmQuanLyDeThi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,10 +312,15 @@
         private System.Windows.Forms.TextBox txtTenDeThi;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvDeThi;
+        private System.Windows.Forms.Button btnThemCauHoi;
+        private System.Windows.Forms.ComboBox cboMonHoc;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridViewTextBoxColumn MABDT;
         private System.Windows.Forms.DataGridViewTextBoxColumn TENBDT;
         private System.Windows.Forms.DataGridViewTextBoxColumn HOCKY;
         private System.Windows.Forms.DataGridViewTextBoxColumn NAMHOC;
         private System.Windows.Forms.DataGridViewTextBoxColumn MAGVTAO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
     }
 }

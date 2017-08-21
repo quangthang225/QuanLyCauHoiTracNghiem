@@ -29,6 +29,8 @@ namespace DAO
                     d.HOCKY = (int)rdr["HOCKY"];
                     d.NAMHOC = (int)rdr["NAMHOC"];
                     d.MAGVTAO = (long)rdr["MAGVTAO"];
+                    d.MAMH = (long)rdr["MAMH"];
+                    d.TENMH = (string)rdr["TENMH"];
                     lstKQ.Add(d);
                 }
                 return lstKQ;

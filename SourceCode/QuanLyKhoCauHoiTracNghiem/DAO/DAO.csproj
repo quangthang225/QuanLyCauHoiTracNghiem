@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AbstractDAO.cs" />
     <Compile Include="DETHIDAO.cs" />
+    <Compile Include="MONHOCDAO.cs" />
     <Compile Include="NGUOIDUNGDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

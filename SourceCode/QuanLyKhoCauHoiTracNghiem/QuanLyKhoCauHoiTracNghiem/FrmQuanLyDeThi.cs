@@ -25,6 +25,13 @@ namespace QuanLyKhoCauHoiTracNghiem
         private void FrmQuanLyDeThi_Load(object sender, EventArgs e)
         {
             LayDanhSachBoDeThi();
+            LayDanhSachMonHoc();
+        }
+
+        private void LayDanhSachMonHoc()
+        {
+            var lst = MONHOCBUS.LayDanhSachMonHoc();
+            cboMonHoc.DataSource = lst;
         }
 
         private void LayDanhSachBoDeThi()
@@ -43,7 +50,7 @@ namespace QuanLyKhoCauHoiTracNghiem
 
         private void btnTao_Click(object sender, EventArgs e)
         {
-            DETHIDTO d = new DETHIDTO(0,txtTenDeThi.Text.TrimEnd(), Convert.ToInt32(txtHocKy.Value), Convert.ToInt32(txtNamHoc.Value), Common.MaNguoiDungDangNhap);
+            DETHIDTO d = new DETHIDTO(0,txtTenDeThi.Text.TrimEnd(), Convert.ToInt32(txtHocKy.Value), Convert.ToInt32(txtNamHoc.Value), Common.MaNguoiDungDangNhap,(int)cboMonHoc.SelectedValue,"");
             int rs = DETHIBUS.ThemBoDeThi(d);
             if (rs == 1)
             {
@@ -81,11 +88,12 @@ namespace QuanLyKhoCauHoiTracNghiem
 
             int selectedIndex = dgvDeThi.SelectedRows[0].Index;
             long maDeThi = Convert.ToInt64(dgvDeThi.Rows[selectedIndex].Cells["MABDT"].Value);
-            DETHIDTO d = new DETHIDTO(maDeThi, txtTenDeThi.Text.TrimEnd(), (int)txtHocKy.Value, (int)txtNamHoc.Value, 0);
+            DETHIDTO d = new DETHIDTO(maDeThi, txtTenDeThi.Text.TrimEnd(), (int)txtHocKy.Value, (int)txtNamHoc.Value, 0, 0, "");
             bool rs = DETHIBUS.CapNhatBoDeThi(d);
             if (rs)
             {
                 LayDanhSachBoDeThi();
+                MessageBox.Show("Cập nhật thành công");
             }
             else
             {
