@@ -15,7 +15,7 @@ BEGIN
 			ELSE
 			BEGIN
 				SET @return = 0
-			END
+			END	
 		COMMIT TRAN
 	END TRY
 	BEGIN CATCH
