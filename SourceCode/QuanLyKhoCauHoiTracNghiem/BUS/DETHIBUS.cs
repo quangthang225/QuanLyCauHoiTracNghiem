@@ -15,10 +15,16 @@ namespace BUS
             return d.LayDanhSachBoDeThi();
         }
 
-        public static bool ThemBoDeThi(DETHIDTO d)
+        public static int ThemBoDeThi(DETHIDTO d)
         {
             DETHIDAO dao = new DETHIDAO();
             return dao.ThemBoDeThi(d);
+        }
+
+        public static bool CapNhatBoDeThi(DETHIDTO d)
+        {
+            DETHIDAO dao = new DETHIDAO();
+            return dao.CapNhatBoDeThi(d);
         }
     }
 }

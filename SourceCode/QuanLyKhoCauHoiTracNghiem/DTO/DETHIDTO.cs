@@ -51,8 +51,9 @@ namespace DTO
         {
 
         }
-        public DETHIDTO(string tenbdt, int hocky, int namhoc,long maNguoiDung)
+        public DETHIDTO(long madt,string tenbdt, int hocky, int namhoc,long maNguoiDung)
         {
+            this._MABDT = madt;
             this._TENBDT = tenbdt;
             this._HOCKY = hocky;
             this._NAMHOC = namhoc;

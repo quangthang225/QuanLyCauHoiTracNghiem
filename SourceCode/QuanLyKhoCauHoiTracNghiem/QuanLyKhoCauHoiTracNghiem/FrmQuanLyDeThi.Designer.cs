@@ -38,6 +38,11 @@
             this.txtTenDeThi = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvDeThi = new System.Windows.Forms.DataGridView();
+            this.MABDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TENBDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HOCKY = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NAMHOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MAGVTAO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtHocKy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNamHoc)).BeginInit();
@@ -70,6 +75,7 @@
             this.btnCapNhat.TabIndex = 8;
             this.btnCapNhat.Text = "Cập nhật";
             this.btnCapNhat.UseVisualStyleBackColor = true;
+            this.btnCapNhat.Click += new System.EventHandler(this.btnCapNhat_Click);
             // 
             // btnTao
             // 
@@ -168,13 +174,60 @@
             // dgvDeThi
             // 
             this.dgvDeThi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDeThi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.MABDT,
+            this.TENBDT,
+            this.HOCKY,
+            this.NAMHOC,
+            this.MAGVTAO});
             this.dgvDeThi.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvDeThi.Location = new System.Drawing.Point(3, 16);
+            this.dgvDeThi.MultiSelect = false;
             this.dgvDeThi.Name = "dgvDeThi";
+            this.dgvDeThi.ReadOnly = true;
             this.dgvDeThi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDeThi.Size = new System.Drawing.Size(589, 299);
             this.dgvDeThi.TabIndex = 0;
             this.dgvDeThi.SelectionChanged += new System.EventHandler(this.dgvDeThi_SelectionChanged);
+            // 
+            // MABDT
+            // 
+            this.MABDT.DataPropertyName = "MABDT";
+            this.MABDT.Frozen = true;
+            this.MABDT.HeaderText = "Mã đề thi";
+            this.MABDT.Name = "MABDT";
+            this.MABDT.ReadOnly = true;
+            // 
+            // TENBDT
+            // 
+            this.TENBDT.DataPropertyName = "TENBDT";
+            this.TENBDT.Frozen = true;
+            this.TENBDT.HeaderText = "Tên";
+            this.TENBDT.Name = "TENBDT";
+            this.TENBDT.ReadOnly = true;
+            // 
+            // HOCKY
+            // 
+            this.HOCKY.DataPropertyName = "HOCKY";
+            this.HOCKY.Frozen = true;
+            this.HOCKY.HeaderText = "Học kỳ";
+            this.HOCKY.Name = "HOCKY";
+            this.HOCKY.ReadOnly = true;
+            // 
+            // NAMHOC
+            // 
+            this.NAMHOC.DataPropertyName = "NAMHOC";
+            this.NAMHOC.Frozen = true;
+            this.NAMHOC.HeaderText = "Năm học";
+            this.NAMHOC.Name = "NAMHOC";
+            this.NAMHOC.ReadOnly = true;
+            // 
+            // MAGVTAO
+            // 
+            this.MAGVTAO.DataPropertyName = "MAGVTAO";
+            this.MAGVTAO.HeaderText = "MAGVTAO";
+            this.MAGVTAO.Name = "MAGVTAO";
+            this.MAGVTAO.ReadOnly = true;
             // 
             // FrmQuanLyDeThi
             // 
@@ -208,5 +261,10 @@
         private System.Windows.Forms.TextBox txtTenDeThi;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvDeThi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MABDT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TENBDT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HOCKY;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NAMHOC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MAGVTAO;
     }
 }

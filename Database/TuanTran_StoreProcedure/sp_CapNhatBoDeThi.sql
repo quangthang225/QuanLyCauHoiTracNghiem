@@ -6,35 +6,34 @@
 @Return bit out
 AS
 BEGIN
-	BEGIN TRAN
-		BEGIN TRY
+	BEGIN TRY
+		BEGIN TRAN
+			DECLARE @validateInput BIT
+			SET @validateInput = 1
+
 			-- Kiểm tra tồn tại @MaBDT
 			IF NOT EXISTS ( SELECT * FROM BODETHI WHERE MABDT = @MaBDT )
-			BEGIN
-				SET @Return = 0
-				RETURN
-			END
+				SET @validateInput = 0
 			
 			-- Kiểm tra tồn tại @TenBoDeThi
 			IF EXISTS ( SELECT * FROM BODETHI WHERE MABDT != @MaBDT AND TENBDT = @TenBoDeThi )
-			BEGIN
-				SET @Return = 0
-				RETURN
-			END 
+				SET @validateInput = 0
 
 			-- @HocKy và @NamHoc hợp lệ
-			IF ( @HocKy < 1 AND @NamHoc < 1)
-			BEGIN
-				SET @Return = 0
-				RETURN
-			END  
+			IF ( @HocKy < 1 OR @NamHoc < 1)
+				SET @validateInput = 0
 
-			UPDATE BODETHI SET TENBDT = @TenBoDeThi, HOCKY = @HocKy, NAMHOC = @NamHoc WHERE MABDT = @MaBDT
-		END TRY
-		BEGIN CATCH
-			ROLLBACK TRAN
-			SET @return = 0
-		END CATCH
-	COMMIT TRAN
+			IF @validateInput = 1
+			BEGIN
+				UPDATE BODETHI SET TENBDT = @TenBoDeThi, HOCKY = @HocKy, NAMHOC = @NamHoc WHERE MABDT = @MaBDT
+				SET @Return = 1
+			END
+			ELSE
+				SET @Return = 0
+		COMMIT TRAN
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRAN
+	END CATCH
 END
 GO
