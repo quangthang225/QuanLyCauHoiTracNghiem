@@ -11,10 +11,8 @@ namespace DAO
     {
         public bool DangNhap(string tenDangNhap, string matKhau,out long maNguoiDung)
         {
-            // B1: Tạo kết nối
             SqlConnection connection = ConnectDB();
             SqlCommand cmd = new SqlCommand("sp_DangNhap", connection);
-            cmd.CommandTimeout = 50;
             cmd.CommandType = CommandType.StoredProcedure;
 
             SqlParameter sParam_tenDangNhap = cmd.Parameters.Add("@tenDangNhap", SqlDbType.VarChar,30);

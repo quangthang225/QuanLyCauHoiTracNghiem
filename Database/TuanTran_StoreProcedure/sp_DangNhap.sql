@@ -12,6 +12,10 @@ BEGIN
 				SET @maNguoiDung = ( SELECT MAND FROM NGUOIDUNG WHERE TENDANGNHAP = @tenDangNhap AND MATKHAU = @matKhau )
 				SET @return = 1
 			END
+			ELSE
+			BEGIN
+				SET @return = 0
+			END
 		COMMIT TRAN
 	END TRY
 	BEGIN CATCH

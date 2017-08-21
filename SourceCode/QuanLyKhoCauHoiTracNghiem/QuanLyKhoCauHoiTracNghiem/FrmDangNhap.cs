@@ -26,7 +26,7 @@ namespace QuanLyKhoCauHoiTracNghiem
             if (rs == true)
             {
                 this.Hide();
-                FrmMain f = new FrmMain(tenDangNhap);
+                FrmMain f = new FrmMain(maNguoiDung,tenDangNhap);
                 f.Show();
             }
             else

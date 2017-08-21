@@ -1,33 +1,41 @@
-﻿CREATE PROCEDURE sp_TaoBoDeThi
+﻿ALTER PROCEDURE sp_TaoBoDeThi
 @TenBoDeThi nvarchar(255),
 @HocKy int,
 @NamHoc int,
+@MaGvTao bigint,
 @Return bit out
 AS
 BEGIN
-	BEGIN TRAN
-		BEGIN TRY
+	BEGIN TRY
+		BEGIN TRAN
+			DECLARE @validateInput BIT
+			SET @validateInput = 1
 			-- Kiểm tra tồn tại @TenBoDeThi
-			IF NOT EXISTS ( SELECT * FROM BODETHI WHERE TenBDT = @TenBoDeThi )
+			IF EXISTS ( SELECT * FROM BODETHI WHERE TenBDT = @TenBoDeThi )
 			BEGIN
-				SET @Return = 0
-				RETURN
+				SET @validateInput = 0
 			END
 
 			-- Kiểm tra @HocKy và @NamHoc hợp lệ
-			IF ( @HocKy < 1 AND @NamHoc < 1)
+			IF ( @HocKy < 1 OR @NamHoc < 1)
+			BEGIN
+				SET @validateInput = 0
+			END  
+			
+			IF ( @validateInput = 1 ) 
+			BEGIN
+				INSERT INTO BODETHI(TENBDT,HOCKY,NAMHOC,MAGVTAO) VALUES(@TenBoDeThi,@HocKy,@NamHoc,@MaGvTao)
+				SET @Return = 1
+			END
+			ELSE
 			BEGIN
 				SET @Return = 0
-				RETURN
-			END  
-
-			INSERT INTO BODETHI(TENBDT,HOCKY,NAMHOC) VALUES(@TenBoDeThi,@HocKy,@NamHoc)
-			SET @Return = 1
-		END TRY
-		BEGIN CATCH
-			ROLLBACK TRAN
-			SET @return = 0
-		END CATCH
-	COMMIT TRAN
+			END
+		COMMIT TRAN
+	END TRY	
+	BEGIN CATCH
+		ROLLBACK TRAN
+	END CATCH
 END
 GO
+

@@ -6,14 +6,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Utilities;
 
 namespace QuanLyKhoCauHoiTracNghiem
 {
     public partial class FrmMain : Form
     {
-        public FrmMain(string tenDangNhap)
+        public FrmMain(long maNguoiDung,string tenDangNhap)
         {
             InitializeComponent();
+            Common.MaNguoiDungDangNhap = maNguoiDung;
             mnuXinChao.Text = "Xin chào: " + tenDangNhap;
         }
 
@@ -48,7 +50,19 @@ namespace QuanLyKhoCauHoiTracNghiem
 
         private void mnuQuanLyMonHoc_Click(object sender, EventArgs e)
         {
-            FrmQuanLyMonHoc frm = new FrmQuanLyMonHoc();
+            //FrmQuanLyMonHoc frm = new FrmQuanLyMonHoc();
+            //Form f = (Form)frm;
+            //HienThiForm(ref f);
+        }
+
+        private void mnuQuanLyDeThi_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void mnuTaoDeThi_Click(object sender, EventArgs e)
+        {
+            FrmQuanLyDeThi frm = new FrmQuanLyDeThi();
             Form f = (Form)frm;
             HienThiForm(ref f);
         }

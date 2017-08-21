@@ -59,11 +59,11 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmQuanLyMonHoc.cs">
+    <Compile Include="FrmQuanLyDeThi.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmQuanLyMonHoc.Designer.cs">
-      <DependentUpon>FrmQuanLyMonHoc.cs</DependentUpon>
+    <Compile Include="FrmQuanLyDeThi.Designer.cs">
+      <DependentUpon>FrmQuanLyDeThi.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,8 +73,8 @@
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmQuanLyMonHoc.resx">
-      <DependentUpon>FrmQuanLyMonHoc.cs</DependentUpon>
+    <EmbeddedResource Include="FrmQuanLyDeThi.resx">
+      <DependentUpon>FrmQuanLyDeThi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -99,6 +99,14 @@
     <ProjectReference Include="..\BUS\BUS.csproj">
       <Project>{8A23EE93-E7AB-4E55-8B2C-0964B14AE29C}</Project>
       <Name>BUS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{286802f7-35a2-4a30-b25c-3d5f643bfa86}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{90d00740-c4e2-4e3c-983b-86a641a20e15}</Project>
+      <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
