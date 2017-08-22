@@ -32,6 +32,8 @@ namespace QuanLyKhoCauHoiTracNghiem
         {
             var lst = MONHOCBUS.LayDanhSachMonHoc();
             cboMonHoc.DataSource = lst;
+            cboMonHoc.ValueMember = "MAMH";
+            cboMonHoc.DisplayMember = "TENMH";
         }
 
         private void LayDanhSachBoDeThi()
@@ -50,7 +52,8 @@ namespace QuanLyKhoCauHoiTracNghiem
 
         private void btnTao_Click(object sender, EventArgs e)
         {
-            DETHIDTO d = new DETHIDTO(0,txtTenDeThi.Text.TrimEnd(), Convert.ToInt32(txtHocKy.Value), Convert.ToInt32(txtNamHoc.Value), Common.MaNguoiDungDangNhap,(int)cboMonHoc.SelectedValue,"");
+            long maMonHoc = ((MONHOCDTO)cboMonHoc.SelectedItem).MAMONHOC;
+            DETHIDTO d = new DETHIDTO(0,txtTenDeThi.Text.TrimEnd(), Convert.ToInt32(txtHocKy.Value), Convert.ToInt32(txtNamHoc.Value), Common.MaNguoiDungDangNhap, maMonHoc, "");
             int rs = DETHIBUS.ThemBoDeThi(d);
             if (rs == 1)
             {
@@ -99,6 +102,28 @@ namespace QuanLyKhoCauHoiTracNghiem
             {
                 MessageBox.Show("Cập nhật bộ đề thi thất bại");
             }
+        }
+
+        private void btnQuanLyCauHoi_Click(object sender, EventArgs e)
+        {
+            if (dgvDeThi.SelectedRows.Count < 1)
+            {
+                MessageBox.Show("Vui lòng chọn 1 đề thi cần cập nhật");
+                return;
+            }
+
+            int selectedIndex = dgvDeThi.SelectedRows[0].Index;
+            long maDeThi = Convert.ToInt64(dgvDeThi.Rows[selectedIndex].Cells["MABDT"].Value);
+            string tenDeThi = dgvDeThi.Rows[selectedIndex].Cells["TENBDT"].Value.ToString();
+            long maMonHoc = Convert.ToInt64(dgvDeThi.Rows[selectedIndex].Cells["MAMH"].Value);
+            string tenMonHoc = dgvDeThi.Rows[selectedIndex].Cells["TENMH"].Value.ToString();
+
+            FrmQuanLyCauHoiTheoBoDeThi frm = new FrmQuanLyCauHoiTheoBoDeThi();
+            frm._madethi = maDeThi;
+            frm._tendethi = tenDeThi;
+            frm._maMonHoc = maMonHoc;
+            frm._tenMonHoc = tenMonHoc;
+            frm.ShowDialog();
         }
     }
 }

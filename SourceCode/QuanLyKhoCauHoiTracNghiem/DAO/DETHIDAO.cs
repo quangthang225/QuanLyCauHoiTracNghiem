@@ -65,6 +65,10 @@ namespace DAO
                 sParam_magv.Direction = ParameterDirection.Input;
                 sParam_magv.Value = d.MAGVTAO;
 
+                SqlParameter sParam_mamh = cmd.Parameters.Add("@MaMonHoc", SqlDbType.BigInt);
+                sParam_mamh.Direction = ParameterDirection.Input;
+                sParam_mamh.Value = d.MAMH;
+
                 SqlParameter sParam_ketQua = cmd.Parameters.Add("@Return", SqlDbType.Int);
                 sParam_ketQua.Direction = ParameterDirection.Output;
 

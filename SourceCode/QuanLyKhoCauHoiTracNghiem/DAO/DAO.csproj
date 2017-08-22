@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractDAO.cs" />
+    <Compile Include="CAUHOIDAO.cs" />
     <Compile Include="DETHIDAO.cs" />
     <Compile Include="MONHOCDAO.cs" />
     <Compile Include="NGUOIDUNGDAO.cs" />
@@ -50,6 +51,10 @@
     <ProjectReference Include="..\DTO\DTO.csproj">
       <Project>{286802F7-35A2-4A30-B25C-3D5F643BFA86}</Project>
       <Name>DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{90D00740-C4E2-4E3C-983B-86A641A20E15}</Project>
+      <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
