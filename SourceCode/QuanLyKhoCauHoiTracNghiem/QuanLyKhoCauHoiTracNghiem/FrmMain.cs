@@ -57,14 +57,14 @@ namespace QuanLyKhoCauHoiTracNghiem
 
         private void mnuQuanLyDeThi_Click(object sender, EventArgs e)
         {
-            
+            FrmQuanLyDeThi frm = new FrmQuanLyDeThi();
+            Form f = (Form)frm;
+            HienThiForm(ref f);
         }
 
         private void mnuTaoDeThi_Click(object sender, EventArgs e)
         {
-            FrmQuanLyDeThi frm = new FrmQuanLyDeThi();
-            Form f = (Form)frm;
-            HienThiForm(ref f);
+           
         }
     }
 }
