@@ -89,5 +89,67 @@ namespace DAO
                 throw e;
             }
         }
+
+        public bool ThemCauHoiVaoDeThi(long maDeThi, long maCauHoi, double diem)
+        {
+            try
+            {
+                SqlConnection connection = ConnectDB();
+                SqlCommand cmd = new SqlCommand("sp_ThemCauHoiVaoBoDeThi", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter sParam_MABDT = cmd.Parameters.Add("@MABDT", SqlDbType.BigInt);
+                sParam_MABDT.Direction = ParameterDirection.Input;
+                sParam_MABDT.Value = maDeThi;
+
+                SqlParameter sParam_MACH = cmd.Parameters.Add("@MACH", SqlDbType.BigInt);
+                sParam_MACH.Direction = ParameterDirection.Input;
+                sParam_MACH.Value = maCauHoi;
+
+                SqlParameter sParam_Diem = cmd.Parameters.Add("@DIEM", SqlDbType.BigInt);
+                sParam_Diem.Direction = ParameterDirection.Input;
+                sParam_Diem.Value = diem;
+
+                SqlParameter sParam_ketQua = cmd.Parameters.Add("@Return", SqlDbType.Int);
+                sParam_ketQua.Direction = ParameterDirection.Output;
+
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return Convert.ToBoolean(sParam_ketQua.Value);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public bool DiChuyenCauHoiRaKhoiBoDeThi(long maDeThi, long maCauHoi)
+        {
+            try
+            {
+                SqlConnection connection = ConnectDB();
+                SqlCommand cmd = new SqlCommand("sp_DiChuyenCauHoiRaKhoiDeThi", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter sParam_MABDT = cmd.Parameters.Add("@MABDT", SqlDbType.BigInt);
+                sParam_MABDT.Direction = ParameterDirection.Input;
+                sParam_MABDT.Value = maDeThi;
+
+                SqlParameter sParam_MACH = cmd.Parameters.Add("@MACH", SqlDbType.BigInt);
+                sParam_MACH.Direction = ParameterDirection.Input;
+                sParam_MACH.Value = maCauHoi;
+
+                SqlParameter sParam_ketQua = cmd.Parameters.Add("@Return", SqlDbType.Int);
+                sParam_ketQua.Direction = ParameterDirection.Output;
+
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return Convert.ToBoolean(sParam_ketQua.Value);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

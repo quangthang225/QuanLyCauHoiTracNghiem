@@ -20,5 +20,17 @@ namespace BUS
             CAUHOIDAO c = new CAUHOIDAO();
             return c.LayDanhSacCauHoiTheoDeThi(maDeThi);
         }
+
+        public static bool ThemCauHoiVaoDeThi(long maDeThi, long maCauHoi, double diem)
+        {
+            CAUHOIDAO c = new CAUHOIDAO();
+            return c.ThemCauHoiVaoDeThi(maDeThi,maCauHoi, diem);
+        }
+
+        public static bool DiChuyenCauHoiRaKhoiBoDeThi(long maDeThi, long maCauHoi)
+        {
+            CAUHOIDAO c = new CAUHOIDAO();
+            return c.DiChuyenCauHoiRaKhoiBoDeThi(maDeThi, maCauHoi);
+        }
     }
 }

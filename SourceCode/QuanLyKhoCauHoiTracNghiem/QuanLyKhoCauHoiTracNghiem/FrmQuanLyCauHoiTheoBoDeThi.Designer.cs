@@ -34,10 +34,12 @@
             this.btnXoa = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvCauHoiTheoDeThi = new System.Windows.Forms.DataGridView();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MACH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NOIDUNG = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.THANGDIEM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SOCAUTRALOI = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,6 +64,7 @@
             // 
             this.dgvCauHoi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCauHoi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column5,
             this.Column1,
             this.Column2,
             this.Column3,
@@ -80,6 +83,7 @@
             this.btnThem.TabIndex = 2;
             this.btnThem.Text = ">>";
             this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnXoa
             // 
@@ -89,6 +93,7 @@
             this.btnXoa.TabIndex = 3;
             this.btnXoa.Text = "<<";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // groupBox2
             // 
@@ -104,6 +109,7 @@
             // 
             this.dgvCauHoiTheoDeThi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCauHoiTheoDeThi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.MACH,
             this.NOIDUNG,
             this.THANGDIEM,
             this.SOCAUTRALOI,
@@ -113,6 +119,13 @@
             this.dgvCauHoiTheoDeThi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCauHoiTheoDeThi.Size = new System.Drawing.Size(464, 341);
             this.dgvCauHoiTheoDeThi.TabIndex = 0;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "MACH";
+            this.Column5.HeaderText = "MACH";
+            this.Column5.Name = "Column5";
+            this.Column5.Visible = false;
             // 
             // Column1
             // 
@@ -140,6 +153,13 @@
             this.Column4.DataPropertyName = "MUCDO";
             this.Column4.HeaderText = "Mức độ";
             this.Column4.Name = "Column4";
+            // 
+            // MACH
+            // 
+            this.MACH.DataPropertyName = "MACH";
+            this.MACH.HeaderText = "MACH";
+            this.MACH.Name = "MACH";
+            this.MACH.Visible = false;
             // 
             // NOIDUNG
             // 
@@ -199,10 +219,12 @@
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvCauHoiTheoDeThi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MACH;
         private System.Windows.Forms.DataGridViewTextBoxColumn NOIDUNG;
         private System.Windows.Forms.DataGridViewTextBoxColumn THANGDIEM;
         private System.Windows.Forms.DataGridViewTextBoxColumn SOCAUTRALOI;
