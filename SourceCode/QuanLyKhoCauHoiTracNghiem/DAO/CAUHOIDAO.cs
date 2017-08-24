@@ -11,6 +11,40 @@ namespace DAO
 {
     public class CAUHOIDAO : AbstractDAO
     {
+        public List<CAUHOIDTO> LayDanhSachCauHoi()
+        {
+            try
+            {
+                List<CAUHOIDTO> lstKQ = new List<CAUHOIDTO>();
+                SqlConnection connection = ConnectDB();
+                SqlCommand cmd = new SqlCommand("sp_LayDanhSachCauHoi", connection);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    CAUHOIDTO d = new CAUHOIDTO();
+                    d.MACH = (long)rdr["MACH"];
+                    d.NOIDUNG = (string)rdr["NOIDUNG"];
+                    d.THANGDIEM = (double)rdr["THANGDIEM"];
+                    d.SOCAUTRALOI = (int)rdr["SOCAUTRALOI"];
+                    if ((int)rdr["MUCDO"] == (int)Enums.MucDoCauHoi.De)
+                        d.MUCDO = "Dễ";
+                    else if ((int)rdr["MUCDO"] == (int)Enums.MucDoCauHoi.Vua)
+                        d.MUCDO = "Vừa";
+                    else
+                        d.MUCDO = "Khó";
+                    d.MAMH = (long)rdr["MAMH"];
+                    d.TENMH = (string)rdr["TENMH"];
+                    lstKQ.Add(d);
+                }
+                return lstKQ;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public List<CAUHOIDTO> LayDanhSachCauHoiTheoMonHocChuaCoTrongDeThi(long maMonHoc, long maDeThi)
         {
             try
@@ -83,6 +117,43 @@ namespace DAO
                     lstKQ.Add(d);
                 }
                 return lstKQ;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public bool ThemCauHoi(string noiDung, double thangDiem, int mucDo, long maMonHoc)
+        {
+            try
+            {
+                SqlConnection connection = ConnectDB();
+                SqlCommand cmd = new SqlCommand("sp_ThemCauHoi", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter sParam_NoiDung= cmd.Parameters.Add("@NoiDung", SqlDbType.NVarChar);
+                sParam_NoiDung.Direction = ParameterDirection.Input;
+                sParam_NoiDung.Value = noiDung;
+
+                SqlParameter sParam_thangDiem = cmd.Parameters.Add("@ThangDiem", SqlDbType.Float);
+                sParam_thangDiem.Direction = ParameterDirection.Input;
+                sParam_thangDiem.Value = thangDiem;
+
+                SqlParameter sParam_MucDo = cmd.Parameters.Add("@MucDo", SqlDbType.Int);
+                sParam_MucDo.Direction = ParameterDirection.Input;
+                sParam_MucDo.Value = mucDo;
+
+                SqlParameter sParam_MaMonHoc = cmd.Parameters.Add("@MaMH", SqlDbType.Int);
+                sParam_MaMonHoc.Direction = ParameterDirection.Input;
+                sParam_MaMonHoc.Value = maMonHoc;
+
+                SqlParameter sParam_ketQua = cmd.Parameters.Add("@Return", SqlDbType.Int);
+                sParam_ketQua.Direction = ParameterDirection.Output;
+
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return Convert.ToBoolean(sParam_ketQua.Value);
             }
             catch (Exception e)
             {

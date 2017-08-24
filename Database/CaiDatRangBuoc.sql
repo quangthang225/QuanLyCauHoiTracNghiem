@@ -44,22 +44,6 @@ BEGIN
 END
 GO
 
-CREATE TRIGGER tg_SoCauTraLoiCuaCauHoi ON CAUHOI
-AFTER INSERT, UPDATE
-AS
-BEGIN
-	DECLARE @SoLuongCauTraLoi INTEGER
-	
-	SELECT @SoLuongCauTraLoi = C.SOCAUTRALOI FROM CAUHOI C,inserted I WHERE C.MACH = I.MACH 
-	IF ( @SoLuongCauTraLoi < 2 OR @SoLuongCauTraLoi > 10 ) 
-	BEGIN
-		RAISERROR ('Số câu trả lời của 1 câu hỏi phải là từ 2 tới 10.', 16, 1);  
-		ROLLBACK TRANSACTION;  
-	END
-	
-END
-GO
-
 --2.Điểm của một bộ đề thi tối đa là 10 
 
 --3.Một câu hỏi phải có tối thiểu 1 đáp án đúng

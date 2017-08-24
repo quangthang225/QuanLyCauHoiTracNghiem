@@ -40,8 +40,6 @@
             this.mnuQuanLyDeThi = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuQuanLyCauHoi = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDangXuat = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuTaoDeThi = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuThemCauHoiVaoDeThi = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -121,9 +119,6 @@
             // 
             // mnuQuanLyDeThi
             // 
-            this.mnuQuanLyDeThi.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuTaoDeThi,
-            this.mnuThemCauHoiVaoDeThi});
             this.mnuQuanLyDeThi.Name = "mnuQuanLyDeThi";
             this.mnuQuanLyDeThi.Size = new System.Drawing.Size(157, 22);
             this.mnuQuanLyDeThi.Text = "Quản lý đề thi";
@@ -134,6 +129,7 @@
             this.mnuQuanLyCauHoi.Name = "mnuQuanLyCauHoi";
             this.mnuQuanLyCauHoi.Size = new System.Drawing.Size(157, 22);
             this.mnuQuanLyCauHoi.Text = "Quản lý câu hỏi";
+            this.mnuQuanLyCauHoi.Click += new System.EventHandler(this.mnuQuanLyCauHoi_Click);
             // 
             // mnuDangXuat
             // 
@@ -141,19 +137,6 @@
             this.mnuDangXuat.Size = new System.Drawing.Size(72, 20);
             this.mnuDangXuat.Text = "Đăng xuất";
             this.mnuDangXuat.Click += new System.EventHandler(this.mnuDangXuat_Click);
-            // 
-            // mnuTaoDeThi
-            // 
-            this.mnuTaoDeThi.Name = "mnuTaoDeThi";
-            this.mnuTaoDeThi.Size = new System.Drawing.Size(202, 22);
-            this.mnuTaoDeThi.Text = "Tạo đề thi";
-            this.mnuTaoDeThi.Click += new System.EventHandler(this.mnuTaoDeThi_Click);
-            // 
-            // mnuThemCauHoiVaoDeThi
-            // 
-            this.mnuThemCauHoiVaoDeThi.Name = "mnuThemCauHoiVaoDeThi";
-            this.mnuThemCauHoiVaoDeThi.Size = new System.Drawing.Size(202, 22);
-            this.mnuThemCauHoiVaoDeThi.Text = "Thêm câu hỏi vào đề thi";
             // 
             // FrmMain
             // 
@@ -188,7 +171,5 @@
         private System.Windows.Forms.ToolStripMenuItem mnuBoMon;
         private System.Windows.Forms.ToolStripMenuItem mnuQuanLyDeThi;
         private System.Windows.Forms.ToolStripMenuItem mnuQuanLyCauHoi;
-        private System.Windows.Forms.ToolStripMenuItem mnuTaoDeThi;
-        private System.Windows.Forms.ToolStripMenuItem mnuThemCauHoiVaoDeThi;
     }
 }

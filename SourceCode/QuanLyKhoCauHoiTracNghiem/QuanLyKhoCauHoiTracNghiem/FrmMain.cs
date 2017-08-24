@@ -50,9 +50,7 @@ namespace QuanLyKhoCauHoiTracNghiem
 
         private void mnuQuanLyMonHoc_Click(object sender, EventArgs e)
         {
-            //FrmQuanLyMonHoc frm = new FrmQuanLyMonHoc();
-            //Form f = (Form)frm;
-            //HienThiForm(ref f);
+
         }
 
         private void mnuQuanLyDeThi_Click(object sender, EventArgs e)
@@ -65,6 +63,13 @@ namespace QuanLyKhoCauHoiTracNghiem
         private void mnuTaoDeThi_Click(object sender, EventArgs e)
         {
            
+        }
+
+        private void mnuQuanLyCauHoi_Click(object sender, EventArgs e)
+        {
+            FrmQuanLyCauHoi frm = new FrmQuanLyCauHoi();
+            Form f = (Form)frm;
+            HienThiForm(ref f);
         }
     }
 }

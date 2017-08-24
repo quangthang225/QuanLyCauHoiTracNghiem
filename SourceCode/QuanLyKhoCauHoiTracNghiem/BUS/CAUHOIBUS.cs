@@ -9,6 +9,12 @@ namespace BUS
 {
     public class CAUHOIBUS
     {
+        public static List<CAUHOIDTO> LayDanhSachCauHoi()
+        {
+            CAUHOIDAO c = new CAUHOIDAO();
+            return c.LayDanhSachCauHoi();
+        }
+
         public static List<CAUHOIDTO> LayDanhSachCauHoiTheoMonHocChuaCoTrongDeThi(long maMonHoc, long maDeThi)
         {
             CAUHOIDAO c = new CAUHOIDAO();
@@ -19,6 +25,12 @@ namespace BUS
         {
             CAUHOIDAO c = new CAUHOIDAO();
             return c.LayDanhSacCauHoiTheoDeThi(maDeThi);
+        }
+
+        public static bool ThemCauHoi(string noiDung, double thangDiem, int mucDo, long maMonHoc)
+        {
+            CAUHOIDAO c = new CAUHOIDAO();
+            return c.ThemCauHoi(noiDung, thangDiem,mucDo,maMonHoc);
         }
 
         public static bool ThemCauHoiVaoDeThi(long maDeThi, long maCauHoi, double diem)

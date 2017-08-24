@@ -92,5 +92,19 @@ namespace DTO
                 _MAMH = value;
             }
         }
+
+        private string _TENMH;
+        public string TENMH
+        {
+            get
+            {
+                return _TENMH;
+            }
+
+            set
+            {
+                _TENMH = value;
+            }
+        }
     }
 }
