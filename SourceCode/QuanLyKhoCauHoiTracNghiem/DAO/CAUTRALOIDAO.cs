@@ -72,5 +72,63 @@ namespace DAO
                 throw e;
             }
         }
+
+        public string CapNhatCauTraLoi(long maCTL, string noiDung, bool laDapAnDung)
+        {
+            try
+            {
+                SqlConnection connection = ConnectDB();
+                SqlCommand cmd = new SqlCommand("sp_CapNhatCauTraLoi", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter sParam_MACTL = cmd.Parameters.Add("@MACTL", SqlDbType.BigInt);
+                sParam_MACTL.Direction = ParameterDirection.Input;
+                sParam_MACTL.Value = maCTL;
+
+                SqlParameter sParam_NOIDUNG = cmd.Parameters.Add("@NOIDUNG", SqlDbType.NVarChar);
+                sParam_NOIDUNG.Direction = ParameterDirection.Input;
+                sParam_NOIDUNG.Value = noiDung;
+
+                SqlParameter sParam_LADAPANDUNG = cmd.Parameters.Add("@LADAPANDUNG", SqlDbType.Bit);
+                sParam_LADAPANDUNG.Direction = ParameterDirection.Input;
+                sParam_LADAPANDUNG.Value = laDapAnDung;
+
+                SqlParameter sParam_ketQua = cmd.Parameters.Add("@Return", SqlDbType.NVarChar, 500);
+                sParam_ketQua.Direction = ParameterDirection.Output;
+
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return Convert.ToString(sParam_ketQua.Value);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public string XoaCauTraLoi(long maCTL)
+        {
+            try
+            {
+                SqlConnection connection = ConnectDB();
+                SqlCommand cmd = new SqlCommand("sp_XoaCauTraLoi", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter sParam_MACTL = cmd.Parameters.Add("@MACTL", SqlDbType.BigInt);
+                sParam_MACTL.Direction = ParameterDirection.Input;
+                sParam_MACTL.Value = maCTL;
+
+                SqlParameter sParam_ketQua = cmd.Parameters.Add("@Return", SqlDbType.NVarChar, 500);
+                sParam_ketQua.Direction = ParameterDirection.Output;
+
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return Convert.ToString(sParam_ketQua.Value);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

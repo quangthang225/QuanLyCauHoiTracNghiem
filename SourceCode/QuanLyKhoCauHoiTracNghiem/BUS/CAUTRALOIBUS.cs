@@ -20,5 +20,16 @@ namespace BUS
             CAUTRALOIDAO c = new CAUTRALOIDAO();
             return c.ThemCauTraLoiVaoCauHoi(noiDung,laDapAnDung,maCauHoi);
         }
+
+        public static string CapNhatCauTraLoi(long maCTL, string noiDung, bool laDapAnDung)
+        {
+            CAUTRALOIDAO c = new CAUTRALOIDAO();
+            return c.CapNhatCauTraLoi(maCTL,noiDung,laDapAnDung);
+        }
+        public static string XoaCauTraLoi(long maCTL)
+        {
+            CAUTRALOIDAO c = new CAUTRALOIDAO();
+            return c.XoaCauTraLoi(maCTL);
+        }
     }
 }

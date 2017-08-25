@@ -88,7 +88,7 @@ namespace QuanLyKhoCauHoiTracNghiem
             {
                 return;
             }
-            
+
             int index = dgvCauHoi.SelectedRows[0].Index;
             long maCauHoi = Convert.ToInt64(dgvCauHoi.Rows[index].Cells["MACH"].Value);
             dgvCauTraLoi.DataSource = CAUTRALOIBUS.LayDanhSachCauTraLoiTheoCauHoi(maCauHoi);
@@ -121,6 +121,65 @@ namespace QuanLyKhoCauHoiTracNghiem
             else
             {
                 MessageBox.Show("Thêm câu trả lời thất bại. Đã có lỗi xảy ra");
+            }
+        }
+
+        private void btnXoaCauTL_Click(object sender, EventArgs e)
+        {
+            DialogResult d = MessageBox.Show("Bạn có chắc chắn muốn xóa câu trả lời này không ?", this.Text, MessageBoxButtons.YesNo);
+            if (d == DialogResult.No)
+                return;
+
+            if (dgvCauTraLoi.SelectedRows.Count < 1)
+            {
+                MessageBox.Show("Vui lòng chọn 1 câu trả lời để xóa");
+                return;
+            }
+            int index = dgvCauTraLoi.SelectedRows[0].Index;
+            long maCTL = Convert.ToInt64(dgvCauTraLoi.Rows[index].Cells[0].Value);
+            string rs = CAUTRALOIBUS.XoaCauTraLoi(maCTL);
+            if (String.IsNullOrEmpty(rs))
+            {
+                LoadCauHoi();
+            }
+            else
+            {
+                MessageBox.Show(rs);
+            }
+        }
+
+        private void dgvCauTraLoi_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvCauTraLoi.SelectedRows.Count < 1)
+            {
+                return;
+            }
+
+            int index = dgvCauTraLoi.SelectedRows[0].Index;
+            txtNoiDungCauTL.Text = Convert.ToString(dgvCauTraLoi.Rows[index].Cells[1].Value);
+            chkLaDapAnDung.Checked = Convert.ToBoolean(dgvCauTraLoi.Rows[index].Cells[2].Value);
+        }
+
+        private void btnCapNhatCauTL_Click(object sender, EventArgs e)
+        {
+            if (dgvCauTraLoi.SelectedRows.Count < 1)
+            {
+                MessageBox.Show("Vui lòng chọn 1 câu trả lời để cập nhật");
+                return;
+            }
+
+            int index = dgvCauTraLoi.SelectedRows[0].Index;
+            long maCTL = Convert.ToInt64(dgvCauTraLoi.Rows[index].Cells[0].Value);
+            string noiDung = txtNoiDungCauTL.Text.TrimEnd();
+            bool laDapAnDung = chkLaDapAnDung.Checked;
+            string rs = CAUTRALOIBUS.CapNhatCauTraLoi(maCTL, noiDung, laDapAnDung);
+            if (String.IsNullOrEmpty(rs))
+            {
+                LoadCauHoi();
+            }
+            else
+            {
+                MessageBox.Show(rs);
             }
         }
     }
