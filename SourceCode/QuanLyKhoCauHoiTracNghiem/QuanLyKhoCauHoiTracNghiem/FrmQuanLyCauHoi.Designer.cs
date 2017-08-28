@@ -30,13 +30,6 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvCauHoi = new System.Windows.Forms.DataGridView();
-            this.MACH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NOIDUNG = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.THANGDIEM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SOCAUTRALOI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MUCDO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MAMONHOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TENMH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cboMonHoc = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -61,6 +54,13 @@
             this.btnThemCauTL = new System.Windows.Forms.Button();
             this.txtNoiDungCauTL = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.MACH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NOIDUNG = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.THANGDIEM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SOCAUTRALOI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MUCDO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MAMH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TENMH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCauHoi)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -88,7 +88,7 @@
             this.THANGDIEM,
             this.SOCAUTRALOI,
             this.MUCDO,
-            this.MAMONHOC,
+            this.MAMH,
             this.TENMH});
             this.dgvCauHoi.Location = new System.Drawing.Point(8, 19);
             this.dgvCauHoi.MultiSelect = false;
@@ -98,57 +98,6 @@
             this.dgvCauHoi.Size = new System.Drawing.Size(544, 215);
             this.dgvCauHoi.TabIndex = 0;
             this.dgvCauHoi.SelectionChanged += new System.EventHandler(this.dgvCauHoi_SelectionChanged);
-            // 
-            // MACH
-            // 
-            this.MACH.DataPropertyName = "MACH";
-            this.MACH.HeaderText = "MACH";
-            this.MACH.Name = "MACH";
-            this.MACH.ReadOnly = true;
-            this.MACH.Visible = false;
-            // 
-            // NOIDUNG
-            // 
-            this.NOIDUNG.DataPropertyName = "NOIDUNG";
-            this.NOIDUNG.HeaderText = "Nội dung";
-            this.NOIDUNG.Name = "NOIDUNG";
-            this.NOIDUNG.ReadOnly = true;
-            // 
-            // THANGDIEM
-            // 
-            this.THANGDIEM.DataPropertyName = "THANGDIEM";
-            this.THANGDIEM.HeaderText = "Thang điểm";
-            this.THANGDIEM.Name = "THANGDIEM";
-            this.THANGDIEM.ReadOnly = true;
-            // 
-            // SOCAUTRALOI
-            // 
-            this.SOCAUTRALOI.DataPropertyName = "SOCAUTRALOI";
-            this.SOCAUTRALOI.HeaderText = "Số câu trả lời";
-            this.SOCAUTRALOI.Name = "SOCAUTRALOI";
-            this.SOCAUTRALOI.ReadOnly = true;
-            // 
-            // MUCDO
-            // 
-            this.MUCDO.DataPropertyName = "MUCDO";
-            this.MUCDO.HeaderText = "Mức độ";
-            this.MUCDO.Name = "MUCDO";
-            this.MUCDO.ReadOnly = true;
-            // 
-            // MAMONHOC
-            // 
-            this.MAMONHOC.DataPropertyName = "MAMH";
-            this.MAMONHOC.HeaderText = "MAMONHOC";
-            this.MAMONHOC.Name = "MAMONHOC";
-            this.MAMONHOC.ReadOnly = true;
-            this.MAMONHOC.Visible = false;
-            // 
-            // TENMH
-            // 
-            this.TENMH.DataPropertyName = "TENMH";
-            this.TENMH.HeaderText = "Môn học";
-            this.TENMH.Name = "TENMH";
-            this.TENMH.ReadOnly = true;
             // 
             // groupBox2
             // 
@@ -200,6 +149,7 @@
             this.btnCapNhatCauHoi.TabIndex = 7;
             this.btnCapNhatCauHoi.Text = "Cập nhật";
             this.btnCapNhatCauHoi.UseVisualStyleBackColor = true;
+            this.btnCapNhatCauHoi.Click += new System.EventHandler(this.btnCapNhatCauHoi_Click);
             // 
             // btnThemCauHoi
             // 
@@ -239,6 +189,7 @@
             this.txtThangDiemCauHoi.Name = "txtThangDiemCauHoi";
             this.txtThangDiemCauHoi.Size = new System.Drawing.Size(100, 20);
             this.txtThangDiemCauHoi.TabIndex = 3;
+            this.txtThangDiemCauHoi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtThangDiemCauHoi_KeyPress);
             // 
             // label2
             // 
@@ -396,6 +347,57 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Nội dung";
             // 
+            // MACH
+            // 
+            this.MACH.DataPropertyName = "MACH";
+            this.MACH.HeaderText = "MACH";
+            this.MACH.Name = "MACH";
+            this.MACH.ReadOnly = true;
+            this.MACH.Visible = false;
+            // 
+            // NOIDUNG
+            // 
+            this.NOIDUNG.DataPropertyName = "NOIDUNG";
+            this.NOIDUNG.HeaderText = "Nội dung";
+            this.NOIDUNG.Name = "NOIDUNG";
+            this.NOIDUNG.ReadOnly = true;
+            // 
+            // THANGDIEM
+            // 
+            this.THANGDIEM.DataPropertyName = "THANGDIEM";
+            this.THANGDIEM.HeaderText = "Thang điểm";
+            this.THANGDIEM.Name = "THANGDIEM";
+            this.THANGDIEM.ReadOnly = true;
+            // 
+            // SOCAUTRALOI
+            // 
+            this.SOCAUTRALOI.DataPropertyName = "SOCAUTRALOI";
+            this.SOCAUTRALOI.HeaderText = "Số câu trả lời";
+            this.SOCAUTRALOI.Name = "SOCAUTRALOI";
+            this.SOCAUTRALOI.ReadOnly = true;
+            // 
+            // MUCDO
+            // 
+            this.MUCDO.DataPropertyName = "MUCDO";
+            this.MUCDO.HeaderText = "Mức độ";
+            this.MUCDO.Name = "MUCDO";
+            this.MUCDO.ReadOnly = true;
+            // 
+            // MAMH
+            // 
+            this.MAMH.DataPropertyName = "MAMH";
+            this.MAMH.HeaderText = "MAMONHOC";
+            this.MAMH.Name = "MAMH";
+            this.MAMH.ReadOnly = true;
+            this.MAMH.Visible = false;
+            // 
+            // TENMH
+            // 
+            this.TENMH.DataPropertyName = "TENMH";
+            this.TENMH.HeaderText = "Môn học";
+            this.TENMH.Name = "TENMH";
+            this.TENMH.ReadOnly = true;
+            // 
             // FrmQuanLyCauHoi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -405,6 +407,7 @@
             this.Controls.Add(this.gbCauTraLoi);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FrmQuanLyCauHoi";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý câu hỏi";
@@ -445,16 +448,16 @@
         private System.Windows.Forms.Button btnThemCauTL;
         private System.Windows.Forms.TextBox txtNoiDungCauTL;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MACTL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NOIDUNGCTL;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn LADAPANDUNG;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn MACH;
         private System.Windows.Forms.DataGridViewTextBoxColumn NOIDUNG;
         private System.Windows.Forms.DataGridViewTextBoxColumn THANGDIEM;
         private System.Windows.Forms.DataGridViewTextBoxColumn SOCAUTRALOI;
         private System.Windows.Forms.DataGridViewTextBoxColumn MUCDO;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MAMONHOC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MAMH;
         private System.Windows.Forms.DataGridViewTextBoxColumn TENMH;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MACTL;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NOIDUNGCTL;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn LADAPANDUNG;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
     }
 }

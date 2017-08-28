@@ -144,7 +144,7 @@ namespace DAO
                 sParam_MucDo.Direction = ParameterDirection.Input;
                 sParam_MucDo.Value = mucDo;
 
-                SqlParameter sParam_MaMonHoc = cmd.Parameters.Add("@MaMH", SqlDbType.Int);
+                SqlParameter sParam_MaMonHoc = cmd.Parameters.Add("@MaMH", SqlDbType.BigInt);
                 sParam_MaMonHoc.Direction = ParameterDirection.Input;
                 sParam_MaMonHoc.Value = maMonHoc;
 
@@ -216,6 +216,47 @@ namespace DAO
                 cmd.ExecuteNonQuery();
                 connection.Close();
                 return Convert.ToBoolean(sParam_ketQua.Value);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public string CapNhatCauHoi(long maCauHoi, string noiDung, double thangDiem, int mucDo, long maMonHoc)
+        {
+            try
+            {
+                SqlConnection connection = ConnectDB();
+                SqlCommand cmd = new SqlCommand("sp_CapNhatCauHoi", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter sParam_MACH = cmd.Parameters.Add("@MACH", SqlDbType.BigInt);
+                sParam_MACH.Direction = ParameterDirection.Input;
+                sParam_MACH.Value = maCauHoi;
+
+                SqlParameter sParam_NoiDung = cmd.Parameters.Add("@NOIDUNG", SqlDbType.NVarChar);
+                sParam_NoiDung.Direction = ParameterDirection.Input;
+                sParam_NoiDung.Value = noiDung;
+
+                SqlParameter sParam_thangDiem = cmd.Parameters.Add("@THANGDIEM", SqlDbType.Float);
+                sParam_thangDiem.Direction = ParameterDirection.Input;
+                sParam_thangDiem.Value = thangDiem;
+
+                SqlParameter sParam_MucDo = cmd.Parameters.Add("@MUCDO", SqlDbType.Int);
+                sParam_MucDo.Direction = ParameterDirection.Input;
+                sParam_MucDo.Value = mucDo;
+
+                SqlParameter sParam_MaMonHoc = cmd.Parameters.Add("@MAMH", SqlDbType.BigInt);
+                sParam_MaMonHoc.Direction = ParameterDirection.Input;
+                sParam_MaMonHoc.Value = maMonHoc;
+
+                SqlParameter sParam_ketQua = cmd.Parameters.Add("@Return", SqlDbType.NVarChar,500);
+                sParam_ketQua.Direction = ParameterDirection.Output;
+
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return Convert.ToString(sParam_ketQua.Value);
             }
             catch (Exception e)
             {

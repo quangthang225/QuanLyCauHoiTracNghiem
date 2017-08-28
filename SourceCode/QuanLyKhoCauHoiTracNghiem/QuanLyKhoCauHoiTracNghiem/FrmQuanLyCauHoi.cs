@@ -91,6 +91,24 @@ namespace QuanLyKhoCauHoiTracNghiem
 
             int index = dgvCauHoi.SelectedRows[0].Index;
             long maCauHoi = Convert.ToInt64(dgvCauHoi.Rows[index].Cells["MACH"].Value);
+            txtNoiDungCauHoi.Text = Convert.ToString(dgvCauHoi.Rows[index].Cells["NOIDUNG"].Value);
+            string mucDo = Convert.ToString(dgvCauHoi.Rows[index].Cells["MUCDO"].Value);
+            if (mucDo == "Dễ")
+                cboMucDoCauHoi.SelectedIndex = (int)Enums.MucDoCauHoi.De - 1;
+            else if (mucDo == "Vừa")
+                cboMucDoCauHoi.SelectedIndex = (int)Enums.MucDoCauHoi.Vua - 1;
+            else
+                cboMucDoCauHoi.SelectedIndex = (int)Enums.MucDoCauHoi.Kho - 1;
+            txtThangDiemCauHoi.Text = Convert.ToString(dgvCauHoi.Rows[index].Cells["THANGDIEM"].Value);
+
+            long maMonHoc = Convert.ToInt64(dgvCauHoi.Rows[index].Cells["MAMH"].Value);
+            foreach (MONHOCDTO item in cboMonHoc.Items)
+            {
+                if (item.MAMONHOC == maMonHoc)
+                {
+                    cboMonHoc.SelectedItem = item;
+                }
+            }
             dgvCauTraLoi.DataSource = CAUTRALOIBUS.LayDanhSachCauTraLoiTheoCauHoi(maCauHoi);
         }
 
@@ -180,6 +198,58 @@ namespace QuanLyKhoCauHoiTracNghiem
             else
             {
                 MessageBox.Show(rs);
+            }
+        }
+
+        private void btnCapNhatCauHoi_Click(object sender, EventArgs e)
+        {
+            if (dgvCauHoi.SelectedRows.Count < 1)
+            {
+                MessageBox.Show("Vui lòng chọn 1 câu hỏi cần cập nhật thông tin");
+                return;
+            }
+
+            if (cboMonHoc.SelectedItem == null)
+            {
+                MessageBox.Show("Vui lòng chọn môn học cho câu hỏi");
+                return;
+            }
+
+            int index = dgvCauHoi.SelectedRows[0].Index;
+            long maCauHoi = Convert.ToInt64(dgvCauHoi.Rows[index].Cells["MACH"].Value);
+            string noiDung = txtNoiDungCauHoi.Text.Trim();
+            double thangDiem = Convert.ToDouble(txtThangDiemCauHoi.Text.Trim());
+            int mucDo;
+            if (cboMucDoCauHoi.SelectedIndex == (int)Enums.MucDoCauHoi.De - 1)
+                mucDo = (int)Enums.MucDoCauHoi.De;
+            else if (cboMucDoCauHoi.SelectedIndex == (int)Enums.MucDoCauHoi.Vua - 1)
+                mucDo = (int)Enums.MucDoCauHoi.Vua;
+            else
+                mucDo = (int)Enums.MucDoCauHoi.Kho;
+            MONHOCDTO m = (MONHOCDTO)cboMonHoc.SelectedItem;
+            string rs = CAUHOIBUS.CapNhatCauHoi(maCauHoi, noiDung, thangDiem, mucDo, m.MAMONHOC);
+            if (String.IsNullOrEmpty(rs))
+            {
+                LoadCauHoi();
+                MessageBox.Show("Cập nhật câu hỏi thành công");
+            }
+            else
+            {
+                MessageBox.Show(rs);
+            }
+        }
+
+        private void txtThangDiemCauHoi_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
             }
         }
     }

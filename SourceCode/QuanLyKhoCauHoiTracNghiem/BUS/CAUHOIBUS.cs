@@ -44,5 +44,11 @@ namespace BUS
             CAUHOIDAO c = new CAUHOIDAO();
             return c.DiChuyenCauHoiRaKhoiBoDeThi(maDeThi, maCauHoi);
         }
+
+        public static string CapNhatCauHoi(long maCauHoi, string noiDung, double thangDiem, int mucDo, long maMonHoc)
+        {
+            CAUHOIDAO c = new CAUHOIDAO();
+            return c.CapNhatCauHoi(maCauHoi, noiDung, thangDiem, mucDo, maMonHoc);
+        }
      }
 }
