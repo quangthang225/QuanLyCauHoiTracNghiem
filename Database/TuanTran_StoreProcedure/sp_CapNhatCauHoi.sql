@@ -1,26 +1,42 @@
-﻿CREATE PROCEDURE sp_CapNhatCauTraLoi
-@MACTL bigint,
+﻿ALTER PROCEDURE sp_CapNhatCauHoi
+@MACH bigint,
 @NOIDUNG nvarchar(max),
-@LADAPANDUNG bit,
+@THANGDIEM float,
+@MUCDO int,
+@MAMH bigint,
 @Return nvarchar(500) out
 AS
 BEGIN
 	BEGIN TRY
 		BEGIN TRAN
-			DECLARE @validateInput BIT
-			SET @validateInput = 1
-			
-			-- Kiểm tra tồn tại câu trả lời cần cập nhật
-			IF NOT EXISTS ( SELECT * FROM CAUTRALOI WHERE MACTL = @MACTL )
-				SET @validateInput = 0
+			-- Kiểm tra tồn tại câu hỏi
+			IF NOT EXISTS ( SELECT * FROM CAUHOI WHERE MACH = @MACH )
+				SET @Return = N'Không tồn tại câu hỏi này'
 
-			IF @validateInput = 1
+			-- Kiểm tra có cập nhật môn học cho câu hỏi hay ko
+			DECLARE @MAMHtemp BIGINT
+			SELECT @MAMHtemp = MAMH FROM CAUHOI WHERE MACH = @MACH
+			IF ( @MAMHtemp != @MAMH )
 			BEGIN
-				UPDATE CAUTRALOI SET NOIDUNG = @NOIDUNG, LADAPANDUNG = @LADAPANDUNG WHERE MACTL = @MACTL
-				SET @Return = ''
+				IF EXISTS ( SELECT * FROM CAUTRALOI WHERE MACH = @MACH )
+					SET @Return = N'Không thể cập nhật môn học cho câu hỏi này vì câu hỏi đang có câu trả lời'
+				ELSE
+				BEGIN
+					UPDATE CAUHOI SET NOIDUNG = @NOIDUNG, THANGDIEM = @THANGDIEM, MUCDO = @MUCDO, MAMH = @MAMH WHERE MACH = @MACH
+					SET @Return = ''
+				END
 			END
 			ELSE
-				SET @Return = 'Dữ liệu không hợp lệ'
+			BEGIN
+				IF @Return = '' OR @Return is null
+				BEGIN
+					UPDATE CAUHOI SET NOIDUNG = @NOIDUNG, THANGDIEM = @THANGDIEM, MUCDO = @MUCDO 
+					WHERE MACH = @MACH
+					SET @Return = ''
+				END
+				ELSE
+					SET @Return = N'Dữ liệu không hợp lệ'
+			END
 		COMMIT TRAN
 	END TRY
 	BEGIN CATCH

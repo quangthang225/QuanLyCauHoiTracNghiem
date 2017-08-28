@@ -9,13 +9,13 @@ namespace BUS
 {
     public class CAUTRALOIBUS
     {
-        public static List<CAUTRALOIDTO> LayDanhSachCauTraLoiTheoCauHoi(long maCauHoi)
+        public static List<CAUTRALOIDTO> LayDanhSachCauTraLoiTheoCauHoi(long maCauHoi,out string Error)
         {
             CAUTRALOIDAO c = new CAUTRALOIDAO();
-            return c.LayDanhSachCauTraLoiTheoCauHoi(maCauHoi);
+            return c.LayDanhSachCauTraLoiTheoCauHoi(maCauHoi, out Error);
         }
 
-        public static bool ThemCauTraLoiVaoCauHoi(string noiDung, bool laDapAnDung, long maCauHoi)
+        public static string ThemCauTraLoiVaoCauHoi(string noiDung, bool laDapAnDung, long maCauHoi)
         {
             CAUTRALOIDAO c = new CAUTRALOIDAO();
             return c.ThemCauTraLoiVaoCauHoi(noiDung,laDapAnDung,maCauHoi);

@@ -25,8 +25,17 @@ namespace QuanLyKhoCauHoiTracNghiem
 
         private void FrmQuanLyCauHoi_Load(object sender, EventArgs e)
         {
-            LoadMonHoc();
-            LoadCauHoi();
+            try
+            {
+                LoadMonHoc();
+                LoadCauHoi();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+            
         }
 
         private void LoadMonHoc()
@@ -109,7 +118,12 @@ namespace QuanLyKhoCauHoiTracNghiem
                     cboMonHoc.SelectedItem = item;
                 }
             }
-            dgvCauTraLoi.DataSource = CAUTRALOIBUS.LayDanhSachCauTraLoiTheoCauHoi(maCauHoi);
+            string error;
+            dgvCauTraLoi.DataSource = CAUTRALOIBUS.LayDanhSachCauTraLoiTheoCauHoi(maCauHoi,out error);
+            if (!String.IsNullOrEmpty(error))
+            {
+                MessageBox.Show(error);
+            }
         }
 
         private void btnThemCauTL_Click(object sender, EventArgs e)
@@ -131,14 +145,14 @@ namespace QuanLyKhoCauHoiTracNghiem
 
             long maCauHoi = Convert.ToInt64(dgvCauHoi.Rows[index].Cells["MACH"].Value);
 
-            bool rs = CAUTRALOIBUS.ThemCauTraLoiVaoCauHoi(noiDung, chkLaDapAnDung.Checked, maCauHoi);
-            if (rs)
+            string rs = CAUTRALOIBUS.ThemCauTraLoiVaoCauHoi(noiDung, chkLaDapAnDung.Checked, maCauHoi);
+            if (String.IsNullOrEmpty(rs))
             {
                 LoadCauHoi();
             }
             else
             {
-                MessageBox.Show("Thêm câu trả lời thất bại. Đã có lỗi xảy ra");
+                MessageBox.Show(rs);
             }
         }
 

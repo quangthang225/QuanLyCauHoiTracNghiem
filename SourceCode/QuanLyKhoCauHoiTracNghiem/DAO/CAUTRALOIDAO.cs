@@ -10,7 +10,7 @@ namespace DAO
 {
     public class CAUTRALOIDAO : AbstractDAO
     {
-        public List<CAUTRALOIDTO> LayDanhSachCauTraLoiTheoCauHoi(long maCauHoi)
+        public List<CAUTRALOIDTO> LayDanhSachCauTraLoiTheoCauHoi(long maCauHoi, out string Error)
         {
             try
             {
@@ -22,8 +22,12 @@ namespace DAO
                 sParam_maCauHoi.Direction = ParameterDirection.Input;
                 sParam_maCauHoi.Value = maCauHoi;
 
+                SqlParameter sParam_ketQua = cmd.Parameters.Add("@Return", SqlDbType.NVarChar,500);
+                sParam_ketQua.Direction = ParameterDirection.Output;
+
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataReader rdr = cmd.ExecuteReader();
+                Error = Convert.ToString(sParam_ketQua.Value);
                 while (rdr.Read())
                 {
                     CAUTRALOIDTO d = new CAUTRALOIDTO();
@@ -40,7 +44,7 @@ namespace DAO
             }
         }
 
-        public bool ThemCauTraLoiVaoCauHoi(string noiDung, bool laDapAnDung, long maCauHoi)
+        public string ThemCauTraLoiVaoCauHoi(string noiDung, bool laDapAnDung, long maCauHoi)
         {
             try
             {
@@ -60,12 +64,12 @@ namespace DAO
                 sParam_MACH.Direction = ParameterDirection.Input;
                 sParam_MACH.Value = maCauHoi;
 
-                SqlParameter sParam_ketQua = cmd.Parameters.Add("@Return", SqlDbType.Int);
+                SqlParameter sParam_ketQua = cmd.Parameters.Add("@Return", SqlDbType.NVarChar,500);
                 sParam_ketQua.Direction = ParameterDirection.Output;
 
                 cmd.ExecuteNonQuery();
                 connection.Close();
-                return Convert.ToBoolean(sParam_ketQua.Value);
+                return Convert.ToString(sParam_ketQua.Value);
             }
             catch (Exception e)
             {
