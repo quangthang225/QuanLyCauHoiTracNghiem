@@ -25,6 +25,7 @@ BEGIN
 			IF @Return = '' OR @Return is null
 			BEGIN
 				INSERT INTO CAUTRALOI(NOIDUNG,LADAPANDUNG,MACH) VALUES(@NOIDUNG,@LADAPANDUNG,@MACH)
+				UPDATE CAUHOI SET SOCAUTRALOI = SOCAUTRALOI + 1
 				SET @Return = ''
 			END						---Cố tình gây lỗi số lượng câu trả lời của câu hỏi > 10---			WAITFOR DELAY '00:00:05'			INSERT INTO CAUTRALOI(NOIDUNG,LADAPANDUNG,MACH) VALUES(@NOIDUNG,@LADAPANDUNG,@MACH)			-----------------------------------------------------------		COMMIT TRAN
 	END TRY
