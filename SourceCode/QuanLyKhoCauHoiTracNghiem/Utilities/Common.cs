@@ -10,8 +10,8 @@ namespace Utilities
 {
     public static class Common
     {
-        public static long MaNguoiDungDangNhap;
-
+        public static long MaNguoiDungDangNhap = -1;
+        public static string TenTaiKhoanDangNhap = "";
         public static DataTable ToDataTable<T>(this IList<T> data)
         {
             PropertyDescriptorCollection props =

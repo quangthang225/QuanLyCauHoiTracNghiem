@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using BUS;
+using Utilities;
 
 namespace QuanLyKhoCauHoiTracNghiem
 {
@@ -25,9 +26,12 @@ namespace QuanLyKhoCauHoiTracNghiem
             bool rs = NGUOIDUNGBUS.DangNhap(tenDangNhap, matKhau, out maNguoiDung);
             if (rs == true)
             {
+                Common.MaNguoiDungDangNhap = maNguoiDung;
+                Common.TenTaiKhoanDangNhap = tenDangNhap;
                 this.Hide();
-                FrmMain f = new FrmMain(maNguoiDung,tenDangNhap);
-                f.Show();
+                
+                //FrmMain f = new FrmMain();
+                //f.Show();
             }
             else
             {
@@ -37,7 +41,7 @@ namespace QuanLyKhoCauHoiTracNghiem
 
         private void btnThoat_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
     }
 }

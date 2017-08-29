@@ -12,18 +12,38 @@ namespace QuanLyKhoCauHoiTracNghiem
 {
     public partial class FrmMain : Form
     {
-        public FrmMain(long maNguoiDung,string tenDangNhap)
+        public FrmMain()
         {
             InitializeComponent();
-            Common.MaNguoiDungDangNhap = maNguoiDung;
-            mnuXinChao.Text = "Xin chào: " + tenDangNhap;
+
         }
 
         private void mnuDangXuat_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Common.MaNguoiDungDangNhap = -1;
+            Common.TenTaiKhoanDangNhap = "";
+            mnuXinChao.Text = "";
+            DisableMenu(true);
             FrmDangNhap f = new FrmDangNhap();
-            f.Show();
+            f.ShowDialog();
+        }
+
+        private void DisableMenu(bool b)
+        {
+            if (b)
+            {
+                mnuGiaoVien.Enabled = false;
+                mnuQuanLy.Enabled = false;
+                mnuQuanTri.Enabled = false;
+                mnuDangXuat.Enabled = false;
+            }
+            else
+            {
+                mnuGiaoVien.Enabled = true;
+                mnuQuanLy.Enabled = true;
+                mnuQuanTri.Enabled = true;
+                mnuDangXuat.Enabled = true;
+            }
         }
 
         private void LayFormNeuTonTai(string name, ref Form frm)
@@ -62,7 +82,7 @@ namespace QuanLyKhoCauHoiTracNghiem
 
         private void mnuTaoDeThi_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void mnuQuanLyCauHoi_Click(object sender, EventArgs e)
@@ -70,6 +90,22 @@ namespace QuanLyKhoCauHoiTracNghiem
             FrmQuanLyCauHoi frm = new FrmQuanLyCauHoi();
             Form f = (Form)frm;
             HienThiForm(ref f);
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            if (Common.MaNguoiDungDangNhap < 0)
+            {
+                DisableMenu(true);
+                mnuXinChao.Text = "";
+                FrmDangNhap f = new FrmDangNhap();
+                f.ShowDialog();
+                if (!String.IsNullOrEmpty(Common.TenTaiKhoanDangNhap))
+                {
+                    mnuXinChao.Text = "Xin chào : " + Common.TenTaiKhoanDangNhap;
+                    DisableMenu(false);
+                }
+            }
         }
     }
 }
