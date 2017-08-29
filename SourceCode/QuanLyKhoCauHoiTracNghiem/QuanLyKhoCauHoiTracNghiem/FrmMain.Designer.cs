@@ -48,10 +48,10 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuQuanTri,
             this.xinChàoToolStripMenuItem,
-            this.mnuXinChao,
             this.mnuQuanLy,
             this.mnuGiaoVien,
-            this.mnuDangXuat});
+            this.mnuDangXuat,
+            this.mnuXinChao});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(707, 24);
@@ -133,6 +133,7 @@
             // 
             // mnuDangXuat
             // 
+            this.mnuDangXuat.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.mnuDangXuat.Name = "mnuDangXuat";
             this.mnuDangXuat.Size = new System.Drawing.Size(72, 20);
             this.mnuDangXuat.Text = "Đăng xuất";

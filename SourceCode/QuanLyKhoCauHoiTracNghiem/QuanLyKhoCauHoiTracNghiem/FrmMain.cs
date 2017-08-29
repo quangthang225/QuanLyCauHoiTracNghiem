@@ -35,14 +35,14 @@ namespace QuanLyKhoCauHoiTracNghiem
                 mnuGiaoVien.Enabled = false;
                 mnuQuanLy.Enabled = false;
                 mnuQuanTri.Enabled = false;
-                mnuDangXuat.Enabled = false;
+                mnuDangXuat.Visible = false;
             }
             else
             {
                 mnuGiaoVien.Enabled = true;
                 mnuQuanLy.Enabled = true;
                 mnuQuanTri.Enabled = true;
-                mnuDangXuat.Enabled = true;
+                mnuDangXuat.Visible = true;
             }
         }
 
