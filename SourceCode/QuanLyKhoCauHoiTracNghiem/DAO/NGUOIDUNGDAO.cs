@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
+using DTO;
 
 namespace DAO
 {
@@ -41,6 +42,32 @@ namespace DAO
                 maNguoiDung = 0;
                 return false;
             }
+        }
+
+        public List<NGUOIDUNGDTO> LayDanhSachNguoiDung()
+        {
+            return null;
+           /* try
+            {
+                List<NGUOIDUNGDTO> lstKQ = new List<NGUOIDUNGDTO>();
+                SqlConnection connection = ConnectDB();
+                SqlCommand cmd = new SqlCommand("sp_LayDanhSachMonHoc", connection);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    MONHOCDTO d = new MONHOCDTO();
+                    d.MAMONHOC = (long)rdr["MAMH"];
+                    d.TENMONHOC = (string)rdr["TENMH"];
+                    lstKQ.Add(d);
+                }
+                return lstKQ;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }*/
         }
     }
 }

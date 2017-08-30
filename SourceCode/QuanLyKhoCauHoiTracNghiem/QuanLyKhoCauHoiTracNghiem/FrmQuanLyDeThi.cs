@@ -32,8 +32,8 @@ namespace QuanLyKhoCauHoiTracNghiem
         {
             var lst = MONHOCBUS.LayDanhSachMonHoc();
             cboMonHoc.DataSource = lst;
-            cboMonHoc.ValueMember = "MAMH";
-            cboMonHoc.DisplayMember = "TENMH";
+            cboMonHoc.ValueMember = "MAMONHOC";
+            cboMonHoc.DisplayMember = "TENMONHOC";
         }
 
         private void LayDanhSachBoDeThi()

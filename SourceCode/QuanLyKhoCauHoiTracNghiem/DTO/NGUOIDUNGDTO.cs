@@ -83,5 +83,47 @@ namespace DTO
             get { return _MAGVQL; }
             set { _MAGVQL = value; }
         }
+
+        private string _TENLOAIND;
+        public string TENLOAIND
+        {
+            get
+            {
+                return _TENLOAIND;
+            }
+
+            set
+            {
+                _TENLOAIND = value;
+            }
+        }
+
+        private string _TENBM;
+        public string TENBM
+        {
+            get
+            {
+                return _TENBM;
+            }
+
+            set
+            {
+                _TENBM = value;
+            }
+        }
+
+        private string _TENGVQL;
+        public string TENGVQL
+        {
+            get
+            {
+                return _TENGVQL;
+            }
+
+            set
+            {
+                _TENGVQL = value;
+            }
+        }
     }
 }
