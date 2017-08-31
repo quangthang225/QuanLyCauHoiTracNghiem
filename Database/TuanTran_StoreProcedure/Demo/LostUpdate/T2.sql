@@ -1,0 +1,8 @@
+﻿SELECT * FROM CAUHOI WHERE MACH = 2
+SELECT * FROM CAUTRALOI WHERE MACH = 2
+DECLARE @MACTL bigint = 10056
+DECLARE @Return nvarchar(500)
+
+
+EXEC sp_XoaCauTraLoi_DEMO @MACTL, @Return out
+print @Return
