@@ -107,5 +107,12 @@ namespace QuanLyKhoCauHoiTracNghiem
                 }
             }
         }
+
+        private void mnuQuanLyNguoiDung_Click(object sender, EventArgs e)
+        {
+            FrmQuanLyNguoiDung frm = new FrmQuanLyNguoiDung();
+            Form f = (Form)frm;
+            HienThiForm(ref f);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BUS;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,26 @@ namespace QuanLyKhoCauHoiTracNghiem
         public FrmQuanLyNguoiDung()
         {
             InitializeComponent();
+            dgvNguoiDung.AutoGenerateColumns = false;
+            dgvNguoiDung.AllowUserToAddRows = false;
+        }
+
+        private void FrmQuanLyNguoiDung_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadNguoiDung();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void LoadNguoiDung()
+        {
+            dgvNguoiDung.DataSource = NGUOIDUNGBUS.LayDanhSachNguoiDung();
         }
     }
 }
