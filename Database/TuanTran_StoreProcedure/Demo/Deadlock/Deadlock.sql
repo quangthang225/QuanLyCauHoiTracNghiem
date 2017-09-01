@@ -16,8 +16,7 @@ BEGIN
 
 			DECLARE @MACHold BIGINT
 			SELECT @MACHold = MACH FROM CAUTRALOI WHERE MACTL = @MACTL
-			IF @Return = '' OR @Return is null
-			BEGIN
+			
 				--Cập nhật số lượng CTL của CAUHOI cũ
 				UPDATE CAUHOI SET SOCAUTRALOI = SOCAUTRALOI - 1 WHERE MACH = @MACHold
 				--Cập nhật CAUTRALOI
@@ -27,7 +26,7 @@ BEGIN
 				
 				--Cập nhật số lượng CTL của CAUHOI mới
 				UPDATE CAUHOI SET SOCAUTRALOI = SOCAUTRALOI + 1 WHERE MACH = @MACH
-			END
+			
 			COMMIT TRAN
 	END TRY
 	BEGIN CATCH
