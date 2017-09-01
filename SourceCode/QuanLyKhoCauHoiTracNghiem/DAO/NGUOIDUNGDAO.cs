@@ -83,5 +83,95 @@ namespace DAO
 
             }
         }
+
+        public bool ThemNguoiDung(string hoTen, string tenDangNhap, string matKhau, bool trangThai, bool toanQuyen, long maLoai, long maBM, long maGVQL)
+        {
+            {
+                try
+                {
+                    SqlConnection connection = ConnectDB();
+                    SqlCommand cmd = new SqlCommand("sp_TaoTaiKhoan", connection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    SqlParameter sParam_HoTen = cmd.Parameters.Add("@HoTen", SqlDbType.NVarChar);
+                    sParam_HoTen.Direction = ParameterDirection.Input;
+                    sParam_HoTen.Value = hoTen;
+
+                    SqlParameter sParam_TenDangNhap = cmd.Parameters.Add("@TenDangNhap", SqlDbType.VarChar);
+                    sParam_TenDangNhap.Direction = ParameterDirection.Input;
+                    sParam_TenDangNhap.Value = tenDangNhap;
+
+                    SqlParameter sParam_MatKhau = cmd.Parameters.Add("@MatKhau", SqlDbType.VarChar);
+                    sParam_MatKhau.Direction = ParameterDirection.Input;
+                    sParam_MatKhau.Value = matKhau;
+
+                    SqlParameter sParam_TrangThai = cmd.Parameters.Add("@TrangThai", SqlDbType.Bit);
+                    sParam_TrangThai.Direction = ParameterDirection.Input;
+                    sParam_TrangThai.Value = trangThai;
+
+                    SqlParameter sParam_ToanQuyen = cmd.Parameters.Add("@ToanQuyenGV", SqlDbType.Bit);
+                    sParam_ToanQuyen.Direction = ParameterDirection.Input;
+                    sParam_ToanQuyen.Value = toanQuyen;
+
+                    SqlParameter sParam_MaLoai = cmd.Parameters.Add("@MaLoai", SqlDbType.BigInt);
+                    sParam_MaLoai.Direction = ParameterDirection.Input;
+                    sParam_MaLoai.Value = maLoai;
+
+                    SqlParameter sParam_MaBM = cmd.Parameters.Add("@MaBM", SqlDbType.BigInt);
+                    sParam_MaBM.Direction = ParameterDirection.Input;
+                    sParam_MaBM.Value = maBM;
+
+                    SqlParameter sParam_MaGVQL = cmd.Parameters.Add("@MaGVQL", SqlDbType.BigInt);
+                    sParam_MaGVQL.Direction = ParameterDirection.Input;
+                    sParam_MaGVQL.Value = maGVQL;
+
+                    //SqlParameter sParam_ketQua = cmd.Parameters.Add("@Return", SqlDbType.Int);
+                    //sParam_ketQua.Direction = ParameterDirection.Output;
+
+                    int rowAffect = cmd.ExecuteNonQuery();
+                    connection.Close();
+                    return (rowAffect > 0) ? true : false;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
+
+        public List<NGUOIDUNGDTO> LayDanhSachGiaoVienQuanLy()
+        {
+            try
+            {
+                List<NGUOIDUNGDTO> lstKQ = new List<NGUOIDUNGDTO>();
+                SqlConnection connection = ConnectDB();
+                SqlCommand cmd = new SqlCommand("sp_LayDanhSachGiaoVienQuanLy", connection);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    NGUOIDUNGDTO d = new NGUOIDUNGDTO();
+                    d.HOTEN = (string)rdr["HOTEN"];
+                    d.MAND = (long)rdr["MAND"];
+                    d.TENDANGNHAP = (string)rdr["TENDANGNHAP"];
+                    d.MATKHAU = (string)rdr["MATKHAU"];
+                    d.TRANGTHAI = (bool)rdr["TRANGTHAI"];
+                    d.TOANQUYENGV = (bool)rdr["TOANQUYENGV"];
+                    d.MALOAI = (long)rdr["MALOAI"];
+                    d.MABM = (long)rdr["MABM"];
+                    if (rdr["MAGVQL"] != DBNull.Value)
+                        d.MAGVQL = (long)rdr["MAGVQL"];
+                    lstKQ.Add(d);
+                }
+                return lstKQ;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("THANG: " + e.ToString());
+                throw e;
+
+            }
+        }
     }
 }

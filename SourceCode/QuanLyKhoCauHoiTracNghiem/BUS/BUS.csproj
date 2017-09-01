@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LOAINGUOIDUNGBUS.cs" />
     <Compile Include="CAUHOIBUS.cs" />
     <Compile Include="CAUTRALOIBUS.cs" />
     <Compile Include="DETHIBUS.cs" />
+    <Compile Include="BOMONBUS.cs" />
     <Compile Include="MONHOCBUS.cs" />
     <Compile Include="NGUOIDUNGBUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

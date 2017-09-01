@@ -44,6 +44,8 @@
     <Compile Include="CAUHOIDAO.cs" />
     <Compile Include="CAUTRALOIDAO.cs" />
     <Compile Include="DETHIDAO.cs" />
+    <Compile Include="LOAINGUOIDUNGDAO.cs" />
+    <Compile Include="BOMONDAO.cs" />
     <Compile Include="MONHOCDAO.cs" />
     <Compile Include="NGUOIDUNGDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

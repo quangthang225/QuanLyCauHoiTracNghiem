@@ -32,9 +32,17 @@ namespace QuanLyKhoCauHoiTracNghiem
             }
         }
 
-        private void LoadNguoiDung()
+        public void LoadNguoiDung()
         {
             dgvNguoiDung.DataSource = NGUOIDUNGBUS.LayDanhSachNguoiDung();
+        }
+
+        private void btn_Them_Click(object sender, EventArgs e)
+        {
+            FrmThemNguoiDung frm = new FrmThemNguoiDung(this);
+            Form f = (Form)frm;
+            f.Show();
+            f.Focus();
         }
     }
 }

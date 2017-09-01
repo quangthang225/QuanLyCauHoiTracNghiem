@@ -43,6 +43,8 @@
     <Compile Include="CAUHOIDTO.cs" />
     <Compile Include="CAUTRALOIDTO.cs" />
     <Compile Include="DETHIDTO.cs" />
+    <Compile Include="LOAINGUOIDUNGDTO.cs" />
+    <Compile Include="BOMONDTO.cs" />
     <Compile Include="MONHOCDTO.cs" />
     <Compile Include="NGUOIDUNGDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

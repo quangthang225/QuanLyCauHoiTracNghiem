@@ -19,5 +19,15 @@ namespace BUS
             NGUOIDUNGDAO n = new NGUOIDUNGDAO();
             return n.LayDanhSachNguoiDung();
         }
+        public static bool ThemNguoiDung(string hoTen, string tenDangNhap, string matKhau, bool trangThai, bool toanQuyen, long maLoai, long maBM, long maGVQL)
+        {
+            NGUOIDUNGDAO n = new NGUOIDUNGDAO();
+            return n.ThemNguoiDung(hoTen, tenDangNhap, matKhau, trangThai, toanQuyen, maLoai, maBM, maGVQL);
+        }
+        public static List<NGUOIDUNGDTO> LayDanhSachGiaoVienQuanLy()
+        {
+            NGUOIDUNGDAO n = new NGUOIDUNGDAO();
+            return n.LayDanhSachGiaoVienQuanLy();
+        }
     }
 }
