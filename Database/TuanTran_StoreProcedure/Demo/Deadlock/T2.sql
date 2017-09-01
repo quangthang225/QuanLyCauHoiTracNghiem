@@ -1,0 +1,6 @@
+DECLARE @MACTL BIGINT = 16
+DECLARE @MACH BIGINT = 1
+DECLARE @Return NVARCHAR(500)
+
+EXEC sp_XoaCauTraLoiTheoCauHoi_DEMO @MACTL,@MACH, @Return out
+print @Return
