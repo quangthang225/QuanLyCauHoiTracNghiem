@@ -10,7 +10,7 @@ namespace DAO
 {
     public class NGUOIDUNGDAO : AbstractDAO
     {
-        public bool DangNhap(string tenDangNhap, string matKhau, out long maNguoiDung)
+        public bool DangNhap(string tenDangNhap, string matKhau, out long maNguoiDung, out bool biKhoa)
         {
             SqlConnection connection = ConnectDB();
             SqlCommand cmd = new SqlCommand("sp_DangNhap", connection);
@@ -30,8 +30,12 @@ namespace DAO
             SqlParameter sParam_ketQua = cmd.Parameters.Add("@return", SqlDbType.Bit);
             sParam_ketQua.Direction = ParameterDirection.Output;
 
+            SqlParameter sParam_biKhoa = cmd.Parameters.Add("@islocked", SqlDbType.Bit);
+            sParam_biKhoa.Direction = ParameterDirection.Output;
+
             cmd.ExecuteNonQuery();
             connection.Close();
+            biKhoa = !(bool)sParam_biKhoa.Value;
             if ((bool)sParam_ketQua.Value == true)
             {
                 maNguoiDung = (long)sParam_maNguoiDung.Value;

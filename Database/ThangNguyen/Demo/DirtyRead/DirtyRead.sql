@@ -32,6 +32,10 @@ BEGIN TRAN
 				UPDATE [NGUOIDUNG] SET TENDANGNHAP = @TenDangNhap,HOTEN = @HoTen, TRANGTHAI = @TrangThai, TOANQUYENGV = @ToanQuyenGV, MALOAI = @MaLoai, MABM = @MaBM, MAGVQL = @MaGVQL  WHERE [MAND] = @MaND
 				SET @Return = 0;
 			END
+		--TESTING
+		WAITFOR DELAY '00:00:05'
+		ROLLBACK TRAN
+		RETURN	
 	END TRY
 	BEGIN CATCH
 		PRINT N'LOI HE THONG'
@@ -39,4 +43,39 @@ BEGIN TRAN
 		ROLLBACK TRAN
 	END CATCH
 COMMIT TRAN
+GO
+
+CREATE PROCEDURE sp_DangNhap
+@tenDangNhap varchar(30),
+@matKhau varchar(30),
+@maNguoiDung bigint out,
+@return bit out,
+@islocked bit out
+AS
+BEGIN
+	BEGIN TRY
+	SET TRAN ISOLATION LEVEL READ UNCOMMITTED
+		BEGIN TRAN
+			SET @islocked = (SELECT TRANGTHAI FROM NGUOIDUNG WHERE TENDANGNHAP = @tenDangNhap)
+
+			IF @islocked = 0
+				BEGIN
+					SET @return = 0
+				END		
+
+			IF EXISTS ( SELECT MAND FROM NGUOIDUNG WHERE TENDANGNHAP = @tenDangNhap AND MATKHAU = @matKhau)
+				BEGIN
+					SET @maNguoiDung = ( SELECT MAND FROM NGUOIDUNG WHERE TENDANGNHAP = @tenDangNhap AND MATKHAU = @matKhau )
+					SET @return = 1
+				END
+			ELSE
+				BEGIN
+					SET @return = 0
+				END	
+		COMMIT TRAN
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRAN
+	END CATCH
+END
 GO

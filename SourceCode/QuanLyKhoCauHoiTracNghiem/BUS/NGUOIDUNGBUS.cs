@@ -9,10 +9,10 @@ namespace BUS
 {
     public class NGUOIDUNGBUS
     {
-        public static bool DangNhap(string tenDangNhap, string matKhau, out long maNguoiDung)
+        public static bool DangNhap(string tenDangNhap, string matKhau, out long maNguoiDung, out bool biKhoa)
         {
             NGUOIDUNGDAO n = new NGUOIDUNGDAO();
-            return n.DangNhap(tenDangNhap, matKhau, out maNguoiDung);
+            return n.DangNhap(tenDangNhap, matKhau, out maNguoiDung, out biKhoa);
         }
         public static List<NGUOIDUNGDTO> LayDanhSachNguoiDung()
         {
