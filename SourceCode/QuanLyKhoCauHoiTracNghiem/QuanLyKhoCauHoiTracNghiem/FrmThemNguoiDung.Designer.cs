@@ -148,7 +148,6 @@
             this.cboLoaiND.Name = "cboLoaiND";
             this.cboLoaiND.Size = new System.Drawing.Size(267, 24);
             this.cboLoaiND.TabIndex = 17;
-            this.cboLoaiND.SelectedIndexChanged += new System.EventHandler(this.cboLoaiND_SelectedIndexChanged);
             // 
             // cboTenBM
             // 

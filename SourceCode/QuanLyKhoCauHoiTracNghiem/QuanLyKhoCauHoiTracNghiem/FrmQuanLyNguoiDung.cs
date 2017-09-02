@@ -17,6 +17,7 @@ namespace QuanLyKhoCauHoiTracNghiem
             InitializeComponent();
             dgvNguoiDung.AutoGenerateColumns = false;
             dgvNguoiDung.AllowUserToAddRows = false;
+
         }
 
         private void FrmQuanLyNguoiDung_Load(object sender, EventArgs e)
@@ -40,6 +41,55 @@ namespace QuanLyKhoCauHoiTracNghiem
         private void btn_Them_Click(object sender, EventArgs e)
         {
             FrmThemNguoiDung frm = new FrmThemNguoiDung(this);
+            Form f = (Form)frm;
+            f.Show();
+            f.Focus();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow row = dgvNguoiDung.CurrentCell.OwningRow;
+            string maND = row.Cells["MaND"].Value.ToString();
+            FrmThemNguoiDung frm = new FrmThemNguoiDung(this, long.Parse(maND));
+            Form f = (Form)frm;
+            f.Show();
+            f.Focus();
+        }
+
+        private void dgvNguoiDung_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvNguoiDung.CurrentCell.RowIndex >=0)
+            {
+                txtCapNhat.Enabled = true;
+            }
+            else
+            {
+                txtCapNhat.Enabled = false;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow row = dgvNguoiDung.CurrentCell.OwningRow;
+            string maND = row.Cells["MaND"].Value.ToString();
+            bool result = NGUOIDUNGBUS.XoaNguoiDung(long.Parse(maND));
+            if (result)
+            {
+                
+                MessageBox.Show("Xóa thành công");
+                LoadNguoiDung();
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi xảy ra! Xin vui lòng thử lại");
+            }
+        }
+
+        private void bntThayDoiGVQL_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow row = dgvNguoiDung.CurrentCell.OwningRow;
+            string maND = row.Cells["MaND"].Value.ToString();
+            FrmThayDoiGVQL frm = new FrmThayDoiGVQL(this, long.Parse(maND));
             Form f = (Form)frm;
             f.Show();
             f.Focus();
