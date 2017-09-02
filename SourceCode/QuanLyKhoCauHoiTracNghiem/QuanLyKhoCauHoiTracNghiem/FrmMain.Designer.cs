@@ -96,6 +96,7 @@
             this.mnuBoMon.Name = "mnuBoMon";
             this.mnuBoMon.Size = new System.Drawing.Size(196, 26);
             this.mnuBoMon.Text = "Quản lý bộ môn";
+            this.mnuBoMon.Click += new System.EventHandler(this.mnuBoMon_Click);
             // 
             // mnuQuanLyMonHoc
             // 
@@ -150,7 +151,7 @@
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý kho câu hỏi trắc nghiệm";

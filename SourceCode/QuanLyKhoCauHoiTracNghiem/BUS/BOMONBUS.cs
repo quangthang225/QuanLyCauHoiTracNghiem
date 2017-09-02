@@ -14,5 +14,15 @@ namespace BUS
             BOMONDAO d = new BOMONDAO();
             return d.LayDanhSachBoMon();
         }
+        public static bool ThemBoMon(string tenBM)
+        {
+            BOMONDAO n = new BOMONDAO();
+            return n.ThemBoMon(tenBM);
+        }
+        public static bool XoaBoMon(long maBM)
+        {
+            BOMONDAO n = new BOMONDAO();
+            return n.XoaBoMon(maBM);
+        }
     }
 }

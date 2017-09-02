@@ -1,0 +1,1 @@
+exec sp_TaoTaiKhoan @HoTen=N'Nguyen Thang',@TenDangNhap='quangthang',@MatKhau='quangthang',@TrangThai=1,@ToanQuyenGV=0,@MaLoai=1,@MaBM=7,@MaGVQL=6

@@ -1,0 +1,1 @@
+exec sp_XoaBoMon @MaBM=7
