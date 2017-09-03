@@ -1,34 +1,24 @@
-CREATE PROC spa_ThemCauHoi
-	@Macauhoi nvarchar(100),
-	@Monhoc nvarchar(100),
+CREATE PROC sp_ThemCauHoi
+	@Monhoc bigint,
 	@Noidung nvarchar(Max),
 	@Socautraloi int,
-	@LoaiMonHoc int,
-	@Thangdiemdukien int,
-	@bit BIT OUTPUT
-	AS 
+	@Thangdiemdukien float,
+	@Mucdo int,
+	@Return nvarchar(500) out
+AS
 BEGIN
-BEGIN TRAN
-BEGIN TRY
-INSERT INTO CauHoi 
-([MaCauHoi],
-[Monhoc],
-[Noidung],
-[Socautraloi],
-[LoaiMonHoc],
-[Thangdiemdukien])
-VALUES (@Macauhoi ,
-@Monhoc ,
-@Noidung ,
-@Socautraloi ,
-@LoaiMonHoc ,
-@Thangdiemdukien)
-set @bit = 1
-END TRY
-BEGIN CATCH
-	ROLLBACK TRAN
-	set @bit = 0
-END CATCH
-COMMIT TRAN
+	BEGIN TRY
+		BEGIN TRAN
+			BEGIN
+				BEGIN
+					INSERT INTO CAUHOI(MAMH,NOIDUNG,SOCAUTRALOI,THANGDIEM,MUCDO) VALUES(@Monhoc,@Noidung,@Socautraloi,@Thangdiemdukien,@Mucdo)
+				END
+			END
+		COMMIT TRAN
+	END TRY
+	BEGIN CATCH
+		SET @Return = ERROR_MESSAGE()
+		ROLLBACK TRAN
+	END CATCH
 END
 GO

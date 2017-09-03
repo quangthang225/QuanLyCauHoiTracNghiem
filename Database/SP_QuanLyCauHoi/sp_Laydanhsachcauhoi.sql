@@ -1,10 +1,10 @@
-﻿CREATE PROC sp_Laydanhsachcauhoi 
+CREATE PROC sp_Laydanhsachcauhoi 
 @Macauhoi bigint,
 @Return nvarchar(500) out
 AS
 BEGIN
 	BEGIN TRY
-		SET TRAN ISOLATION LEVEL READ COMMITTED -- mức cô lập mặc định
+		SET TRAN ISOLATION LEVEL READ COMMITTED -- m?c c� l?p m?c ??nh
 		BEGIN TRAN
 			IF NOT EXISTS ( SELECT * FROM CAUHOI WHERE @Macauhoi = MACH )
 			BEGIN
