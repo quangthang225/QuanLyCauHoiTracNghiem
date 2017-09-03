@@ -23,6 +23,22 @@ namespace DTO
             set { _TENMONHOC = value; }
         }
 
+        private string _TENBOMON;
+
+        public string TENBOMON
+        {
+            get { return _TENBOMON; }
+            set { _TENBOMON = value; }
+        }
+
+        private long _MABOMON;
+
+        public long MABOMON
+        {
+            get { return _MABOMON; }
+            set { _MABOMON = value; }
+        }
+
         public override string ToString()
         {
             return _TENMONHOC;

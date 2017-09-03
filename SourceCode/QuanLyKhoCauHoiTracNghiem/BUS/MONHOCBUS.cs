@@ -14,5 +14,10 @@ namespace BUS
             MONHOCDAO d = new MONHOCDAO();
             return d.LayDanhSachMonHoc();
         }
+        public static int ThemMonHoc(MONHOCDTO d)
+        {
+            MONHOCDAO dao = new MONHOCDAO();
+            return dao.ThemMonHoc(d);
+        }
     }
 }
