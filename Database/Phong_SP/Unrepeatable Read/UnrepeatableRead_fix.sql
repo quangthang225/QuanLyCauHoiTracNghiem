@@ -1,4 +1,6 @@
-﻿CREATE PROC sp_LayMonHoc_Fix
+﻿USE [QuanLyCauHoiTracNghiem]
+
+CREATE PROC sp_LayMonHoc_Fix
 	@MAMH BIGINT,
 	@MABM BIGINT
 AS

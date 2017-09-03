@@ -1,4 +1,10 @@
-﻿CREATE PROC sp_LayMonHoc
+﻿USE [QuanLyCauHoiTracNghiem]
+
+IF OBJECT_ID('sp_LayMonHoc') IS NOT NULL
+	DROP PROC sp_LayMonHoc
+GO
+
+CREATE PROC sp_LayMonHoc
 	@MAMH BIGINT,
 	@MABM BIGINT
 AS BEGIN
@@ -18,6 +24,10 @@ AS BEGIN
 	COMMIT TRAN
 END
 
+GO
+
+IF OBJECT_ID('sp_CapNhatMonHoc') IS NOT NULL
+	DROP PROC sp_CapNhatMonHoc
 GO
 
 CREATE PROC sp_CapNhatMonHoc
