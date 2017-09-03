@@ -19,7 +19,7 @@ namespace BUS
             BOMONDAO n = new BOMONDAO();
             return n.ThemBoMon(tenBM);
         }
-        public static bool XoaBoMon(long maBM)
+        public static int XoaBoMon(long maBM)
         {
             BOMONDAO n = new BOMONDAO();
             return n.XoaBoMon(maBM);

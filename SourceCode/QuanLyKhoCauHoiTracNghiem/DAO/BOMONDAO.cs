@@ -57,7 +57,7 @@ namespace DAO
                 }
             }
         }
-        public bool XoaBoMon(long maBM)
+        public int XoaBoMon(long maBM)
         {
             {
                 try
@@ -70,9 +70,12 @@ namespace DAO
                     sParam_maND.Direction = ParameterDirection.Input;
                     sParam_maND.Value = maBM;
 
-                    int rowAffect = cmd.ExecuteNonQuery();
+                    SqlParameter sParam_ketQua = cmd.Parameters.Add("@Return", SqlDbType.Int);
+                    sParam_ketQua.Direction = ParameterDirection.Output;
+
+                    cmd.ExecuteNonQuery();
                     connection.Close();
-                    return (rowAffect > 0) ? true : false;
+                    return (int)sParam_ketQua.Value;
                 }
                 catch (Exception e)
                 {

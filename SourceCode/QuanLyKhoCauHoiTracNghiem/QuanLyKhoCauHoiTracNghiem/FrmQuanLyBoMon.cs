@@ -46,15 +46,22 @@ namespace QuanLyKhoCauHoiTracNghiem
         {
             DataGridViewRow row = dgvBoMon.CurrentCell.OwningRow;
             string maBM = row.Cells["MaBM"].Value.ToString();
-            bool result = BOMONBUS.XoaBoMon(long.Parse(maBM));
-            if (result)
+            int result = BOMONBUS.XoaBoMon(long.Parse(maBM));
+            switch (result)
             {
-                MessageBox.Show("Xóa thành công");
-                LoadBoMon();
-            }
-            else
-            {
-                MessageBox.Show("Xóa thất bại");
+                case 0:
+                    MessageBox.Show("Xóa thành công");
+                    LoadBoMon();
+                    return;
+                case 1:
+                    MessageBox.Show("Bộ môn không tồn tại");
+                    return;
+                case 2:
+                    MessageBox.Show("Bộ môn đã được sử dụng. Không thể xóa");
+                    return;
+                default:
+                    MessageBox.Show("Lỗi hệ thống");
+                    return;
             }
         }
     }
