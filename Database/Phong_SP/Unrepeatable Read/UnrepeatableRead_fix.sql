@@ -1,6 +1,10 @@
 ﻿USE [QuanLyCauHoiTracNghiem]
 
-CREATE PROC sp_LayMonHoc_Fix
+IF OBJECT_ID('sp_LayMonHoc') IS NOT NULL
+	DROP PROC sp_LayMonHoc
+GO
+
+CREATE PROC sp_LayMonHoc
 	@MAMH BIGINT,
 	@MABM BIGINT
 AS
@@ -26,7 +30,11 @@ END
 
 GO
 
-CREATE PROC sp_CapNhatMonHoc_Fix
+IF OBJECT_ID('sp_CapNhatMonHoc') IS NOT NULL
+	DROP PROC sp_CapNhatMonHoc
+GO
+
+CREATE PROC sp_CapNhatMonHoc
 	@MAMH BIGINT,
 	@MABM BIGINT
 AS BEGIN
