@@ -1,3 +1,4 @@
+
 CREATE PROC sp_CapNhatThongTin
 @MaND bigint,
 @HoTen nvarchar(255),
@@ -204,7 +205,7 @@ COMMIT TRAN
 RETURN 0
 GO
 
-ALTER PROC sp_ThayDoiGVQL
+CREATE PROC sp_ThayDoiGVQL
 @MaND bigint,
 @MaGVQL bigint,
 @Return int out
@@ -334,7 +335,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE sp_CapNhatBoDeThi
+CREATE PROCEDURE sp_CapNhatBoDeThi
 @MaBDT bigint,
 @TenBoDeThi nvarchar(255),
 @HocKy int,
@@ -376,7 +377,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE sp_CapNhatCauHoi
+CREATE PROCEDURE sp_CapNhatCauHoi
 @MACH bigint,
 @NOIDUNG nvarchar(max),
 @THANGDIEM float,
@@ -672,7 +673,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE sp_LayDanhSachCauTraLoiTheoCauHoi
+CREATE PROCEDURE sp_LayDanhSachCauTraLoiTheoCauHoi
 @MACH bigint,
 @Return nvarchar(500) out
 AS
@@ -708,7 +709,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE sp_TaoBoDeThi
+CREATE PROCEDURE sp_TaoBoDeThi
 @TenBoDeThi nvarchar(255),
 @HocKy int,
 @NamHoc int,
@@ -755,7 +756,7 @@ END
 GO
 
 
-ALTER PROCEDURE sp_ThemCauHoi
+CREATE PROCEDURE sp_ThemCauHoi
 @NoiDung nvarchar(max),
 @ThangDiem float,
 @MucDo int,
@@ -790,7 +791,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE sp_ThemCauHoiVaoBoDeThi
+CREATE PROCEDURE sp_ThemCauHoiVaoBoDeThi
 @MABDT bigint,
 @MACH bigint,
 @Diem float,
@@ -838,7 +839,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE sp_ThemCauTraLoiVaoCauHoi
+CREATE PROCEDURE sp_ThemCauTraLoiVaoCauHoi
 @NOIDUNG nvarchar(max),
 @LADAPANDUNG bit,
 @MACH bigint,
@@ -985,285 +986,208 @@ BEGIN
 END
 GO
 
-CREATE PROC sp_CapNhatCauHoi
-	@Macauhoi bigint,
-	@Monhoc bigint,
-	@Noidung nvarchar(Max),
-	@Socautraloi int,
-	@Thangdiemdukien float,
-	@Mucdo int,
-	@Return nvarchar(500) out
-AS
-BEGIN 
-	BEGIN TRAN
-		BEGIN TRY
-			IF NOT EXISTS(SELECT * FROM CAUHOI WHERE [MACH] = @Macauhoi)
-			BEGIN
-				SET @Return = N'MA CAU HOI KHONG TON TAI'
-			END
-			ELSE IF NOT EXISTS(SELECT * FROM MONHOC WHERE [MAMH] = @Monhoc)
-			BEGIN
-				SET @Return = N'MA MON HOC KHONG TON TAI'
-			END
-			WAITFOR DELAY '00:00:05'
-			BEGIN
-				UPDATE [CAUHOI] SET MAMH = @Monhoc,NOIDUNG = @Noidung, SOCAUTRALOI = @Socautraloi, THANGDIEM = @Thangdiemdukien , MUCDO = @Mucdo  WHERE [MACH] = @Macauhoi
-				SET @Return = '';
-			END	
-		END TRY
-		BEGIN CATCH
-			SET @Return = N'LOI HE THONG'
-			ROLLBACK TRAN
-		END CATCH
-	COMMIT TRAN
-END
-GO
+--CREATE PROC spa_PhanLoaiCauHoi
+--	@Macauhoi nvarchar(100),
+--	@MucDo nvarchar(100),
+--	@bit BIT OUTPUT
+--	AS 
+--BEGIN
+--BEGIN TRAN
+--BEGIN TRY
+--UPDATE CAUHOI  
+--SET MucDo = @MucDo
+--WHERE MaCauHoi = @Macauhoi 
+--set @bit = 1
 
-CREATE PROC sp_Laydanhsachcauhoi 
-@Macauhoi bigint,
-@Return nvarchar(500) out
-AS
-BEGIN
-	BEGIN TRY
-		SET TRAN ISOLATION LEVEL READ COMMITTED -- m?c c� l?p m?c ??nh
-		BEGIN TRAN
-			IF NOT EXISTS ( SELECT * FROM CAUHOI WHERE @Macauhoi = MACH )
-			BEGIN
-				SET @Return = N'KHONG TON TAI CAU HOI NAY'
-			END
-			SELECT * FROM CAUHOI WHERE [MACH] = @MaCauHoi
-		COMMIT TRAN
-	END TRY
-	BEGIN CATCH
-		SET @Return = ERROR_MESSAGE()
-		ROLLBACK TRAN
-	END CATCH
-END
-GO
+--END TRY
+--		BEGIN CATCH
+--			ROLLBACK TRAN
+--			SET @bit = 0
+--		END CATCH
+--			COMMIT TRAN
+--END
+--GO
 
-CREATE PROC spa_PhanLoaiCauHoi
-	@Macauhoi nvarchar(100),
-	@MucDo nvarchar(100),
-	@bit BIT OUTPUT
-	AS 
-BEGIN
-BEGIN TRAN
-BEGIN TRY
-UPDATE CAUHOI  
-SET MucDo = @MucDo
-WHERE MaCauHoi = @Macauhoi 
-set @bit = 1
+--CREATE PROC sp_Soluongcauhoicuabomon 
+--@Mamonhoc bigint,
+--@Return nvarchar(500) out
+--AS
+--BEGIN
+--	BEGIN TRY
+--		BEGIN TRAN
+--			DECLARE @slch INT
+--			SELECT @slch = COUNT(*) FROM CAUHOI c WHERE c.MAMH =  @Mamonhoc
+--			IF ( @slch < 1  )
+--				SET @Return = N'Mon hoc nay chua co cau hoi nao'
+--			IF @Return = '' OR @Return is null
+--			BEGIN
+--				WAITFOR DELAY '00:00:05'
+--				SELECT COUNT(*) FROM CAUHOI c WHERE c.MAMH =  @Mamonhoc
+--			END
+--		COMMIT TRAN
+--	END TRY
+--	BEGIN CATCH
+--		SET @Return = ERROR_MESSAGE()
+--		ROLLBACK TRAN
+--	END CATCH
+--END
 
-END TRY
-		BEGIN CATCH
-			ROLLBACK TRAN
-			SET @bit = 0
-		END CATCH
-			COMMIT TRAN
-END
-GO
+--CREATE PROC sp_Soluongcautraloicuacauhoi 
+--@Macauhoi bigint,
+--@Return nvarchar(500) out
+--AS
+--BEGIN
+--	BEGIN TRY
+--		BEGIN TRAN
+--			IF NOT EXISTS(SELECT * FROM CAUHOI WHERE [MACH] = @Macauhoi)
+--			BEGIN
+--				PRINT N'MA CAU HOI KHONG TON TAI'
+--				ROLLBACK TRAN
+--				RETURN 1
+--			END
+--			IF @Return = '' OR @Return is null
+--			BEGIN
+--				WAITFOR DELAY '00:00:05'
+--				SELECT SOCAUTRALOI FROM CAUHOI c WHERE c.MAMH =  @Macauhoi
+--			END
+--		COMMIT TRAN
+--	END TRY
+--	BEGIN CATCH
+--		SET @Return = ERROR_MESSAGE()
+--		ROLLBACK TRAN
+--	END CATCH
+--END
 
-CREATE PROC sp_Soluongcauhoicuabomon 
-@Mamonhoc bigint,
-@Return nvarchar(500) out
-AS
-BEGIN
-	BEGIN TRY
-		BEGIN TRAN
-			DECLARE @slch INT
-			SELECT @slch = COUNT(*) FROM CAUHOI c WHERE c.MAMH =  @Mamonhoc
-			IF ( @slch < 1  )
-				SET @Return = N'Mon hoc nay chua co cau hoi nao'
-			IF @Return = '' OR @Return is null
-			BEGIN
-				WAITFOR DELAY '00:00:05'
-				SELECT COUNT(*) FROM CAUHOI c WHERE c.MAMH =  @Mamonhoc
-			END
-		COMMIT TRAN
-	END TRY
-	BEGIN CATCH
-		SET @Return = ERROR_MESSAGE()
-		ROLLBACK TRAN
-	END CATCH
-END
+--CREATE PROC sp_ThayDoiMonHoc
+--@Macauhoi bigint,
+--@Monhoc bigint,
+--@Return nvarchar(500) out
+--AS
+--BEGIN TRAN
+--	BEGIN TRY
+--		IF NOT EXISTS(SELECT * FROM CAUHOI WHERE [MACH] = @Macauhoi)
+--			BEGIN
+--				SET @Return = N'MA CAU HOI KHONG TON TAI'
+--			END
+--		ELSE IF NOT EXISTS(SELECT * FROM MONHOC WHERE [MAMH] = @Monhoc)
+--			BEGIN
+--				SET @Return = N'MA MON HOC KHONG TON TAI'
+--			END
+--		UPDATE [CAUHOI] SET MAMH = @Monhoc  WHERE [MACH] = @Macauhoi
+--		SET @Return = ''
+--	END TRY
+--	BEGIN CATCH
+--		ROLLBACK TRAN
+--		SET @Return = N'LOI HE THONG'
+--	END CATCH
+--COMMIT TRAN
+--GO
 
-CREATE PROC sp_Soluongcautraloicuacauhoi 
-@Macauhoi bigint,
-@Return nvarchar(500) out
-AS
-BEGIN
-	BEGIN TRY
-		BEGIN TRAN
-			IF NOT EXISTS(SELECT * FROM CAUHOI WHERE [MACH] = @Macauhoi)
-			BEGIN
-				PRINT N'MA CAU HOI KHONG TON TAI'
-				ROLLBACK TRAN
-				RETURN 1
-			END
-			IF @Return = '' OR @Return is null
-			BEGIN
-				WAITFOR DELAY '00:00:05'
-				SELECT SOCAUTRALOI FROM CAUHOI c WHERE c.MAMH =  @Macauhoi
-			END
-		COMMIT TRAN
-	END TRY
-	BEGIN CATCH
-		SET @Return = ERROR_MESSAGE()
-		ROLLBACK TRAN
-	END CATCH
-END
+--CREATE PROC sp_ThemCauHoi
+--	@Monhoc bigint,
+--	@Noidung nvarchar(Max),
+--	@Socautraloi int,
+--	@Thangdiemdukien float,
+--	@Mucdo int,
+--	@Return nvarchar(500) out
+--AS
+--BEGIN
+--	BEGIN TRY
+--		BEGIN TRAN
+--			BEGIN
+--				BEGIN
+--					INSERT INTO CAUHOI(MAMH,NOIDUNG,SOCAUTRALOI,THANGDIEM,MUCDO) VALUES(@Monhoc,@Noidung,@Socautraloi,@Thangdiemdukien,@Mucdo)
+--				END
+--			END
+--		COMMIT TRAN
+--	END TRY
+--	BEGIN CATCH
+--		SET @Return = ERROR_MESSAGE()
+--		ROLLBACK TRAN
+--	END CATCH
+--END
+--GO
 
-CREATE PROC sp_ThayDoiMonHoc
-@Macauhoi bigint,
-@Monhoc bigint,
-@Return nvarchar(500) out
-AS
-BEGIN TRAN
-	BEGIN TRY
-		IF NOT EXISTS(SELECT * FROM CAUHOI WHERE [MACH] = @Macauhoi)
-			BEGIN
-				SET @Return = N'MA CAU HOI KHONG TON TAI'
-			END
-		ELSE IF NOT EXISTS(SELECT * FROM MONHOC WHERE [MAMH] = @Monhoc)
-			BEGIN
-				SET @Return = N'MA MON HOC KHONG TON TAI'
-			END
-		UPDATE [CAUHOI] SET MAMH = @Monhoc  WHERE [MACH] = @Macauhoi
-		SET @Return = ''
-	END TRY
-	BEGIN CATCH
-		ROLLBACK TRAN
-		SET @Return = N'LOI HE THONG'
-	END CATCH
-COMMIT TRAN
-GO
+--CREATE PROCEDURE sp_TimKiemCauHoi
+--	@Macauhoi nvarchar(100),
+--	@Monhoc nvarchar(100),
+--	@LoaiMonHoc int,
+--	@MucDo nvarchar(100) ,
+--	@bit BIT OUTPUT
+--AS
+--BEGIN
+--	BEGIN TRAN
+--		BEGIN TRY
+--			SELECT *
+--			FROM CAUHOI
+--			WHERE (MaCauHoi = @Macauhoi OR @Macauhoi = 0 ) 
+--					OR ( Monhoc like N'%' + @Monhoc + '%' OR @Monhoc = '' )
+--					OR ( LoaiMonHoc = @LoaiMonHoc OR @LoaiMonHoc = 0 )
+--					OR ( Mucdo like N'%' + @MucDo + '%' OR @MucDo = '' )
+--			SET @bit = 1
+--		END TRY
+--		BEGIN CATCH
+--			ROLLBACK TRAN
+--			SET @bit = 0
+--		END CATCH
+--	COMMIT TRAN
+--END
+--GO
 
-CREATE PROC sp_ThemCauHoi
-	@Monhoc bigint,
-	@Noidung nvarchar(Max),
-	@Socautraloi int,
-	@Thangdiemdukien float,
-	@Mucdo int,
-	@Return nvarchar(500) out
-AS
-BEGIN
-	BEGIN TRY
-		BEGIN TRAN
-			BEGIN
-				BEGIN
-					INSERT INTO CAUHOI(MAMH,NOIDUNG,SOCAUTRALOI,THANGDIEM,MUCDO) VALUES(@Monhoc,@Noidung,@Socautraloi,@Thangdiemdukien,@Mucdo)
-				END
-			END
-		COMMIT TRAN
-	END TRY
-	BEGIN CATCH
-		SET @Return = ERROR_MESSAGE()
-		ROLLBACK TRAN
-	END CATCH
-END
-GO
-
-CREATE PROCEDURE sp_TimKiemCauHoi
-	@Macauhoi nvarchar(100),
-	@Monhoc nvarchar(100),
-	@LoaiMonHoc int,
-	@MucDo nvarchar(100) ,
-	@bit BIT OUTPUT
-AS
-BEGIN
-	BEGIN TRAN
-		BEGIN TRY
-			SELECT *
-			FROM CAUHOI
-			WHERE (MaCauHoi = @Macauhoi OR @Macauhoi = 0 ) 
-					OR ( Monhoc like N'%' + @Monhoc + '%' OR @Monhoc = '' )
-					OR ( LoaiMonHoc = @LoaiMonHoc OR @LoaiMonHoc = 0 )
-					OR ( Mucdo like N'%' + @MucDo + '%' OR @MucDo = '' )
-			SET @bit = 1
-		END TRY
-		BEGIN CATCH
-			ROLLBACK TRAN
-			SET @bit = 0
-		END CATCH
-	COMMIT TRAN
-END
-GO
-
-CREATE PROC sp_XoaCauHoi
-	@Macauhoi bigint,
-	@Return nvarchar(500) out
-	AS 
-	BEGIN TRY
-		BEGIN TRAN
-			IF NOT EXISTS(SELECT * FROM CAUHOI WHERE [MACH] = @Macauhoi)
-			BEGIN
-				SET @Return = N'MA CAU HOI KHONG TON TAI'
-			END
-			BEGIN
-				DELETE CauHoi WHERE MACH = @Macauhoi 
-				SET @Return = '';
-			END
+--CREATE PROC sp_XoaCauHoi
+--	@Macauhoi bigint,
+--	@Return nvarchar(500) out
+--	AS 
+--	BEGIN TRY
+--		BEGIN TRAN
+--			IF NOT EXISTS(SELECT * FROM CAUHOI WHERE [MACH] = @Macauhoi)
+--			BEGIN
+--				SET @Return = N'MA CAU HOI KHONG TON TAI'
+--			END
+--			BEGIN
+--				DELETE CauHoi WHERE MACH = @Macauhoi 
+--				SET @Return = '';
+--			END
 		
-				--TESTING
-			WAITFOR DELAY '00:00:05'
-			ROLLBACK TRAN
-			RETURN	
-		COMMIT TRAN
-	END TRY
-	BEGIN CATCH
-		SET @Return = N'LOI HE THONG'
-		ROLLBACK TRAN
-	END CATCH
-GO
+--				--TESTING
+--			WAITFOR DELAY '00:00:05'
+--			ROLLBACK TRAN
+--			RETURN	
+--		COMMIT TRAN
+--	END TRY
+--	BEGIN CATCH
+--		SET @Return = N'LOI HE THONG'
+--		ROLLBACK TRAN
+--	END CATCH
+--GO
 
-CREATE PROC sp_Laydanhsachcauhoi 
-@Macauhoi bigint,
-@Return nvarchar(500) out
-AS
-BEGIN
-	BEGIN TRY
-		SET TRAN ISOLATION LEVEL READ COMMITTED -- mức cô lập mặc định
-		BEGIN TRAN
-			IF NOT EXISTS ( SELECT * FROM CAUHOI WHERE @Macauhoi = MACH )
-			BEGIN
-				SET @Return = N'KHONG TON TAI CAU HOI NAY'
-			END
-			SELECT * FROM CAUHOI WHERE [MACH] = @MaCauHoi
-		COMMIT TRAN
-	END TRY
-	BEGIN CATCH
-		SET @Return = ERROR_MESSAGE()
-		ROLLBACK TRAN
-	END CATCH
-END
+--CREATE PROCEDURE sp_LayDanhSachBoMon
+--AS
+--BEGIN
+--	BEGIN TRAN
+--		BEGIN TRY
+--			SELECT * FROM BOMON
+--		END TRY
+--		BEGIN CATCH
+--			ROLLBACK TRAN
+--		END CATCH
+--	COMMIT TRAN
+--END
+--GO
 
-CREATE PROCEDURE sp_LayDanhSachBoMon
-AS
-BEGIN
-	BEGIN TRAN
-		BEGIN TRY
-			SELECT * FROM BOMON
-		END TRY
-		BEGIN CATCH
-			ROLLBACK TRAN
-		END CATCH
-	COMMIT TRAN
-END
-GO
-
-CREATE PROCEDURE sp_LayDanhSachMonHoc
-AS
-BEGIN
-	BEGIN TRAN
-		BEGIN TRY
-			SELECT * FROM MONHOC
-		END TRY
-		BEGIN CATCH
-			ROLLBACK TRAN
-		END CATCH
-	COMMIT TRAN
-END
-GO
+--CREATE PROCEDURE sp_LayDanhSachMonHoc
+--AS
+--BEGIN
+--	BEGIN TRAN
+--		BEGIN TRY
+--			SELECT * FROM MONHOC
+--		END TRY
+--		BEGIN CATCH
+--			ROLLBACK TRAN
+--		END CATCH
+--	COMMIT TRAN
+--END
+--GO
 
 IF OBJECT_ID('sp_ThemMonHoc') IS NOT NULL
 	DROP PROC sp_ThemMonHoc
