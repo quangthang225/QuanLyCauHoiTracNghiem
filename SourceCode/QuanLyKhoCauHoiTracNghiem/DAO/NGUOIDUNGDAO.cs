@@ -329,5 +329,83 @@ namespace DAO
                 }
             }
         }
+
+        public List<NGUOIDUNGDTO> LayDanhSachGV(long maGVQL)
+        {
+            try
+            {
+                List<NGUOIDUNGDTO> lstKQ = new List<NGUOIDUNGDTO>();
+                SqlConnection connection = ConnectDB();
+                SqlCommand cmd = new SqlCommand("sp_LayDanhGV", connection);
+
+                SqlParameter sParam_MaGVQL = cmd.Parameters.Add("@MaGVQL", SqlDbType.BigInt);
+                sParam_MaGVQL.Direction = ParameterDirection.Input;
+                sParam_MaGVQL.Value = maGVQL;
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    NGUOIDUNGDTO d = new NGUOIDUNGDTO();
+                    d.HOTEN = (string)rdr["HOTEN"];
+                    d.MAND = (long)rdr["MAND"];
+                    d.TENDANGNHAP = (string)rdr["TENDANGNHAP"];
+                    d.MATKHAU = (string)rdr["MATKHAU"];
+                    d.TRANGTHAI = (bool)rdr["TRANGTHAI"];
+                    d.TOANQUYENGV = (bool)rdr["TOANQUYENGV"];
+                    d.MALOAI = (long)rdr["MALOAI"];
+                    d.MABM = (long)rdr["MABM"];
+                    if (rdr["MAGVQL"] != DBNull.Value)
+                        d.MAGVQL = (long)rdr["MAGVQL"];
+                    d.TENLOAIND = (string)rdr["TENLOAIND"];
+                    d.TENBM = (string)rdr["TENBM"];
+                    //Console.WriteLine(rdr["TENGVQL"]);
+                    //if (rdr["TENGVQL"] != DBNull.Value)
+                    //    d.TENGVQL = (string)rdr["TENGVQL"];
+                    lstKQ.Add(d);
+                }
+                return lstKQ;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                throw e;
+
+            }
+        }
+
+        public bool CapNhatQuyenGV(long maGVQL, long maGV, bool value)
+        {
+            try
+            {
+                SqlConnection connection = ConnectDB();
+                SqlCommand cmd = new SqlCommand("sp_GVQLCAPQUYEN", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter sParam_MaGVQL = cmd.Parameters.Add("@MAGVQL", SqlDbType.BigInt);
+                sParam_MaGVQL.Direction = ParameterDirection.Input;
+                sParam_MaGVQL.Value = maGVQL;
+
+                SqlParameter sParam_MaGV = cmd.Parameters.Add("@MAGV", SqlDbType.BigInt);
+                sParam_MaGV.Direction = ParameterDirection.Input;
+                sParam_MaGV.Value = maGV;
+
+                SqlParameter sParam_Value = cmd.Parameters.Add("@VALUE", SqlDbType.Bit);
+                sParam_Value.Direction = ParameterDirection.Input;
+                sParam_Value.Value = value;
+
+                SqlParameter sParam_ketQua = cmd.Parameters.Add("@KETQUA", SqlDbType.Bit);
+                sParam_ketQua.Direction = ParameterDirection.Output;
+
+                cmd.ExecuteNonQuery();
+                return Convert.ToBoolean(sParam_ketQua.Value);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return false;
+        }
     }
 }

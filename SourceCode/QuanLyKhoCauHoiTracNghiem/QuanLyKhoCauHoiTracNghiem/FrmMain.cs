@@ -121,5 +121,12 @@ namespace QuanLyKhoCauHoiTracNghiem
             Form f = (Form)frm;
             HienThiForm(ref f);
         }
+
+        private void mnuQuanLyGiaoVien_Click(object sender, EventArgs e)
+        {
+            FrmQuanLyGiaoVien frm = new FrmQuanLyGiaoVien();
+            Form f = (Form)frm;
+            HienThiForm(ref f);
+        }
     }
 }

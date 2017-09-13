@@ -40,6 +40,7 @@
             this.mnuQuanLyCauHoi = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDangXuat = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuXinChao = new System.Windows.Forms.ToolStripMenuItem();
+            this.quảnLýGiáoViênToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,7 +87,8 @@
             // 
             this.mnuQuanLy.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuBoMon,
-            this.mnuQuanLyMonHoc});
+            this.mnuQuanLyMonHoc,
+            this.quảnLýGiáoViênToolStripMenuItem});
             this.mnuQuanLy.Name = "mnuQuanLy";
             this.mnuQuanLy.Size = new System.Drawing.Size(71, 24);
             this.mnuQuanLy.Text = "Quản lý";
@@ -94,14 +96,14 @@
             // mnuBoMon
             // 
             this.mnuBoMon.Name = "mnuBoMon";
-            this.mnuBoMon.Size = new System.Drawing.Size(196, 26);
+            this.mnuBoMon.Size = new System.Drawing.Size(199, 26);
             this.mnuBoMon.Text = "Quản lý bộ môn";
             this.mnuBoMon.Click += new System.EventHandler(this.mnuBoMon_Click);
             // 
             // mnuQuanLyMonHoc
             // 
             this.mnuQuanLyMonHoc.Name = "mnuQuanLyMonHoc";
-            this.mnuQuanLyMonHoc.Size = new System.Drawing.Size(196, 26);
+            this.mnuQuanLyMonHoc.Size = new System.Drawing.Size(199, 26);
             this.mnuQuanLyMonHoc.Text = "Quản lý môn học";
             this.mnuQuanLyMonHoc.Click += new System.EventHandler(this.mnuQuanLyMonHoc_Click);
             // 
@@ -143,6 +145,13 @@
             this.mnuXinChao.Size = new System.Drawing.Size(85, 24);
             this.mnuXinChao.Text = "Xin chào: ";
             // 
+            // quảnLýGiáoViênToolStripMenuItem
+            // 
+            this.quảnLýGiáoViênToolStripMenuItem.Name = "quảnLýGiáoViênToolStripMenuItem";
+            this.quảnLýGiáoViênToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
+            this.quảnLýGiáoViênToolStripMenuItem.Text = "Quản lý giáo viên";
+            this.quảnLýGiáoViênToolStripMenuItem.Click += new System.EventHandler(this.mnuQuanLyGiaoVien_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -178,5 +187,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuBoMon;
         private System.Windows.Forms.ToolStripMenuItem mnuQuanLyDeThi;
         private System.Windows.Forms.ToolStripMenuItem mnuQuanLyCauHoi;
+        private System.Windows.Forms.ToolStripMenuItem quảnLýGiáoViênToolStripMenuItem;
     }
 }

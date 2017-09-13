@@ -49,5 +49,15 @@ namespace BUS
             NGUOIDUNGDAO n = new NGUOIDUNGDAO();
             return n.ThayDoiGVQL(maND, maGVQL);
         }
+        public static List<NGUOIDUNGDTO> LayDanhSachGiaoVien(long maGVQL)
+        {
+            NGUOIDUNGDAO n = new NGUOIDUNGDAO();
+            return n.LayDanhSachGV(maGVQL);
+        }
+        public static bool CapNhatQuyenGV(long maGVQL, long maGV, bool value)
+        {
+            NGUOIDUNGDAO n = new NGUOIDUNGDAO();
+            return n.CapNhatQuyenGV(maGVQL, maGV, value);
+        }
     }
 }
