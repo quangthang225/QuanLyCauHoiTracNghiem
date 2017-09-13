@@ -59,7 +59,7 @@ SourceCode/QuanLyKhoCauHoiTracNghiem/Utilities/obj/Debug/Utilities.dll
 SourceCode/QuanLyKhoCauHoiTracNghiem/Utilities/obj/Debug/Utilities.pdb
 SourceCode/QuanLyKhoCauHoiTracNghiem/Utilities/obj/Debug/Utilities.csproj.FileListAbsolute.txt
 SourceCode/QuanLyKhoCauHoiTracNghiem/QuanLyKhoCauHoiTracNghiem/obj/x86/Debug/QuanLyKhoCauHoiTracNghiem.FrmQuanLyCauHoiTheoBoDeThi.resources
-SourceCode/QuanLyKhoCauHoiTracNghiem/QuanLyKhoCauHoiTracNghiem/.vs
+SourceCode/QuanLyKhoCauHoiTracNghiem/.vs
 SourceCode/QuanLyKhoCauHoiTracNghiem/QuanLyKhoCauHoiTracNghiem/obj
 
 SourceCode/QuanLyKhoCauHoiTracNghiem/BUS/bin
@@ -73,3 +73,5 @@ SourceCode/QuanLyKhoCauHoiTracNghiem/DTO/obj
 
 SourceCode/QuanLyKhoCauHoiTracNghiem/Utilities/bin
 SourceCode/QuanLyKhoCauHoiTracNghiem/Utilities/obj
+
+QuanLyTracNghiem\SourceCode\QuanLyKhoCauHoiTracNghiem\.vs
