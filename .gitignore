@@ -34,7 +34,8 @@ SourceCode/QuanLyKhoCauHoiTracNghiem/DTO/obj/Debug/DTO.pdb
 SourceCode/QuanLyKhoCauHoiTracNghiem/DTO/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 SourceCode/QuanLyKhoCauHoiTracNghiem/QuanLyKhoCauHoiTracNghiem/bin/Debug/DTO.dll
 SourceCode/QuanLyKhoCauHoiTracNghiem/QuanLyKhoCauHoiTracNghiem/bin/Debug/DTO.pdb
-SourceCode/QuanLyKhoCauHoiTracNghiem/QuanLyKhoCauHoiTracNghiem/bin/Debug/Utilities.dll
+SourceCode/QuanLyKhoCauHoiTracNghiem/QuanLyKhoCauHoiTracNghiem/bin
+SourceCode/QuanLyKhoCauHoiTracNghiem/QuanLyKhoCauHoiTracNghiem/obj
 SourceCode/QuanLyKhoCauHoiTracNghiem/QuanLyKhoCauHoiTracNghiem/bin/Debug/Utilities.pdb
 SourceCode/QuanLyKhoCauHoiTracNghiem/QuanLyKhoCauHoiTracNghiem/obj/x86/Debug/DesignTimeResolveAssemblyReferences.cache
 SourceCode/QuanLyKhoCauHoiTracNghiem/QuanLyKhoCauHoiTracNghiem/obj/x86/Debug/DesignTimeResolveAssemblyReferencesInput.cache
@@ -58,3 +59,17 @@ SourceCode/QuanLyKhoCauHoiTracNghiem/Utilities/obj/Debug/Utilities.dll
 SourceCode/QuanLyKhoCauHoiTracNghiem/Utilities/obj/Debug/Utilities.pdb
 SourceCode/QuanLyKhoCauHoiTracNghiem/Utilities/obj/Debug/Utilities.csproj.FileListAbsolute.txt
 SourceCode/QuanLyKhoCauHoiTracNghiem/QuanLyKhoCauHoiTracNghiem/obj/x86/Debug/QuanLyKhoCauHoiTracNghiem.FrmQuanLyCauHoiTheoBoDeThi.resources
+SourceCode/QuanLyKhoCauHoiTracNghiem/QuanLyKhoCauHoiTracNghiem/.vs
+SourceCode/QuanLyKhoCauHoiTracNghiem/QuanLyKhoCauHoiTracNghiem/obj
+
+SourceCode/QuanLyKhoCauHoiTracNghiem/BUS/bin
+SourceCode/QuanLyKhoCauHoiTracNghiem/BUS/obj
+
+SourceCode/QuanLyKhoCauHoiTracNghiem/DAO/bin
+SourceCode/QuanLyKhoCauHoiTracNghiem/DAO/obj
+
+SourceCode/QuanLyKhoCauHoiTracNghiem/DTO/bin
+SourceCode/QuanLyKhoCauHoiTracNghiem/DTO/obj
+
+SourceCode/QuanLyKhoCauHoiTracNghiem/Utilities/bin
+SourceCode/QuanLyKhoCauHoiTracNghiem/Utilities/obj
