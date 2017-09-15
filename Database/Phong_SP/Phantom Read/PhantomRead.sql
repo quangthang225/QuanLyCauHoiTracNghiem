@@ -1,58 +1,88 @@
 ﻿USE [QuanLyCauHoiTracNghiem]
 
-IF OBJECT_ID('sp_LayMonHoc') IS NOT NULL
-	DROP PROC sp_LayMonHoc
+IF OBJECT_ID('sp_LayDanhSachMonHoc') IS NOT NULL
+	DROP PROC sp_LayDanhSachMonHoc
 GO
 
-CREATE PROC sp_LayMonHoc
-	@MABM BIGINT
-AS 
-SET TRAN ISOLATION LEVEL REPEATABLE READ --PHANTOM: Đọc phải xin và giữ đến hết giao tác nhưng ko ngăn được Insert
---SET TRAN ISOLATION LEVEL SERIALIZABLE --FIX PHANTOM: Ngăn chặn Insert dữ liệu
-BEGIN
-	BEGIN TRAN
-		BEGIN TRY
-			DECLARE @COUNT INT = (SELECT COUNT(*) FROM MONHOC WHERE MABM = @MABM)
-			PRINT 'CO ' + CAST(@COUNT AS VARCHAR(10)) + ' KET QUA.'
-		
-			WAITFOR DELAY '0:0:10'
-
-			SELECT * FROM MONHOC WHERE MABM = @MABM
-		END TRY
-		BEGIN CATCH
-			ROLLBACK TRAN
-			RETURN 0
-		END CATCH
-	COMMIT TRAN
-END
-
-GO
-
-IF OBJECT_ID('sp_ThemMonHoc') IS NOT NULL
-	DROP PROC sp_ThemMonHoc
-GO
-
-CREATE PROC sp_ThemMonHoc
+CREATE PROCEDURE sp_LayDanhSachMonHoc
 	@TENMH NVARCHAR(MAX),
 	@MABM BIGINT
 AS
-SET TRAN ISOLATION LEVEL READ COMMITTED
+
+SET TRAN ISOLATION LEVEL REPEATABLE READ --PHANTOM: Đọc phải xin và giữ đến hết giao tác nhưng ko ngăn được Insert
+
 BEGIN
 	BEGIN TRAN
 		BEGIN TRY
-		PRINT 'AAA'
-			--DECLARE @IS_EXIST BIT = (SELECT 1 FROM MONHOC WHERE @TENMH = TENMH)
+			DECLARE @COUNT INT
+			IF @MABM = 0
+			BEGIN
+				PRINT 'Tìm kiếm theo tên môn học'
+				SELECT @COUNT = COUNT(*) FROM MONHOC MH, BOMON BM WHERE BM.MABM = MH.MABM AND MH.TENMH LIKE '%'+@TENMH+'%'
+				PRINT 'CO ' + CAST(@COUNT AS VARCHAR(10)) + ' KET QUA.'
+		
+				WAITFOR DELAY '0:0:10' --Chờ 10 giây
 
-			--IF @IS_EXIST!=1
-			--BEGIN 
-				--RETURN 0
-			--END
+				SELECT MH.MAMH, MH.TENMH, MH.MABM, BM.TENBM FROM MONHOC MH, BOMON BM WHERE BM.MABM = MH.MABM AND MH.TENMH LIKE '%'+@TENMH+'%'
+			END
+			ELSE
+			BEGIN
+				PRINT 'Tìm kiếm theo bộ môn và tên môn học'
+				SELECT @COUNT = COUNT(*) FROM MONHOC MH, BOMON BM WHERE BM.MABM = MH.MABM AND @MABM = MH.MABM AND MH.TENMH LIKE '%'+@TENMH+'%'
+				PRINT 'CO ' + CAST(@COUNT AS VARCHAR(10)) + ' KET QUA.'
+		
+				WAITFOR DELAY '0:0:10' --Chờ 10 giây
 
-			INSERT INTO MONHOC(TENMH, MABM) VALUES (@TENMH, @MABM)
+				SELECT MH.MAMH, MH.TENMH, MH.MABM, BM.TENBM FROM MONHOC MH, BOMON BM WHERE BM.MABM = MH.MABM AND @MABM = MH.MABM AND MH.TENMH LIKE '%'+@TENMH+'%'
+			END
 		END TRY
 		BEGIN CATCH
+			PRINT N'XẢY RA LỖI'
 			ROLLBACK TRAN
 		END CATCH
 	COMMIT TRAN
 END
 GO
+------------------------------------------------------------------------------------------------------------------------------------------------
+IF OBJECT_ID('sp_ThemMonHoc') IS NOT NULL
+	DROP PROC sp_ThemMonHoc
+GO
+CREATE PROC sp_ThemMonHoc
+	@MABM BIGINT,
+	@TENMH NVARCHAR(MAX),
+	@KETQUA INT OUTPUT
+AS 
+
+SET TRAN ISOLATION LEVEL READ COMMITTED --Ghi: xin và nhả khóa đến hết gt, Đọc: xin và nhả khóa liền
+
+BEGIN
+	BEGIN TRAN
+		BEGIN TRY
+			DECLARE @IS_EXIST_BM BIT = (SELECT 1 FROM BOMON WHERE @MABM = BOMON.MABM)
+
+			IF @IS_EXIST_BM!=1
+			BEGIN 
+				ROLLBACK TRAN
+				SET @KETQUA = 2 -- Bộ môn không tồn tại  
+			END
+
+			INSERT INTO MONHOC(MABM, TENMH) VALUES (@MABM, @TENMH)
+			SET @KETQUA = 1
+
+			IF (@TENMH LIKE '%[^a-zA-Z0-9 ._]%')
+			BEGIN
+				PRINT 'Tên môn học không hợp lệ'
+				SET @KETQUA = 3 --Tên môn học chứa kí tự đặc biệt
+				ROLLBACK TRAN
+				RETURN
+			END
+		END TRY
+		BEGIN CATCH
+			ROLLBACK TRAN
+			SET @KETQUA = 0 --Thất bại
+		END CATCH
+	COMMIT TRAN
+END
+GO 
+
+
