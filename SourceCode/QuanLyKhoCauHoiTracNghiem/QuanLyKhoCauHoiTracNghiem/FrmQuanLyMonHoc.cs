@@ -221,5 +221,10 @@ namespace QuanLyKhoCauHoiTracNghiem
                 return;
             }
         }
+
+        private void dgvMonHoc_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
