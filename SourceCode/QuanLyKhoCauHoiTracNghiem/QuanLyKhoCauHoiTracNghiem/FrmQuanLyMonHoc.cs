@@ -18,6 +18,7 @@ namespace QuanLyKhoCauHoiTracNghiem
             InitializeComponent();
             dgvMonHoc.AutoGenerateColumns = false;
             dgvMonHoc.AllowUserToAddRows = false;
+            dgvMonHoc.DataSource = null;
         }
 
         private void gbThemMH_Enter(object sender, EventArgs e)
@@ -27,7 +28,7 @@ namespace QuanLyKhoCauHoiTracNghiem
 
         public void LoadMonHoc()
         {
-            dgvMonHoc.DataSource = MONHOCBUS.LayDanhSachMonHoc();
+            dgvMonHoc.DataSource = MONHOCBUS.LayDanhSachMonHoc("", 0);
         }
         public void LoadBoMon()
         {
@@ -68,33 +69,156 @@ namespace QuanLyKhoCauHoiTracNghiem
         {
             cbTimBM.SelectedIndex = -1;
             txtTimMH.Text = "";
+            dgvMonHoc.DataSource = MONHOCBUS.LayDanhSachMonHoc("", 0);
         }
 
         private void btnResetTaoMH_Click(object sender, EventArgs e)
         {
+            ckbIsNew.Checked = true;
+            btnXoaMonHoc.Enabled = false;
             cbThemBM.SelectedIndex = -1;
             txtThemTenMH.Text = "";
         }
 
         private void btnLuuMH_Click(object sender, EventArgs e)
         {
-            long maBM = ((BOMONDTO)cbThemBM.SelectedItem).MABM;
-            MONHOCDTO d = new MONHOCDTO();
-            d.MABOMON = maBM;
-            d.TENMONHOC = txtThemTenMH.Text.TrimEnd();
-            int rs = MONHOCBUS.ThemMonHoc(d);
-            if (rs == 1)
+            if (ckbIsNew.Checked)
             {
-                MessageBox.Show("Thêm môn học thành công");
-                LoadMonHoc();
+                //Tạo mới môn học
+                if (txtThemTenMH.Text.TrimEnd() == "")
+                {
+                    MessageBox.Show("Tên môn học là bắt buộc!");
+                    return;
+                }
+                if (cbThemBM.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Vui lòng chọn bộ môn!");
+                    return;
+                }
+                long maBM = ((BOMONDTO)cbThemBM.SelectedItem).MABM;
+                MONHOCDTO d = new MONHOCDTO();
+                d.MABOMON = maBM;
+                d.TENMONHOC = txtThemTenMH.Text.TrimEnd();
+                int rs = MONHOCBUS.ThemMonHoc(d);
+                if (rs == 1)
+                {
+                    MessageBox.Show("Thêm môn học thành công");
+                    LoadMonHoc();
+                }
+                else if (rs == 2)
+                {
+                    MessageBox.Show("Bộ môn không tồn tại");
+                }
+                else if (rs == 3)
+                {
+                    MessageBox.Show("Tên môn học không hợp lệ.");
+                }
+                else
+                {
+                    MessageBox.Show("Thêm môn học thất bại");
+                }
+            }else
+            {
+                //Cập nhật môn học
+                if (txtThemTenMH.Text.TrimEnd() == "")
+                {
+                    MessageBox.Show("Tên môn học là bắt buộc!"); ;
+                    return;
+                }
+                if (cbThemBM.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Vui lòng chọn bộ môn!");
+                    return;
+                }
+                int selectedIndex = dgvMonHoc.SelectedRows[0].Index;
+                long maMH = (long)dgvMonHoc.Rows[selectedIndex].Cells["MAMH"].Value;
+                long maBM = ((BOMONDTO)cbThemBM.SelectedItem).MABM;
+                MONHOCDTO d = new MONHOCDTO();
+                d.MAMONHOC = maMH;
+                d.MABOMON = maBM;
+                d.TENMONHOC = txtThemTenMH.Text.TrimEnd();
+                int rs = MONHOCBUS.CapNhatMonHoc(d);
+                if (rs == 1)
+                {
+                    MessageBox.Show("Cập nhật môn học thành công");
+                    LoadMonHoc();
+                }
+                else if (rs == 2)
+                {
+                    MessageBox.Show("Môn học không tồn tại");
+                }
+                else if (rs == 4)
+                {
+                    MessageBox.Show("Bộ môn không tồn tại");
+                }
+                else if (rs == 3)
+                {
+                    MessageBox.Show("Tên môn học không hợp lệ.");
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật môn học thất bại");
+                }
             }
-            else if (rs == 2)
+
+            
+        }
+
+        private void btnTimMH_Click(object sender, EventArgs e)
+        {
+            string tenmh = "";
+            long maBM = 0;
+            if (txtTimMH.Text != "")
             {
-                MessageBox.Show("Đã tồn tại môn học trong hệ thống. Thêm thất bại");
+                tenmh = txtTimMH.Text;
             }
-            else
+
+            if (cbTimBM.SelectedIndex != -1)
             {
-                MessageBox.Show("Thêm môn học thất bại");
+                maBM = ((BOMONDTO)cbTimBM.SelectedItem).MABM;
+            }
+            dgvMonHoc.DataSource = MONHOCBUS.LayDanhSachMonHoc(tenmh, maBM);
+        }
+
+        private void dgvMonHoc_SelectionChanged(object sender, EventArgs e)
+        {
+            ckbIsNew.Checked = false;
+            btnXoaMonHoc.Enabled = true;
+            if (dgvMonHoc.SelectedRows.Count < 1)
+            {
+                return;
+            }
+
+            int selectedIndex = dgvMonHoc.SelectedRows[0].Index;
+            if(dgvMonHoc.Rows[selectedIndex].Cells["TENBM"].Value != null)
+            {
+                txtThemTenMH.Text = dgvMonHoc.Rows[selectedIndex].Cells["TENMH"].Value.ToString();
+            }
+        }
+
+        private void btnXoaMonHoc_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Bạn có muốn xóa môn học này?", "Xóa môn học", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                int selectedIndex = dgvMonHoc.SelectedRows[0].Index;
+                long maMH = (long)dgvMonHoc.Rows[selectedIndex].Cells["MAMH"].Value;
+                int rs = MONHOCBUS.XoaMonHoc(maMH);
+                if (rs == 1)
+                {
+                    MessageBox.Show("Xóa môn học thành công");
+                    LoadMonHoc();
+                }else if(rs == 2)
+                {
+                    MessageBox.Show("Môn học không tồn tại");
+                }
+                else {
+                    MessageBox.Show("Xóa môn học thất bại");
+                }
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                return;
             }
         }
     }

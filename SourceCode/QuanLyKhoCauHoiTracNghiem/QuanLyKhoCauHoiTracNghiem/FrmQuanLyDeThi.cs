@@ -30,7 +30,7 @@ namespace QuanLyKhoCauHoiTracNghiem
 
         private void LayDanhSachMonHoc()
         {
-            var lst = MONHOCBUS.LayDanhSachMonHoc();
+            var lst = MONHOCBUS.LayDanhSachMonHoc("", 0);
             cboMonHoc.DataSource = lst;
             cboMonHoc.ValueMember = "MAMONHOC";
             cboMonHoc.DisplayMember = "TENMONHOC";
@@ -71,6 +71,7 @@ namespace QuanLyKhoCauHoiTracNghiem
 
         private void dgvDeThi_SelectionChanged(object sender, EventArgs e)
         {
+            MessageBox.Show(dgvDeThi.SelectedRows.Count.ToString());
             if (dgvDeThi.SelectedRows.Count < 1)
             {
                 return;

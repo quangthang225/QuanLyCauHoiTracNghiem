@@ -29,24 +29,26 @@
         private void InitializeComponent()
         {
             this.gbTimMH = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtTimMH = new System.Windows.Forms.TextBox();
-            this.btnTimMH = new System.Windows.Forms.Button();
+            this.cbTimBM = new System.Windows.Forms.ComboBox();
             this.btnResetTim = new System.Windows.Forms.Button();
+            this.btnTimMH = new System.Windows.Forms.Button();
+            this.txtTimMH = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvMonHoc = new System.Windows.Forms.DataGridView();
             this.gbThemMH = new System.Windows.Forms.GroupBox();
+            this.cbThemBM = new System.Windows.Forms.ComboBox();
             this.btnResetTaoMH = new System.Windows.Forms.Button();
             this.btnLuuMH = new System.Windows.Forms.Button();
             this.txtThemTenMH = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.cbThemBM = new System.Windows.Forms.ComboBox();
-            this.cbTimBM = new System.Windows.Forms.ComboBox();
-            this.MAMONHOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TENMONHOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TENBOMON = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MAMH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TENMH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TENBM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ckbIsNew = new System.Windows.Forms.CheckBox();
+            this.btnXoaMonHoc = new System.Windows.Forms.Button();
             this.gbTimMH.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMonHoc)).BeginInit();
@@ -68,39 +70,13 @@
             this.gbTimMH.TabStop = false;
             this.gbTimMH.Text = "Tìm môn học";
             // 
-            // label1
+            // cbTimBM
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Tên môn học";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(459, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Bộ môn";
-            // 
-            // txtTimMH
-            // 
-            this.txtTimMH.Location = new System.Drawing.Point(131, 50);
-            this.txtTimMH.Name = "txtTimMH";
-            this.txtTimMH.Size = new System.Drawing.Size(280, 26);
-            this.txtTimMH.TabIndex = 2;
-            // 
-            // btnTimMH
-            // 
-            this.btnTimMH.Location = new System.Drawing.Point(637, 97);
-            this.btnTimMH.Name = "btnTimMH";
-            this.btnTimMH.Size = new System.Drawing.Size(75, 34);
-            this.btnTimMH.TabIndex = 4;
-            this.btnTimMH.Text = "Tìm";
-            this.btnTimMH.UseVisualStyleBackColor = true;
+            this.cbTimBM.FormattingEnabled = true;
+            this.cbTimBM.Location = new System.Drawing.Point(548, 44);
+            this.cbTimBM.Name = "cbTimBM";
+            this.cbTimBM.Size = new System.Drawing.Size(277, 28);
+            this.cbTimBM.TabIndex = 6;
             // 
             // btnResetTim
             // 
@@ -111,6 +87,41 @@
             this.btnResetTim.Text = "Làm lại";
             this.btnResetTim.UseVisualStyleBackColor = true;
             this.btnResetTim.Click += new System.EventHandler(this.btnResetTim_Click);
+            // 
+            // btnTimMH
+            // 
+            this.btnTimMH.Location = new System.Drawing.Point(637, 97);
+            this.btnTimMH.Name = "btnTimMH";
+            this.btnTimMH.Size = new System.Drawing.Size(75, 34);
+            this.btnTimMH.TabIndex = 4;
+            this.btnTimMH.Text = "Tìm";
+            this.btnTimMH.UseVisualStyleBackColor = true;
+            this.btnTimMH.Click += new System.EventHandler(this.btnTimMH_Click);
+            // 
+            // txtTimMH
+            // 
+            this.txtTimMH.Location = new System.Drawing.Point(131, 50);
+            this.txtTimMH.Name = "txtTimMH";
+            this.txtTimMH.Size = new System.Drawing.Size(280, 26);
+            this.txtTimMH.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(459, 53);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(64, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Bộ môn";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 53);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(101, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Tên môn học";
             // 
             // groupBox1
             // 
@@ -126,17 +137,23 @@
             // 
             this.dgvMonHoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMonHoc.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.MAMONHOC,
-            this.TENMONHOC,
-            this.TENBOMON});
+            this.MAMH,
+            this.TENMH,
+            this.TENBM});
             this.dgvMonHoc.Location = new System.Drawing.Point(0, 26);
+            this.dgvMonHoc.MultiSelect = false;
             this.dgvMonHoc.Name = "dgvMonHoc";
+            this.dgvMonHoc.ReadOnly = true;
             this.dgvMonHoc.RowTemplate.Height = 28;
+            this.dgvMonHoc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMonHoc.Size = new System.Drawing.Size(849, 201);
             this.dgvMonHoc.TabIndex = 0;
+            this.dgvMonHoc.SelectionChanged += new System.EventHandler(this.dgvMonHoc_SelectionChanged);
             // 
             // gbThemMH
             // 
+            this.gbThemMH.Controls.Add(this.btnXoaMonHoc);
+            this.gbThemMH.Controls.Add(this.ckbIsNew);
             this.gbThemMH.Controls.Add(this.cbThemBM);
             this.gbThemMH.Controls.Add(this.btnResetTaoMH);
             this.gbThemMH.Controls.Add(this.btnLuuMH);
@@ -145,15 +162,24 @@
             this.gbThemMH.Controls.Add(this.label4);
             this.gbThemMH.Location = new System.Drawing.Point(13, 410);
             this.gbThemMH.Name = "gbThemMH";
-            this.gbThemMH.Size = new System.Drawing.Size(848, 164);
+            this.gbThemMH.Size = new System.Drawing.Size(848, 196);
             this.gbThemMH.TabIndex = 2;
             this.gbThemMH.TabStop = false;
             this.gbThemMH.Text = "Thêm/Sửa môn học";
             this.gbThemMH.Enter += new System.EventHandler(this.gbThemMH_Enter);
             // 
+            // cbThemBM
+            // 
+            this.cbThemBM.FormattingEnabled = true;
+            this.cbThemBM.Location = new System.Drawing.Point(556, 90);
+            this.cbThemBM.Name = "cbThemBM";
+            this.cbThemBM.Size = new System.Drawing.Size(277, 28);
+            this.cbThemBM.TabIndex = 12;
+            this.cbThemBM.SelectedIndexChanged += new System.EventHandler(this.txtThemBoMon_SelectedIndexChanged);
+            // 
             // btnResetTaoMH
             // 
-            this.btnResetTaoMH.Location = new System.Drawing.Point(726, 96);
+            this.btnResetTaoMH.Location = new System.Drawing.Point(735, 137);
             this.btnResetTaoMH.Name = "btnResetTaoMH";
             this.btnResetTaoMH.Size = new System.Drawing.Size(98, 36);
             this.btnResetTaoMH.TabIndex = 11;
@@ -163,7 +189,7 @@
             // 
             // btnLuuMH
             // 
-            this.btnLuuMH.Location = new System.Drawing.Point(636, 96);
+            this.btnLuuMH.Location = new System.Drawing.Point(645, 137);
             this.btnLuuMH.Name = "btnLuuMH";
             this.btnLuuMH.Size = new System.Drawing.Size(75, 36);
             this.btnLuuMH.TabIndex = 10;
@@ -173,7 +199,7 @@
             // 
             // txtThemTenMH
             // 
-            this.txtThemTenMH.Location = new System.Drawing.Point(130, 51);
+            this.txtThemTenMH.Location = new System.Drawing.Point(139, 92);
             this.txtThemTenMH.Name = "txtThemTenMH";
             this.txtThemTenMH.Size = new System.Drawing.Size(280, 26);
             this.txtThemTenMH.TabIndex = 8;
@@ -181,7 +207,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(458, 54);
+            this.label3.Location = new System.Drawing.Point(467, 95);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 20);
             this.label3.TabIndex = 7;
@@ -190,55 +216,65 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(5, 54);
+            this.label4.Location = new System.Drawing.Point(14, 95);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(101, 20);
             this.label4.TabIndex = 6;
             this.label4.Text = "Tên môn học";
             // 
-            // cbThemBM
+            // MAMH
             // 
-            this.cbThemBM.FormattingEnabled = true;
-            this.cbThemBM.Location = new System.Drawing.Point(547, 49);
-            this.cbThemBM.Name = "cbThemBM";
-            this.cbThemBM.Size = new System.Drawing.Size(277, 28);
-            this.cbThemBM.TabIndex = 12;
-            this.cbThemBM.SelectedIndexChanged += new System.EventHandler(this.txtThemBoMon_SelectedIndexChanged);
+            this.MAMH.DataPropertyName = "MAMONHOC";
+            this.MAMH.HeaderText = "Mã môn học";
+            this.MAMH.Name = "MAMH";
+            this.MAMH.ReadOnly = true;
+            this.MAMH.Width = 120;
             // 
-            // cbTimBM
+            // TENMH
             // 
-            this.cbTimBM.FormattingEnabled = true;
-            this.cbTimBM.Location = new System.Drawing.Point(548, 44);
-            this.cbTimBM.Name = "cbTimBM";
-            this.cbTimBM.Size = new System.Drawing.Size(277, 28);
-            this.cbTimBM.TabIndex = 6;
+            this.TENMH.DataPropertyName = "TENMONHOC";
+            this.TENMH.HeaderText = "Tên môn học";
+            this.TENMH.Name = "TENMH";
+            this.TENMH.ReadOnly = true;
+            this.TENMH.Width = 200;
             // 
-            // MAMONHOC
+            // TENBM
             // 
-            this.MAMONHOC.DataPropertyName = "MAMONHOC";
-            this.MAMONHOC.HeaderText = "Mã môn học";
-            this.MAMONHOC.Name = "MAMONHOC";
-            this.MAMONHOC.Width = 120;
+            this.TENBM.DataPropertyName = "TENBOMON";
+            this.TENBM.HeaderText = "Tên bộ môn";
+            this.TENBM.Name = "TENBM";
+            this.TENBM.ReadOnly = true;
+            this.TENBM.Width = 180;
             // 
-            // TENMONHOC
+            // ckbIsNew
             // 
-            this.TENMONHOC.DataPropertyName = "TENMONHOC";
-            this.TENMONHOC.HeaderText = "Tên môn học";
-            this.TENMONHOC.Name = "TENMONHOC";
-            this.TENMONHOC.Width = 200;
+            this.ckbIsNew.AutoSize = true;
+            this.ckbIsNew.Checked = true;
+            this.ckbIsNew.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbIsNew.Enabled = false;
+            this.ckbIsNew.Location = new System.Drawing.Point(18, 47);
+            this.ckbIsNew.Name = "ckbIsNew";
+            this.ckbIsNew.Size = new System.Drawing.Size(91, 24);
+            this.ckbIsNew.TabIndex = 13;
+            this.ckbIsNew.Text = "Tạo mới";
+            this.ckbIsNew.UseVisualStyleBackColor = true;
             // 
-            // TENBOMON
+            // btnXoaMonHoc
             // 
-            this.TENBOMON.DataPropertyName = "TENBOMON";
-            this.TENBOMON.HeaderText = "Tên bộ môn";
-            this.TENBOMON.Name = "TENBOMON";
-            this.TENBOMON.Width = 180;
+            this.btnXoaMonHoc.Enabled = false;
+            this.btnXoaMonHoc.Location = new System.Drawing.Point(556, 137);
+            this.btnXoaMonHoc.Name = "btnXoaMonHoc";
+            this.btnXoaMonHoc.Size = new System.Drawing.Size(75, 36);
+            this.btnXoaMonHoc.TabIndex = 14;
+            this.btnXoaMonHoc.Text = "Xóa";
+            this.btnXoaMonHoc.UseVisualStyleBackColor = true;
+            this.btnXoaMonHoc.Click += new System.EventHandler(this.btnXoaMonHoc_Click);
             // 
             // FrmQuanLyMonHoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(873, 587);
+            this.ClientSize = new System.Drawing.Size(873, 618);
             this.Controls.Add(this.gbThemMH);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbTimMH);
@@ -273,8 +309,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbTimBM;
         private System.Windows.Forms.ComboBox cbThemBM;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MAMONHOC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TENMONHOC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TENBOMON;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MAMH;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TENMH;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TENBM;
+        private System.Windows.Forms.CheckBox ckbIsNew;
+        private System.Windows.Forms.Button btnXoaMonHoc;
     }
 }

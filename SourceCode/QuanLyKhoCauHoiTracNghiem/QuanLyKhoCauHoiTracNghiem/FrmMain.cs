@@ -70,7 +70,9 @@ namespace QuanLyKhoCauHoiTracNghiem
 
         private void mnuQuanLyMonHoc_Click(object sender, EventArgs e)
         {
-
+            FrmQuanLyMonHoc frm = new FrmQuanLyMonHoc();
+            Form f = (Form)frm;
+            HienThiForm(ref f);
         }
 
         private void mnuQuanLyDeThi_Click(object sender, EventArgs e)
@@ -96,7 +98,7 @@ namespace QuanLyKhoCauHoiTracNghiem
         {
             if (Common.MaNguoiDungDangNhap < 0)
             {
-                DisableMenu(true);
+               /* DisableMenu(true);
                 mnuXinChao.Text = "";
                 FrmDangNhap f = new FrmDangNhap();
                 f.ShowDialog();
@@ -104,7 +106,7 @@ namespace QuanLyKhoCauHoiTracNghiem
                 {
                     mnuXinChao.Text = "Xin chào : " + Common.TenTaiKhoanDangNhap;
                     DisableMenu(false);
-                }
+                }*/
             }
         }
 

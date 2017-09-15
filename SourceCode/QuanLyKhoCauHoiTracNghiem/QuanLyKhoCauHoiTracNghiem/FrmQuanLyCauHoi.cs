@@ -40,7 +40,7 @@ namespace QuanLyKhoCauHoiTracNghiem
 
         private void LoadMonHoc()
         {
-            cboMonHoc.DataSource = MONHOCBUS.LayDanhSachMonHoc();
+            cboMonHoc.DataSource = MONHOCBUS.LayDanhSachMonHoc("", 0);
         }
 
         private void LoadCauHoi()
