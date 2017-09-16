@@ -130,7 +130,7 @@ namespace DAO
             {
                 List<CAUHOIDTO> lstKQ = new List<CAUHOIDTO>();
                 SqlConnection connection = ConnectDB();
-                SqlCommand cmd = new SqlCommand("sp_LayDanhSachCaiHoiTheoNoiDungVaMucDo_DEMO", connection);
+                SqlCommand cmd = new SqlCommand("sp_LayDanhSachCauHoiTheoNoiDungVaMucDo_DEMO", connection);
 
                 SqlParameter sParam_noidung = cmd.Parameters.Add("@NOIDUNG", SqlDbType.NVarChar);
                 sParam_noidung.Direction = ParameterDirection.Input;

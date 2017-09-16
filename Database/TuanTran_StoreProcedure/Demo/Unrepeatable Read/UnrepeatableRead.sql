@@ -1,7 +1,7 @@
 ﻿USE [QuanLyCauHoiTracNghiem]
 GO
 --CREATE 
-ALTER PROCEDURE sp_LayDanhSachCaiHoiTheoNoiDungVaMucDo_DEMO
+CREATE PROCEDURE sp_LayDanhSachCauHoiTheoNoiDungVaMucDo_DEMO
 @NOIDUNG nvarchar(max),
 @MUCDO int,
 @Return nvarchar(500) out
@@ -9,7 +9,6 @@ AS
 BEGIN
 	BEGIN TRY
 		BEGIN TRAN
-
 			IF NOT EXISTS( SELECT * FROM CAUHOI WHERE @NOIDUNG like '%' + @NOIDUNG + '%' OR @NOIDUNG = '' )
 				SET @Return = N'Không có câu hỏi chứa nội dung này'
 			
@@ -45,11 +44,11 @@ AS
 BEGIN
 	BEGIN TRY
 		BEGIN TRAN
-			-- Kiểm tra tồn tại câu hỏi
+			--Kiểm tra tồn tại câu hỏi
 			IF NOT EXISTS ( SELECT * FROM CAUHOI WHERE MACH = @MACH )
 				SET @Return = N'Không tồn tại câu hỏi này'
 
-			-- Kiểm tra có cập nhật môn học cho câu hỏi hay ko
+			--Kiểm tra có cập nhật môn học cho câu hỏi hay ko
 			DECLARE @MAMHtemp BIGINT
 			SELECT @MAMHtemp = MAMH FROM CAUHOI WHERE MACH = @MACH
 			IF ( @MAMHtemp != @MAMH )

@@ -1,7 +1,7 @@
 ﻿USE [QuanLyCauHoiTracNghiem]
 GO
 --CREATE 
-ALTER PROCEDURE sp_LayDanhSachCaiHoiTheoNoiDungVaMucDo_DEMO
+ALTER PROCEDURE sp_LayDanhSachCauHoiTheoNoiDungVaMucDo_DEMO
 @NOIDUNG nvarchar(max),
 @MUCDO int,
 @Return nvarchar(500) out

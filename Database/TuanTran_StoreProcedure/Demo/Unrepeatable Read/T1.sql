@@ -1,5 +1,5 @@
-SELECT * FROM CAUHOI WHERE NOIDUNG like '%Hello%' AND MUCDO = 1
+SELECT * FROM CAUHOI WHERE NOIDUNG like '%Hello%' AND MUCDO = 3
 
 DECLARE @Return nvarchar(500)
-EXEC sp_LayDanhSachCauHoiTheoMucDO_DEMO 'Hello', 1, @Return out
-
+EXEC sp_LayDanhSachCauHoiTheoNoiDungVaMucDo_DEMO 'Hello', 3, @Return out
+print @Return
