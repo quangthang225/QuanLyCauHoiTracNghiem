@@ -266,5 +266,20 @@ namespace QuanLyKhoCauHoiTracNghiem
                 e.Handled = true;
             }
         }
+
+        private void btnTim_Click(object sender, EventArgs e)
+        {
+            int mucDo = 0;
+            if (cboMucDoTimKiem.SelectedItem.ToString().Equals("Khó"))
+                mucDo = (int)Enums.MucDoCauHoi.Kho;
+            if (cboMucDoTimKiem.SelectedItem.ToString().Equals("Dễ"))
+                mucDo = (int)Enums.MucDoCauHoi.De;
+            if (cboMucDoTimKiem.SelectedItem.ToString().Equals("Vừa"))
+                mucDo = (int)Enums.MucDoCauHoi.Vua;
+            string error = "";
+            string noiDung = txtNoiDungTimKiem.Text.Trim();
+            var lstCauHoi = CAUHOIBUS.LayDanhSachCauHoiTheoNoiDungVaMucDo(noiDung, mucDo);
+            dgvCauHoi.DataSource = lstCauHoi;
+        }
     }
 }

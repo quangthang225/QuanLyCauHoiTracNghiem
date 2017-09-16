@@ -1,7 +1,7 @@
 ﻿USE [QuanLyCauHoiTracNghiem]
 GO
 --CREATE 
-ALTER PROCEDURE sp_LayDanhSachCauHoiTheoMucDO_DEMO
+ALTER PROCEDURE sp_LayDanhSachCaiHoiTheoNoiDungVaMucDo_DEMO
 @NOIDUNG nvarchar(max),
 @MUCDO int,
 @Return nvarchar(500) out
@@ -9,6 +9,7 @@ AS
 BEGIN
 	BEGIN TRY
 		BEGIN TRAN
+
 			IF NOT EXISTS( SELECT * FROM CAUHOI WHERE @NOIDUNG like '%' + @NOIDUNG + '%' OR @NOIDUNG = '' )
 				SET @Return = N'Không có câu hỏi chứa nội dung này'
 			
@@ -20,7 +21,7 @@ BEGIN
 				WAITFOR DELAY '00:00:10'
 				SELECT c.*,m.TENMH FROM CAUHOI c,MonHoc m 
 				WHERE c.MAMH = m.MAMH AND NOIDUNG like '%' + @NOIDUNG + '%' AND c.MUCDO = @MUCDO 
-				SET @Return = ''
+				
 			END
 		COMMIT TRAN
 	END TRY

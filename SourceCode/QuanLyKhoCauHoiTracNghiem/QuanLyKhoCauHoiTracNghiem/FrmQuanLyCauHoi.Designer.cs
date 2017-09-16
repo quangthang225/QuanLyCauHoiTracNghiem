@@ -30,6 +30,13 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvCauHoi = new System.Windows.Forms.DataGridView();
+            this.MACH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NOIDUNG = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.THANGDIEM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SOCAUTRALOI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MUCDO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MAMH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TENMH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cboMonHoc = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -54,25 +61,25 @@
             this.btnThemCauTL = new System.Windows.Forms.Button();
             this.txtNoiDungCauTL = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.MACH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NOIDUNG = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.THANGDIEM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SOCAUTRALOI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MUCDO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MAMH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TENMH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cboMucDoTimKiem = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtNoiDungTimKiem = new System.Windows.Forms.TextBox();
+            this.btnTim = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCauHoi)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.gbCauTraLoi.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCauTraLoi)).BeginInit();
             this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgvCauHoi);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 63);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(561, 240);
             this.groupBox1.TabIndex = 0;
@@ -99,6 +106,57 @@
             this.dgvCauHoi.TabIndex = 0;
             this.dgvCauHoi.SelectionChanged += new System.EventHandler(this.dgvCauHoi_SelectionChanged);
             // 
+            // MACH
+            // 
+            this.MACH.DataPropertyName = "MACH";
+            this.MACH.HeaderText = "MACH";
+            this.MACH.Name = "MACH";
+            this.MACH.ReadOnly = true;
+            this.MACH.Visible = false;
+            // 
+            // NOIDUNG
+            // 
+            this.NOIDUNG.DataPropertyName = "NOIDUNG";
+            this.NOIDUNG.HeaderText = "Nội dung";
+            this.NOIDUNG.Name = "NOIDUNG";
+            this.NOIDUNG.ReadOnly = true;
+            // 
+            // THANGDIEM
+            // 
+            this.THANGDIEM.DataPropertyName = "THANGDIEM";
+            this.THANGDIEM.HeaderText = "Thang điểm";
+            this.THANGDIEM.Name = "THANGDIEM";
+            this.THANGDIEM.ReadOnly = true;
+            // 
+            // SOCAUTRALOI
+            // 
+            this.SOCAUTRALOI.DataPropertyName = "SOCAUTRALOI";
+            this.SOCAUTRALOI.HeaderText = "Số câu trả lời";
+            this.SOCAUTRALOI.Name = "SOCAUTRALOI";
+            this.SOCAUTRALOI.ReadOnly = true;
+            // 
+            // MUCDO
+            // 
+            this.MUCDO.DataPropertyName = "MUCDO";
+            this.MUCDO.HeaderText = "Mức độ";
+            this.MUCDO.Name = "MUCDO";
+            this.MUCDO.ReadOnly = true;
+            // 
+            // MAMH
+            // 
+            this.MAMH.DataPropertyName = "MAMH";
+            this.MAMH.HeaderText = "MAMONHOC";
+            this.MAMH.Name = "MAMH";
+            this.MAMH.ReadOnly = true;
+            this.MAMH.Visible = false;
+            // 
+            // TENMH
+            // 
+            this.TENMH.DataPropertyName = "TENMH";
+            this.TENMH.HeaderText = "Môn học";
+            this.TENMH.Name = "TENMH";
+            this.TENMH.ReadOnly = true;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.cboMonHoc);
@@ -111,7 +169,7 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.txtNoiDungCauHoi);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Location = new System.Drawing.Point(12, 258);
+            this.groupBox2.Location = new System.Drawing.Point(12, 309);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(561, 107);
             this.groupBox2.TabIndex = 1;
@@ -219,7 +277,7 @@
             // gbCauTraLoi
             // 
             this.gbCauTraLoi.Controls.Add(this.dgvCauTraLoi);
-            this.gbCauTraLoi.Location = new System.Drawing.Point(579, 12);
+            this.gbCauTraLoi.Location = new System.Drawing.Point(579, 63);
             this.gbCauTraLoi.Name = "gbCauTraLoi";
             this.gbCauTraLoi.Size = new System.Drawing.Size(362, 240);
             this.gbCauTraLoi.TabIndex = 2;
@@ -284,7 +342,7 @@
             this.groupBox4.Controls.Add(this.btnThemCauTL);
             this.groupBox4.Controls.Add(this.txtNoiDungCauTL);
             this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Location = new System.Drawing.Point(579, 257);
+            this.groupBox4.Location = new System.Drawing.Point(585, 309);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(361, 108);
             this.groupBox4.TabIndex = 2;
@@ -347,62 +405,74 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Nội dung";
             // 
-            // MACH
+            // groupBox3
             // 
-            this.MACH.DataPropertyName = "MACH";
-            this.MACH.HeaderText = "MACH";
-            this.MACH.Name = "MACH";
-            this.MACH.ReadOnly = true;
-            this.MACH.Visible = false;
+            this.groupBox3.Controls.Add(this.btnTim);
+            this.groupBox3.Controls.Add(this.txtNoiDungTimKiem);
+            this.groupBox3.Controls.Add(this.cboMucDoTimKiem);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Location = new System.Drawing.Point(12, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(561, 54);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Tìm kiếm câu hỏi";
             // 
-            // NOIDUNG
+            // label6
             // 
-            this.NOIDUNG.DataPropertyName = "NOIDUNG";
-            this.NOIDUNG.HeaderText = "Nội dung";
-            this.NOIDUNG.Name = "NOIDUNG";
-            this.NOIDUNG.ReadOnly = true;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 26);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(50, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Nội dung";
             // 
-            // THANGDIEM
+            // cboMucDoTimKiem
             // 
-            this.THANGDIEM.DataPropertyName = "THANGDIEM";
-            this.THANGDIEM.HeaderText = "Thang điểm";
-            this.THANGDIEM.Name = "THANGDIEM";
-            this.THANGDIEM.ReadOnly = true;
+            this.cboMucDoTimKiem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMucDoTimKiem.FormattingEnabled = true;
+            this.cboMucDoTimKiem.Items.AddRange(new object[] {
+            "Dễ",
+            "Vừa",
+            "Khó"});
+            this.cboMucDoTimKiem.Location = new System.Drawing.Point(371, 23);
+            this.cboMucDoTimKiem.Name = "cboMucDoTimKiem";
+            this.cboMucDoTimKiem.Size = new System.Drawing.Size(100, 21);
+            this.cboMucDoTimKiem.TabIndex = 12;
             // 
-            // SOCAUTRALOI
+            // label7
             // 
-            this.SOCAUTRALOI.DataPropertyName = "SOCAUTRALOI";
-            this.SOCAUTRALOI.HeaderText = "Số câu trả lời";
-            this.SOCAUTRALOI.Name = "SOCAUTRALOI";
-            this.SOCAUTRALOI.ReadOnly = true;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(321, 26);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Mức độ";
             // 
-            // MUCDO
+            // txtNoiDungTimKiem
             // 
-            this.MUCDO.DataPropertyName = "MUCDO";
-            this.MUCDO.HeaderText = "Mức độ";
-            this.MUCDO.Name = "MUCDO";
-            this.MUCDO.ReadOnly = true;
+            this.txtNoiDungTimKiem.Location = new System.Drawing.Point(62, 23);
+            this.txtNoiDungTimKiem.Name = "txtNoiDungTimKiem";
+            this.txtNoiDungTimKiem.Size = new System.Drawing.Size(253, 20);
+            this.txtNoiDungTimKiem.TabIndex = 11;
             // 
-            // MAMH
+            // btnTim
             // 
-            this.MAMH.DataPropertyName = "MAMH";
-            this.MAMH.HeaderText = "MAMONHOC";
-            this.MAMH.Name = "MAMH";
-            this.MAMH.ReadOnly = true;
-            this.MAMH.Visible = false;
-            // 
-            // TENMH
-            // 
-            this.TENMH.DataPropertyName = "TENMH";
-            this.TENMH.HeaderText = "Môn học";
-            this.TENMH.Name = "TENMH";
-            this.TENMH.ReadOnly = true;
+            this.btnTim.Location = new System.Drawing.Point(480, 21);
+            this.btnTim.Name = "btnTim";
+            this.btnTim.Size = new System.Drawing.Size(75, 23);
+            this.btnTim.TabIndex = 11;
+            this.btnTim.Text = "Tìm";
+            this.btnTim.UseVisualStyleBackColor = true;
+            this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
             // 
             // FrmQuanLyCauHoi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(952, 370);
+            this.ClientSize = new System.Drawing.Size(952, 428);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.gbCauTraLoi);
             this.Controls.Add(this.groupBox2);
@@ -420,6 +490,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCauTraLoi)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -459,5 +531,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MUCDO;
         private System.Windows.Forms.DataGridViewTextBoxColumn MAMH;
         private System.Windows.Forms.DataGridViewTextBoxColumn TENMH;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btnTim;
+        private System.Windows.Forms.TextBox txtNoiDungTimKiem;
+        private System.Windows.Forms.ComboBox cboMucDoTimKiem;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
     }
 }

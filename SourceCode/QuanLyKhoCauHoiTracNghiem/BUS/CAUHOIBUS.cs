@@ -18,7 +18,7 @@ namespace BUS
         public static List<CAUHOIDTO> LayDanhSachCauHoiTheoMonHocChuaCoTrongDeThi(long maMonHoc, long maDeThi)
         {
             CAUHOIDAO c = new CAUHOIDAO();
-            return c.LayDanhSachCauHoiTheoMonHocChuaCoTrongDeThi(maMonHoc,maDeThi);
+            return c.LayDanhSachCauHoiTheoMonHocChuaCoTrongDeThi(maMonHoc, maDeThi);
         }
 
         public static List<CAUHOIDTO> LayDanhSachCauHoiTheoDeThi(long maDeThi)
@@ -30,13 +30,13 @@ namespace BUS
         public static bool ThemCauHoi(string noiDung, double thangDiem, int mucDo, long maMonHoc)
         {
             CAUHOIDAO c = new CAUHOIDAO();
-            return c.ThemCauHoi(noiDung, thangDiem,mucDo,maMonHoc);
+            return c.ThemCauHoi(noiDung, thangDiem, mucDo, maMonHoc);
         }
 
         public static bool ThemCauHoiVaoDeThi(long maDeThi, long maCauHoi, double diem)
         {
             CAUHOIDAO c = new CAUHOIDAO();
-            return c.ThemCauHoiVaoDeThi(maDeThi,maCauHoi, diem);
+            return c.ThemCauHoiVaoDeThi(maDeThi, maCauHoi, diem);
         }
 
         public static bool DiChuyenCauHoiRaKhoiBoDeThi(long maDeThi, long maCauHoi)
@@ -50,5 +50,11 @@ namespace BUS
             CAUHOIDAO c = new CAUHOIDAO();
             return c.CapNhatCauHoi(maCauHoi, noiDung, thangDiem, mucDo, maMonHoc);
         }
-     }
+
+        public static List<CAUHOIDTO> LayDanhSachCauHoiTheoNoiDungVaMucDo(string noiDung, int mucDo)
+        {
+            CAUHOIDAO c = new CAUHOIDAO();
+            return c.LayDanhSachCauHoiTheoNoiDungVaMucDo(noiDung, mucDo);
+        }
+    }
 }

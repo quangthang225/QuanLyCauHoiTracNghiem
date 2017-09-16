@@ -124,6 +124,51 @@ namespace DAO
             }
         }
 
+        public List<CAUHOIDTO> LayDanhSachCauHoiTheoNoiDungVaMucDo(string noiDung, int mucDo)
+        {
+            try
+            {
+                List<CAUHOIDTO> lstKQ = new List<CAUHOIDTO>();
+                SqlConnection connection = ConnectDB();
+                SqlCommand cmd = new SqlCommand("sp_LayDanhSachCaiHoiTheoNoiDungVaMucDo_DEMO", connection);
+
+                SqlParameter sParam_noidung = cmd.Parameters.Add("@NOIDUNG", SqlDbType.NVarChar);
+                sParam_noidung.Direction = ParameterDirection.Input;
+                sParam_noidung.Value = noiDung;
+
+                SqlParameter sParam_mucdo = cmd.Parameters.Add("@MUCDO", SqlDbType.NVarChar);
+                sParam_mucdo.Direction = ParameterDirection.Input;
+                sParam_mucdo.Value = mucDo;
+
+                SqlParameter sParam_ketQua = cmd.Parameters.Add("@Return", SqlDbType.NVarChar,500);
+                sParam_ketQua.Direction = ParameterDirection.Output;
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    CAUHOIDTO d = new CAUHOIDTO();
+                    d.MACH = (long)rdr["MACH"];
+                    d.NOIDUNG = (string)rdr["NOIDUNG"];
+                    d.THANGDIEM = (double)rdr["THANGDIEM"];
+                    d.SOCAUTRALOI = (int)rdr["SOCAUTRALOI"];
+                    if ((int)rdr["MUCDO"] == (int)Enums.MucDoCauHoi.De)
+                        d.MUCDO = "Dễ";
+                    else if ((int)rdr["MUCDO"] == (int)Enums.MucDoCauHoi.Vua)
+                        d.MUCDO = "Vừa";
+                    else
+                        d.MUCDO = "Khó";
+                    d.MAMH = (long)rdr["MAMH"];
+                    lstKQ.Add(d);
+                }
+                return lstKQ;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public bool ThemCauHoi(string noiDung, double thangDiem, int mucDo, long maMonHoc)
         {
             try
@@ -228,7 +273,7 @@ namespace DAO
             try
             {
                 SqlConnection connection = ConnectDB();
-                SqlCommand cmd = new SqlCommand("sp_CapNhatCauHoi", connection);
+                SqlCommand cmd = new SqlCommand("sp_CapNhatCauHoi_DEMO", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter sParam_MACH = cmd.Parameters.Add("@MACH", SqlDbType.BigInt);
