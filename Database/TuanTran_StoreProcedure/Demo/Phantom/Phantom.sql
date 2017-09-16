@@ -7,8 +7,8 @@ BEGIN
 		BEGIN TRAN
 			DECLARE @slCauHoi INT
 			SELECT @slCauHoi = COUNT(*) FROM TAOBODETHI WHERE MABDT = @MABDT
-			IF ( @slCauHoi < 0  )
-				SET @Return = N'Bộ đề thi chưa có bất câu hỏi nào'
+			IF ( @slCauHoi = 0  )
+				SET @Return = N'Bộ đề thi chưa có bất kỳ câu hỏi nào'
 			IF @Return = '' OR @Return is null
 			BEGIN
 				WAITFOR DELAY '00:00:05'
@@ -25,7 +25,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE sp_ThemCauHoiVaoBoDeThi_DEMO
+ALTER PROCEDURE sp_ThemCauHoiVaoBoDeThi_DEMO
 @MABDT bigint,
 @MACH bigint,
 @Diem float,

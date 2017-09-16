@@ -5,3 +5,7 @@ DECLARE @Return nvarchar(500)
 
 
 EXEC sp_ThemCauHoiVaoBoDeThi_DEMO @MABDT, @MACH, @Diem, @Return out
+print @Return
+
+SELECT * FROM BODETHI WHERE MABDT = 1
+SELECT * FROM TAOBODETHI WHERE MABDT = 1
