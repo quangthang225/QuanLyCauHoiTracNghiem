@@ -1,7 +1,7 @@
 ﻿USE [QuanLyCauHoiTracNghiem]
 GO
 --CREATE 
-ALTER PROCEDURE sp_LayDanhSachCauHoiTheoMucDO_DEMO
+ALTER PROCEDURE sp_LayDanhSachCaiHoiTheoNoiDungVaMucDo_DEMO
 @NOIDUNG nvarchar(max),
 @MUCDO int,
 @Return nvarchar(500) out
@@ -26,7 +26,6 @@ BEGIN
 		COMMIT TRAN
 	END TRY
 	BEGIN CATCH
-		SET @Return = ERROR_MESSAGE() 
 		ROLLBACK TRAN
 	END CATCH
 END

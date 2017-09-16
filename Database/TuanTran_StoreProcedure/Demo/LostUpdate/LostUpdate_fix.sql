@@ -25,6 +25,7 @@ BEGIN
 			BEGIN
 				WAITFOR DELAY '00:00:10'
 				INSERT INTO CAUTRALOI(NOIDUNG,LADAPANDUNG,MACH) VALUES(@NOIDUNG,@LADAPANDUNG,@MACH)
+				UPDATE CAUHOI SET SOCAUTRALOI = SOCAUTRALOI + 1 WHERE MACH = @MACH
 				SET @Return = ''
 
 				DECLARE @slCauTraLoi INT
@@ -39,6 +40,7 @@ BEGIN
 	END CATCH
 END
 GO
+
 
 ALTER PROCEDURE sp_XoaCauTraLoi_DEMO
 @MACTL bigint,
@@ -56,14 +58,16 @@ BEGIN
 
 			IF @Return = '' OR @Return is null
 			BEGIN
-				DECLARE @slCauTraLoi INT
-				SELECT @slCauTraLoi = ch.SOCAUTRALOI FROM CAUTRALOI ct, CAUHOI ch 
-				WHERE ct.MACTL = @MACTL AND ct.MACH = ch.MACH  
+				DECLARE @mach INT
+				SELECT @mach = MACH FROM CAUTRALOI
+				WHERE MACTL = @MACTL
 
 				-- Xóa câu trả lời
 				DELETE FROM CAUTRALOI WHERE MACTL = @MACTL
-				
-				SET @slCauTraLoi = @slCauTraLoi - 1 
+				UPDATE CAUHOI SET SOCAUTRALOI = SOCAUTRALOI - 1 WHERE MACH = @mach
+
+				DECLARE @slCauTraLoi INT
+				SELECT @slCauTraLoi = SOCAUTRALOI FROM CAUHOI WHERE MACH = @MACH
 				PRINT 'So luong cau tra loi co trong cau hoi: ' + Cast(@slCauTraLoi as varchar(10))
 			END
 		COMMIT TRAN

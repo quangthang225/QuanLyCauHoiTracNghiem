@@ -115,7 +115,7 @@ namespace DAO
             try
             {
                 SqlConnection connection = ConnectDB();
-                SqlCommand cmd = new SqlCommand("sp_XoaCauTraLoi", connection);
+                SqlCommand cmd = new SqlCommand("sp_XoaCauTraLoi_DEMO", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter sParam_MACTL = cmd.Parameters.Add("@MACTL", SqlDbType.BigInt);
