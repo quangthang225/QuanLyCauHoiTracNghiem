@@ -1,4 +1,5 @@
 ﻿USE [QuanLyCauHoiTracNghiem]
 
 --Thực hiện đổi mã Bộ môn của Môn học
-EXEC sp_CapNhatTenMonHoc 1, 'HOA'
+DECLARE @KQ INT
+EXEC sp_CapNhatMonHoc 1, 'TEN HOP LE 22', 1, @KQ

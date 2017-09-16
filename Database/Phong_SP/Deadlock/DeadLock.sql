@@ -42,7 +42,7 @@ BEGIN
 
 			IF (@TENMH LIKE '%[^a-zA-Z0-9 ._]%')
 			BEGIN
-				PRINT 'Tên môn học không hợp lệ'
+				PRINT N'Tên môn học không hợp lệ'
 				SET @KETQUA = 3 --Tên môn học chứa kí tự đặc biệt
 				ROLLBACK TRAN
 				RETURN

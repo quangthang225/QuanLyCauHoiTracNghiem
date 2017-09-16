@@ -1,4 +1,6 @@
-﻿IF OBJECT_ID('sp_LayDanhSachMonHoc') IS NOT NULL
+﻿USE [QuanLyCauHoiTracNghiem]
+
+IF OBJECT_ID('sp_LayDanhSachMonHoc') IS NOT NULL
 	DROP PROC sp_LayDanhSachMonHoc
 GO
 
@@ -11,12 +13,12 @@ BEGIN
 		BEGIN TRY
 			IF @MABM = 0
 			BEGIN
-				PRINT 'Tìm kiếm theo tên môn học'
+				PRINT N'Tìm kiếm theo tên môn học'
 				SELECT MH.MAMH, MH.TENMH, MH.MABM, BM.TENBM FROM MONHOC MH, BOMON BM WHERE  BM.MABM = MH.MABM AND MH.TENMH LIKE '%'+@TENMH+'%'
 			END
 			ELSE
 			BEGIN
-				PRINT 'Tìm kiếm theo bộ môn và tên môn học'
+				PRINT N'Tìm kiếm theo bộ môn và tên môn học'
 				SELECT MH.MAMH, MH.TENMH, MH.MABM, BM.TENBM FROM MONHOC MH, BOMON BM WHERE BM.MABM = MH.MABM AND @MABM = MH.MABM AND MH.TENMH LIKE '%'+@TENMH+'%'
 			END
 		END TRY

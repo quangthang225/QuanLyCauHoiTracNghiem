@@ -1,4 +1,6 @@
-﻿IF OBJECT_ID('sp_XoaMonHoc') IS NOT NULL
+﻿USE [QuanLyCauHoiTracNghiem]
+
+IF OBJECT_ID('sp_XoaMonHoc') IS NOT NULL
 	DROP PROC sp_XoaMonHoc
 GO
 CREATE PROC sp_XoaMonHoc

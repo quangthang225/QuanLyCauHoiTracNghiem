@@ -1,4 +1,9 @@
-﻿CREATE PROCEDURE sp_LayDanhSachBoMon
+﻿USE [QuanLyCauHoiTracNghiem]
+
+IF OBJECT_ID('sp_LayDanhSachBoMon') IS NOT NULL
+	DROP PROC sp_LayDanhSachBoMon
+GO
+CREATE PROCEDURE sp_LayDanhSachBoMon
 AS
 BEGIN
 	BEGIN TRAN

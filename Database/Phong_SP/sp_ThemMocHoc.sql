@@ -1,4 +1,6 @@
-﻿IF OBJECT_ID('sp_ThemMonHoc') IS NOT NULL
+﻿USE [QuanLyCauHoiTracNghiem]
+
+IF OBJECT_ID('sp_ThemMonHoc') IS NOT NULL
 	DROP PROC sp_ThemMonHoc
 GO
 CREATE PROC sp_ThemMonHoc
@@ -21,7 +23,7 @@ AS BEGIN
 
 			IF (@TENMH LIKE '%[^a-zA-Z0-9 ._]%')
 			BEGIN
-				PRINT 'Tên môn học không hợp lệ'
+				PRINT N'Tên môn học không hợp lệ'
 				SET @KETQUA = 3 --Tên môn học chứa kí tự đặc biệt
 				ROLLBACK TRAN
 				RETURN

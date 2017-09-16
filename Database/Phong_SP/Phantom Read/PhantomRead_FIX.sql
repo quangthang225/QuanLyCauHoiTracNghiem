@@ -17,9 +17,9 @@ BEGIN
 			DECLARE @COUNT INT
 			IF @MABM = 0
 			BEGIN
-				PRINT 'Tìm kiếm theo tên môn học'
+				PRINT N'Tìm kiếm theo tên môn học'
 				SELECT @COUNT = COUNT(*) FROM MONHOC MH, BOMON BM WHERE BM.MABM = MH.MABM AND MH.TENMH LIKE '%'+@TENMH+'%'
-				PRINT 'CO ' + CAST(@COUNT AS VARCHAR(10)) + ' KET QUA.'
+				PRINT N'CÓ ' + CAST(@COUNT AS VARCHAR(10)) + ' KẾT QUẢ.'
 		
 				WAITFOR DELAY '0:0:10' --Chờ 10 giây
 
@@ -27,9 +27,9 @@ BEGIN
 			END
 			ELSE
 			BEGIN
-				PRINT 'Tìm kiếm theo bộ môn và tên môn học'
+				PRINT N'Tìm kiếm theo bộ môn và tên môn học'
 				SELECT @COUNT = COUNT(*) FROM MONHOC MH, BOMON BM WHERE BM.MABM = MH.MABM AND @MABM = MH.MABM AND MH.TENMH LIKE '%'+@TENMH+'%'
-				PRINT 'CO ' + CAST(@COUNT AS VARCHAR(10)) + ' KET QUA.'
+				PRINT N'CÓ ' + CAST(@COUNT AS VARCHAR(10)) + ' KẾT QUẢ.'
 		
 				WAITFOR DELAY '0:0:10' --Chờ 10 giây
 
@@ -71,7 +71,7 @@ BEGIN
 
 			IF (@TENMH LIKE '%[^a-zA-Z0-9 ._]%')
 			BEGIN
-				PRINT 'Tên môn học không hợp lệ'
+				PRINT N'Tên môn học không hợp lệ'
 				SET @KETQUA = 3 --Tên môn học chứa kí tự đặc biệt
 				ROLLBACK TRAN
 				RETURN

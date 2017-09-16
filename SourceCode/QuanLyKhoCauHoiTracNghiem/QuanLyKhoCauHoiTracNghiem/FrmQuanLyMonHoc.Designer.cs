@@ -37,18 +37,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvMonHoc = new System.Windows.Forms.DataGridView();
+            this.MAMH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TENMH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TENBM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbThemMH = new System.Windows.Forms.GroupBox();
+            this.btnXoaMonHoc = new System.Windows.Forms.Button();
+            this.ckbIsNew = new System.Windows.Forms.CheckBox();
             this.cbThemBM = new System.Windows.Forms.ComboBox();
             this.btnResetTaoMH = new System.Windows.Forms.Button();
             this.btnLuuMH = new System.Windows.Forms.Button();
             this.txtThemTenMH = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.MAMH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TENMH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TENBM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ckbIsNew = new System.Windows.Forms.CheckBox();
-            this.btnXoaMonHoc = new System.Windows.Forms.Button();
             this.gbTimMH.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMonHoc)).BeginInit();
@@ -80,17 +80,17 @@
             // 
             // btnResetTim
             // 
-            this.btnResetTim.Location = new System.Drawing.Point(727, 97);
+            this.btnResetTim.Location = new System.Drawing.Point(710, 97);
             this.btnResetTim.Name = "btnResetTim";
-            this.btnResetTim.Size = new System.Drawing.Size(98, 34);
+            this.btnResetTim.Size = new System.Drawing.Size(115, 34);
             this.btnResetTim.TabIndex = 5;
-            this.btnResetTim.Text = "Làm lại";
+            this.btnResetTim.Text = "Tìm tất cả";
             this.btnResetTim.UseVisualStyleBackColor = true;
             this.btnResetTim.Click += new System.EventHandler(this.btnResetTim_Click);
             // 
             // btnTimMH
             // 
-            this.btnTimMH.Location = new System.Drawing.Point(637, 97);
+            this.btnTimMH.Location = new System.Drawing.Point(619, 97);
             this.btnTimMH.Name = "btnTimMH";
             this.btnTimMH.Size = new System.Drawing.Size(75, 34);
             this.btnTimMH.TabIndex = 4;
@@ -151,6 +151,30 @@
             this.dgvMonHoc.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMonHoc_CellContentClick);
             this.dgvMonHoc.SelectionChanged += new System.EventHandler(this.dgvMonHoc_SelectionChanged);
             // 
+            // MAMH
+            // 
+            this.MAMH.DataPropertyName = "MAMONHOC";
+            this.MAMH.HeaderText = "Mã môn học";
+            this.MAMH.Name = "MAMH";
+            this.MAMH.ReadOnly = true;
+            this.MAMH.Width = 120;
+            // 
+            // TENMH
+            // 
+            this.TENMH.DataPropertyName = "TENMONHOC";
+            this.TENMH.HeaderText = "Tên môn học";
+            this.TENMH.Name = "TENMH";
+            this.TENMH.ReadOnly = true;
+            this.TENMH.Width = 200;
+            // 
+            // TENBM
+            // 
+            this.TENBM.DataPropertyName = "TENBOMON";
+            this.TENBM.HeaderText = "Tên bộ môn";
+            this.TENBM.Name = "TENBM";
+            this.TENBM.ReadOnly = true;
+            this.TENBM.Width = 180;
+            // 
             // gbThemMH
             // 
             this.gbThemMH.Controls.Add(this.btnXoaMonHoc);
@@ -168,6 +192,30 @@
             this.gbThemMH.TabStop = false;
             this.gbThemMH.Text = "Thêm/Sửa môn học";
             this.gbThemMH.Enter += new System.EventHandler(this.gbThemMH_Enter);
+            // 
+            // btnXoaMonHoc
+            // 
+            this.btnXoaMonHoc.Enabled = false;
+            this.btnXoaMonHoc.Location = new System.Drawing.Point(556, 137);
+            this.btnXoaMonHoc.Name = "btnXoaMonHoc";
+            this.btnXoaMonHoc.Size = new System.Drawing.Size(75, 36);
+            this.btnXoaMonHoc.TabIndex = 14;
+            this.btnXoaMonHoc.Text = "Xóa";
+            this.btnXoaMonHoc.UseVisualStyleBackColor = true;
+            this.btnXoaMonHoc.Click += new System.EventHandler(this.btnXoaMonHoc_Click);
+            // 
+            // ckbIsNew
+            // 
+            this.ckbIsNew.AutoSize = true;
+            this.ckbIsNew.Checked = true;
+            this.ckbIsNew.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbIsNew.Enabled = false;
+            this.ckbIsNew.Location = new System.Drawing.Point(18, 47);
+            this.ckbIsNew.Name = "ckbIsNew";
+            this.ckbIsNew.Size = new System.Drawing.Size(91, 24);
+            this.ckbIsNew.TabIndex = 13;
+            this.ckbIsNew.Text = "Tạo mới";
+            this.ckbIsNew.UseVisualStyleBackColor = true;
             // 
             // cbThemBM
             // 
@@ -222,54 +270,6 @@
             this.label4.Size = new System.Drawing.Size(101, 20);
             this.label4.TabIndex = 6;
             this.label4.Text = "Tên môn học";
-            // 
-            // MAMH
-            // 
-            this.MAMH.DataPropertyName = "MAMONHOC";
-            this.MAMH.HeaderText = "Mã môn học";
-            this.MAMH.Name = "MAMH";
-            this.MAMH.ReadOnly = true;
-            this.MAMH.Width = 120;
-            // 
-            // TENMH
-            // 
-            this.TENMH.DataPropertyName = "TENMONHOC";
-            this.TENMH.HeaderText = "Tên môn học";
-            this.TENMH.Name = "TENMH";
-            this.TENMH.ReadOnly = true;
-            this.TENMH.Width = 200;
-            // 
-            // TENBM
-            // 
-            this.TENBM.DataPropertyName = "TENBOMON";
-            this.TENBM.HeaderText = "Tên bộ môn";
-            this.TENBM.Name = "TENBM";
-            this.TENBM.ReadOnly = true;
-            this.TENBM.Width = 180;
-            // 
-            // ckbIsNew
-            // 
-            this.ckbIsNew.AutoSize = true;
-            this.ckbIsNew.Checked = true;
-            this.ckbIsNew.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbIsNew.Enabled = false;
-            this.ckbIsNew.Location = new System.Drawing.Point(18, 47);
-            this.ckbIsNew.Name = "ckbIsNew";
-            this.ckbIsNew.Size = new System.Drawing.Size(91, 24);
-            this.ckbIsNew.TabIndex = 13;
-            this.ckbIsNew.Text = "Tạo mới";
-            this.ckbIsNew.UseVisualStyleBackColor = true;
-            // 
-            // btnXoaMonHoc
-            // 
-            this.btnXoaMonHoc.Enabled = false;
-            this.btnXoaMonHoc.Location = new System.Drawing.Point(556, 137);
-            this.btnXoaMonHoc.Name = "btnXoaMonHoc";
-            this.btnXoaMonHoc.Size = new System.Drawing.Size(75, 36);
-            this.btnXoaMonHoc.TabIndex = 14;
-            this.btnXoaMonHoc.Text = "Xóa";
-            this.btnXoaMonHoc.UseVisualStyleBackColor = true;
-            this.btnXoaMonHoc.Click += new System.EventHandler(this.btnXoaMonHoc_Click);
             // 
             // FrmQuanLyMonHoc
             // 
