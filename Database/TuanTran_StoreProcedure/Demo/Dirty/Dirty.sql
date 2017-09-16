@@ -24,10 +24,15 @@ BEGIN
 			
 			IF @Return = '' OR @Return is null
 			BEGIN
-				INSERT INTO CAUTRALOI(NOIDUNG,LADAPANDUNG,MACH) VALUES(@NOIDUNG,@LADAPANDUNG,@MACH)
 				UPDATE CAUHOI SET SOCAUTRALOI = SOCAUTRALOI + 1
 				SET @Return = ''
-			END						---Cố tình gây lỗi số lượng câu trả lời của câu hỏi > 10---			WAITFOR DELAY '00:00:05'			INSERT INTO CAUTRALOI(NOIDUNG,LADAPANDUNG,MACH) VALUES(@NOIDUNG,@LADAPANDUNG,@MACH)			-----------------------------------------------------------		COMMIT TRAN
+			END
+			
+			WAITFOR DELAY '00:00:10'
+			INSERT INTO CAUTRALOI(NOIDUNG,LADAPANDUNG,MACH) VALUES(@NOIDUNG,@LADAPANDUNG,@MACH)
+			-----------------------------------------------------------
+
+		COMMIT TRAN
 	END TRY
 	BEGIN CATCH
 		SET @Return = ERROR_MESSAGE()
@@ -39,24 +44,21 @@ GO
 
 CREATE
 --ALTER 
-PROCEDURE sp_LayDanhSachCauTraLoiTheoCauHoi_DEMO
-@MACH bigint,
-@Return nvarchar(500) out
+PROCEDURE sp_LayDanhSachCauHoi_DEMO
 AS
 BEGIN
 	BEGIN TRY
 		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		BEGIN TRAN
-			IF NOT EXISTS ( SELECT * FROM CAUHOI WHERE @MACH = MACH )
+			IF NOT EXISTS ( SELECT * FROM CAUHOI )
 			BEGIN
-				SET @Return = N'Không tồn tại câu hỏi này'
+				print N'Không tồn tại câu hỏi'
 			END
 
-			SELECT * FROM CAUTRALOI WHERE MACH = @MACH
+			SELECT C.*,M.MAMH,M.TENMH FROM CAUHOI C, MONHOC M WHERE C.MAMH = M.MAMH
 		COMMIT TRAN
 	END TRY
 	BEGIN CATCH
-		SET @Return = ERROR_MESSAGE()
 		ROLLBACK TRAN
 	END CATCH
 END

@@ -49,7 +49,7 @@ namespace DAO
             try
             {
                 SqlConnection connection = ConnectDB();
-                SqlCommand cmd = new SqlCommand("sp_ThemCauTraLoiVaoCauHoi", connection);
+                SqlCommand cmd = new SqlCommand("sp_ThemCauTraLoiVaoCauHoi_DEMO", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter sParam_NOIDUNG = cmd.Parameters.Add("@NOIDUNG", SqlDbType.NVarChar);

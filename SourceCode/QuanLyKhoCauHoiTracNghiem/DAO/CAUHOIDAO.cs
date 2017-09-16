@@ -17,7 +17,7 @@ namespace DAO
             {
                 List<CAUHOIDTO> lstKQ = new List<CAUHOIDTO>();
                 SqlConnection connection = ConnectDB();
-                SqlCommand cmd = new SqlCommand("sp_LayDanhSachCauHoi", connection);
+                SqlCommand cmd = new SqlCommand("sp_LayDanhSachCauHoi_DEMO", connection);
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataReader rdr = cmd.ExecuteReader();
