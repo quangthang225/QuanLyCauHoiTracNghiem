@@ -21,14 +21,17 @@ BEGIN
 				SET @Return = N'Trong câu hỏi đã tồn tại câu trả lời này'
 			END
 
+			
 			IF @Return = '' OR @Return is null
 			BEGIN
-				INSERT INTO CAUTRALOI(NOIDUNG,LADAPANDUNG,MACH) VALUES(@NOIDUNG,@LADAPANDUNG,@MACH)
 				UPDATE CAUHOI SET SOCAUTRALOI = SOCAUTRALOI + 1
 				SET @Return = ''
 			END
+			
+			WAITFOR DELAY '00:00:10'
+			INSERT INTO CAUTRALOI(NOIDUNG,LADAPANDUNG,MACH) VALUES(@NOIDUNG,@LADAPANDUNG,@MACH)
+			-----------------------------------------------------------
 
-			---Cố tình gây lỗi số lượng câu trả lời của câu hỏi > 10---			WAITFOR DELAY '00:00:05'			INSERT INTO CAUTRALOI(NOIDUNG,LADAPANDUNG,MACH) VALUES(@NOIDUNG,@LADAPANDUNG,@MACH)			-----------------------------------------------------------
 		COMMIT TRAN
 	END TRY
 	BEGIN CATCH
@@ -40,24 +43,21 @@ GO
 
 CREATE
 --ALTER 
-PROCEDURE sp_XEMTHONGTINCAUHOI_DEMO
-@MACH bigint,
-@Return nvarchar(500) out
+PROCEDURE sp_LayDanhSachCauHoi_DEMO
 AS
 BEGIN
 	BEGIN TRY
-		SET TRAN ISOLATION LEVEL READ COMMITTED -- mức cô lập mặc định
+		SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 		BEGIN TRAN
-			IF NOT EXISTS ( SELECT * FROM CAUHOI WHERE @MACH = MACH )
+			IF NOT EXISTS ( SELECT * FROM CAUHOI )
 			BEGIN
-				SET @Return = N'Không tồn tại câu hỏi này'
+				print N'Không tồn tại câu hỏi'
 			END
 
-			SELECT * FROM CAUHOI WHERE MACH = @MACH
+			SELECT C.*,M.MAMH,M.TENMH FROM CAUHOI C, MONHOC M WHERE C.MAMH = M.MAMH
 		COMMIT TRAN
 	END TRY
 	BEGIN CATCH
-		SET @Return = ERROR_MESSAGE()
 		ROLLBACK TRAN
 	END CATCH
 END
